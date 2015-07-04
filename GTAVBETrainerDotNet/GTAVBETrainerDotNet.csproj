@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E695B708-E6DB-4EC5-9963-5FB27ABCBD4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GTAVBETrainerDotNet</RootNamespace>
+    <AssemblyName>BETrainer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ScriptHookVDotNet, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ScriptHookVDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Config\MSPCustomSet.cs" />
+    <Compile Include="Feature\ConfigurationFeature.cs" />
+    <Compile Include="Feature\Feature.cs" />
+    <Compile Include="Feature\LocationFeature.cs" />
+    <Compile Include="Feature\PlayerFeature.cs" />
+    <Compile Include="Feature\VehicleFeature.cs" />
+    <Compile Include="Feature\WeaponFeature.cs" />
+    <Compile Include="GlobalConst.cs" />
+    <Compile Include="IniFile.cs" />
+    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\MenuItem.cs" />
+    <Compile Include="Menu\MenuItemEventHandler.cs" />
+    <Compile Include="Menu\MenuText.cs" />
+    <Compile Include="Menu\MenuStorage.cs" />
+    <Compile Include="Model\ModelData.cs" />
+    <Compile Include="Model\ModelStorage.cs" />
+    <Compile Include="SkinProps\SkinPropDetail.cs" />
+    <Compile Include="SkinProps\SkinPropUtils.cs" />
+    <Compile Include="Teleport\SimpleTeleportTarget.cs" />
+    <Compile Include="Teleport\TeleportCategory.cs" />
+    <Compile Include="Teleport\TeleportTarget.cs" />
+    <Compile Include="Teleport\TeleportTargetStorage.cs" />
+    <Compile Include="Trainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Vehicle\CustomVehicle.cs" />
+    <Compile Include="Vehicle\ModStorage.cs" />
+    <Compile Include="Vehicle\PaintData.cs" />
+    <Compile Include="Vehicle\PaintStorage.cs" />
+    <Compile Include="Vehicle\VehicleData.cs" />
+    <Compile Include="Vehicle\VehicleStorage.cs" />
+    <Compile Include="Weapon\WeaponAttachmentData.cs" />
+    <Compile Include="Weapon\WeaponData.cs" />
+    <Compile Include="Weapon\SavedWeaponItem.cs" />
+    <Compile Include="Weapon\WeaponSet.cs" />
+    <Compile Include="Weapon\WeaponStorage.cs" />
+    <Compile Include="WinAPI.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "$(TargetDir)\BETrainer.dll" "E:\SteamLibrary\steamapps\common\Grand Theft Auto V\scripts"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
