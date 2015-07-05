@@ -83,7 +83,6 @@
     <Compile Include="Weapon\SavedWeaponItem.cs" />
     <Compile Include="Weapon\WeaponSet.cs" />
     <Compile Include="Weapon\WeaponStorage.cs" />
-    <Compile Include="WinAPI.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

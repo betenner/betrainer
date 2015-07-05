@@ -34,13 +34,17 @@ namespace GTAVBETrainerDotNet
             public static bool ExplosiveMelee = false;
             public static bool VehicleRocket = false;
 
+            private static int _vehicleRocketFrames = 0;
+            private const int VEHICLE_ROCKET_FRAME_INTERVAL = 10;
+
             /// <summary>
             /// Sets infinite ammo
             /// </summary>
             /// <param name="sender">Source menu item</param>
             public static void SetInfiniteAmmo(MenuItem sender)
             {
-
+                InfiniteAmmo = sender.On;
+                Config.DoAutoSave();
             }
 
             /// <summary>
@@ -49,7 +53,8 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void SetPermanentParachute(MenuItem sender)
             {
-
+                PermanentParachute = sender.On;
+                Config.DoAutoSave();
             }
 
             /// <summary>
@@ -58,7 +63,8 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void SetNoReload(MenuItem sender)
             {
-
+                NoReload = sender.On;
+                Config.DoAutoSave();
             }
 
             /// <summary>
@@ -67,7 +73,8 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void SetFireAmmo(MenuItem sender)
             {
-
+                FireAmmo = sender.On;
+                Config.DoAutoSave();
             }
 
             /// <summary>
@@ -76,7 +83,8 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void SetExplosiveAmmo(MenuItem sender)
             {
-
+                ExplosiveAmmo = sender.On;
+                Config.DoAutoSave();
             }
 
             /// <summary>
@@ -85,7 +93,8 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void SetExplosiveMelee(MenuItem sender)
             {
-
+                ExplosiveMelee = sender.On;
+                Config.DoAutoSave();
             }
 
             /// <summary>
@@ -94,9 +103,121 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void SetVehicleRocket(MenuItem sender)
             {
+                VehicleRocket = sender.On;
+                Config.DoAutoSave();
+            }
+
+            /// <summary>
+            /// Gets all weapons
+            /// </summary>
+            /// <param name="sender">Source menu item</param>
+            public static void GetAllWeapons(MenuItem sender)
+            {
 
             }
 
+            /// <summary>
+            /// Updates weapon features
+            /// </summary>
+            public static void UpdateFeatures()
+            {
+                int player = Game.Player.Character.Handle;
+                bool hasPlayer = Function.Call<bool>(Hash.DOES_ENTITY_EXIST, player);
+                if (!hasPlayer) return;
+                
+                bool inVehicle = Game.Player.Character.IsInVehicle();
+                int vehicle = Game.Player.Character.CurrentVehicle.Handle;
+
+                // Fire ammo
+                if (FireAmmo)
+                {
+                    Function.Call(Hash.SET_FIRE_AMMO_THIS_FRAME, player);
+                }
+
+                // Explosive ammo
+                if (ExplosiveAmmo)
+                {
+                    Function.Call(Hash.SET_EXPLOSIVE_AMMO_THIS_FRAME, player);
+                }
+
+                // Explosive melee
+                if (ExplosiveMelee)
+                {
+                    Function.Call(Hash.SET_EXPLOSIVE_MELEE_THIS_FRAME, player);
+                }
+
+                // Infinite ammo
+                if (InfiniteAmmo)
+                {
+                    for (int i = 0; i < WeaponStorage.WEAPON_CATEGORY_COUNT; i++)
+                    {
+                        for (int j = 0; j < WeaponStorage.WEAPONS[i].Length; j++)
+                        {
+                            int weapon = Function.Call<int>(Hash.GET_HASH_KEY, WeaponStorage.WEAPONS[i][j].InternalValue);
+                            if (Function.Call<bool>(Hash.IS_WEAPON_VALID, weapon) && Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, player, weapon, 0))
+                            {
+                                unsafe
+                                {
+                                    int ammo = 0;
+                                    if (Function.Call<bool>(Hash.GET_MAX_AMMO, player, weapon, &ammo))
+                                    {
+                                        Function.Call(Hash.SET_PED_AMMO, player, weapon, ammo);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Permanent parachute
+                if (PermanentParachute)
+                {
+                    int paraState = Function.Call<int>(Hash.GET_PED_PARACHUTE_STATE, player);
+
+                    // Thanks to Enhanced Native Trainer, this is to prevent crashing the game
+                    if (paraState == -1 || paraState == 3)
+                    {
+                        Function.Call(Hash.GIVE_DELAYED_WEAPON_TO_PED, player, WeaponStorage.PARACHUTE_HASH, 1, 0);
+                    }
+                }
+
+                // No reload
+                if (NoReload)
+                {
+                    unsafe
+                    {
+                        int current = 0;
+                        Function.Call(Hash.GET_CURRENT_PED_WEAPON, player, &current, 1);
+                        if (Function.Call<bool>(Hash.IS_WEAPON_VALID, current))
+                        {
+                            int maxAmmo = 0;
+                            if (Function.Call<bool>(Hash.GET_MAX_AMMO, player, current, &maxAmmo))
+                            {
+                                Function.Call(Hash.SET_PED_AMMO, player, current, maxAmmo);
+                                maxAmmo = Function.Call<int>(Hash.GET_MAX_AMMO_IN_CLIP, player, current, 1);
+                                if (maxAmmo > 0) Function.Call(Hash.SET_AMMO_IN_CLIP, player, current, maxAmmo);
+                            }
+                        }
+                    }
+                }
+
+                // Vehicle rocket
+                if (VehicleRocket && inVehicle && Game.IsKeyPressed(Configuration.InputKey.VehicleRocket))
+                {
+                    if (Trainer.FrameCounter - _vehicleRocketFrames >= VEHICLE_ROCKET_FRAME_INTERVAL)
+                    {
+                        GTA.Math.Vector3 v0 = GTA.Math.Vector3.Zero, v1 = GTA.Math.Vector3.Zero;
+
+                        unsafe
+                        {
+                            //Function.Call(Hash.GET_MODEL_DIMENSIONS, Function.Call<int>(Hash.GET_ENTITY_MODEL), &v0, &v1);//
+                        }
+
+
+                        _vehicleRocketFrames = Trainer.FrameCounter;
+                    }
+                }
+            }
 
             /// <summary>
             /// Gets the current player's weapon set

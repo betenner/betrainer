@@ -291,6 +291,21 @@ namespace GTAVBETrainerDotNet.Menu
                 public static Menu SpeedMeter = null;
             }
 
+            /// <summary>
+            /// Weapon menu
+            /// </summary>
+            public static Menu Weapon = null;
+
+            /// <summary>
+            /// Weapon sub menus
+            /// </summary>
+            public static class Weapons
+            {
+                /// <summary>
+                /// Get specific weapon menu
+                /// </summary>
+                public static Menu GetSpecificWeapon = null;
+            }
 
             /// <summary>
             /// Configuration menu
@@ -462,6 +477,22 @@ namespace GTAVBETrainerDotNet.Menu
             }
         
             /// <summary>
+            /// Weapon menu items
+            /// </summary>
+            public static class Weapon
+            {
+                public static MenuItem GetAllWeapons = null;
+                public static MenuItem GetSpecificWeapon = null;
+                public static MenuItem InfiniteAmmo = null;
+                public static MenuItem PermanentParachute = null;
+                public static MenuItem NoReload = null;
+                public static MenuItem FireAmmo = null;
+                public static MenuItem ExplosiveAmmo = null;
+                public static MenuItem ExplosiveMelee = null;
+                public static MenuItem VehicleRockets = null;
+            }
+
+            /// <summary>
             /// Configuration menu items
             /// </summary>
             public static class Configuration
@@ -559,8 +590,27 @@ namespace GTAVBETrainerDotNet.Menu
             InitPlayerMenu();
             InitLocationMenu();
             InitVehicleMenu();
+            InitWeaponMenu();
             InitConfigurationMenu();
             InitMainMenu();
+        }
+
+        /// <summary>
+        /// Initializes weapon menu
+        /// </summary>
+        private static void InitWeaponMenu()
+        {
+            Menus.Weapon = new Menu(MenuText.Weapon.I00_TITLE);
+            MenuItems.Weapon.GetAllWeapons = AddMenuItem(Menus.Weapon, MenuText.Weapon.I01_GET_ALL_WEAPONS, false, false, null, Feature.Weapon.GetAllWeapons);
+            // TODO: InitSpecificWeaponMenu()
+            MenuItems.Weapon.GetSpecificWeapon = AddMenuItem(Menus.Weapon, MenuText.Weapon.I02_GET_SPECIFIC_WEAPON, false, false, Menus.Weapons.GetSpecificWeapon);
+            MenuItems.Weapon.InfiniteAmmo = AddMenuItem(Menus.Weapon, MenuText.Weapon.I03_INFINITE_AMMO, true, Feature.Weapon.InfiniteAmmo, null, Feature.Weapon.SetInfiniteAmmo);
+            MenuItems.Weapon.PermanentParachute = AddMenuItem(Menus.Weapon, MenuText.Weapon.I04_PERMANENT_PARACHUTE, true, Feature.Weapon.PermanentParachute, null, Feature.Weapon.SetPermanentParachute);
+            MenuItems.Weapon.NoReload = AddMenuItem(Menus.Weapon, MenuText.Weapon.I05_NO_RELOAD, true, Feature.Weapon.NoReload, null, Feature.Weapon.SetNoReload);
+            MenuItems.Weapon.FireAmmo = AddMenuItem(Menus.Weapon, MenuText.Weapon.I06_FIRE_AMMO, true, Feature.Weapon.FireAmmo, null, Feature.Weapon.SetFireAmmo);
+            MenuItems.Weapon.ExplosiveAmmo = AddMenuItem(Menus.Weapon, MenuText.Weapon.I07_EXPLOSIVE_AMMO, true, Feature.Weapon.FireAmmo, null, Feature.Weapon.SetFireAmmo);
+            MenuItems.Weapon.ExplosiveMelee = AddMenuItem(Menus.Weapon, MenuText.Weapon.I08_EXPLOSIVE_MELEE, true, Feature.Weapon.ExplosiveMelee, null, Feature.Weapon.SetExplosiveMelee);
+            MenuItems.Weapon.VehicleRockets = AddMenuItem(Menus.Weapon, MenuText.Weapon.I09_VEHICLE_ROCKETS, true, Feature.Weapon.VehicleRocket, null, Feature.Weapon.SetVehicleRocket);
         }
 
         /// <summary>
@@ -1082,7 +1132,7 @@ namespace GTAVBETrainerDotNet.Menu
             AddMenuItem(Menus.Main, MenuText.Main.I01_PLAYER, false, false, Menus.Player);
             AddMenuItem(Menus.Main, MenuText.Main.I02_LOCATION, false, false, Menus.Location);
             AddMenuItem(Menus.Main, MenuText.Main.I03_VEHICLE, false, false, Menus.Vehicle);
-            AddMenuItem(Menus.Main, MenuText.Main.I04_WEAPON, false, false);
+            AddMenuItem(Menus.Main, MenuText.Main.I04_WEAPON, false, false, Menus.Weapon);
             AddMenuItem(Menus.Main, MenuText.Main.I05_TIME, false, false);
             AddMenuItem(Menus.Main, MenuText.Main.I06_WORLD, false, false);
             AddMenuItem(Menus.Main, MenuText.Main.I07_WEATHER, false, false);

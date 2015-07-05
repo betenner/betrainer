@@ -159,7 +159,7 @@ namespace GTAVBETrainerDotNet
             /// </summary>
             public static void UpdateBoostVehicle()
             {
-                if (!Boost || !WinAPI.IsKeyDown(Configuration.InputKey.BoostVehicle) || !CheckInVehicle()) return;
+                if (!Boost || !Game.IsKeyPressed(Configuration.InputKey.BoostVehicle) || !CheckInVehicle()) return;
 
                 int vehicle = Game.Player.Character.CurrentVehicle.Handle;
                 float speed = Function.Call<float>(Hash.GET_ENTITY_SPEED, vehicle);
