@@ -31,6 +31,7 @@ namespace GTAVBETrainerDotNet
         {
             Player.UpdateFeatures();
             Vehicle.UpdateFeatures();
+            Weapon.UpdateFeatures();
         }
 
         /// <summary>
@@ -41,6 +42,7 @@ namespace GTAVBETrainerDotNet
             Player.InitFeatures();
             Location.InitFeatures();
             Vehicle.InitFeatures();
+            Weapon.InitFeatures();
         }
     }
 }
