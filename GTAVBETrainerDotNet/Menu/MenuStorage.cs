@@ -637,6 +637,7 @@ namespace GTAVBETrainerDotNet.Menu
             miCash.Text = string.Format(MenuText.Player.I03_CASH, POSITIVE_SIGN, DEFAULT_CASH_AMOUNT);
 
             AddMenuItem(Menus.Player, MenuText.Player.I04_HEAL, false, false, null, Feature.Player.QuickHeal);
+            Utils.ShowNotificationAboveMap(Feature.Player.Invincible.ToString());
             MenuItems.Player.Invincible = AddMenuItem(Menus.Player, MenuText.Player.I05_INVINCIBLE, true, Feature.Player.Invincible, null, Feature.Player.SetInvincible);
             MenuItems.Player.InfiniteAbility = AddMenuItem(Menus.Player, MenuText.Player.I06_INFINITE_ABILITY, true, Feature.Player.InfiniteAbility, null, Feature.Player.SetInfiniteAbility);
             MenuItems.Player.FastRun = AddMenuItem(Menus.Player, MenuText.Player.I07_FAST_RUN, true, Feature.Player.FastRun, null, Feature.Player.SetFastRun);

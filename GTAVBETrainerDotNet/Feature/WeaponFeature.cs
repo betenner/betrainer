@@ -36,6 +36,7 @@ namespace GTAVBETrainerDotNet
 
             private static int _vehicleRocketFrames = 0;
             private const int VEHICLE_ROCKET_FRAME_INTERVAL = 10;
+            private const string VEHICLE_ROCKET_NAME = "WEAPON_VEHICLE_ROCKET";
 
             /// <summary>
             /// Sets infinite ammo
@@ -202,21 +203,35 @@ namespace GTAVBETrainerDotNet
                 }
 
                 // Vehicle rocket
-                if (VehicleRocket && inVehicle && Game.IsKeyPressed(Configuration.InputKey.VehicleRocket))
+                if (VehicleRocket && inVehicle && Game.IsKeyPressed(Configuration.InputKey.VehicleRocket) && Game.Player.CanControlCharacter)
                 {
                     if (Trainer.FrameCounter - _vehicleRocketFrames >= VEHICLE_ROCKET_FRAME_INTERVAL)
                     {
                         GTA.Math.Vector3 v0 = GTA.Math.Vector3.Zero, v1 = GTA.Math.Vector3.Zero;
+                        Game.Player.Character.CurrentVehicle.Model.GetDimensions(ref v0, ref v1);
 
-                        unsafe
+                        int weaponAsset = Function.Call<int>(Hash.GET_HASH_KEY, VEHICLE_ROCKET_NAME);
+                        if (!Function.Call<bool>(Hash.HAS_WEAPON_ASSET_LOADED, weaponAsset))
                         {
-                            //Function.Call(Hash.GET_MODEL_DIMENSIONS, Function.Call<int>(Hash.GET_ENTITY_MODEL), &v0, &v1);//
+                            Function.Call(Hash.REQUEST_WEAPON_ASSET, weaponAsset, 31, 0);
+                            while (!Function.Call<bool>(Hash.HAS_WEAPON_ASSET_LOADED, weaponAsset))
+                            {
+                                Script.Wait(0);
+                            }
                         }
 
+                        GTA.Math.Vector3 from0 = Function.Call<GTA.Math.Vector3>(Hash.GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS, vehicle, -(v1.X + 0.25f), v1.Y + 1.25f, 0.1f);
+                        GTA.Math.Vector3 to0 = Function.Call<GTA.Math.Vector3>(Hash.GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS, vehicle, -v1.X, v1.Y + 100f, 0.1f);
+                        GTA.Math.Vector3 from1 = Function.Call<GTA.Math.Vector3>(Hash.GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS, vehicle, (v1.X + 0.25f), v1.Y + 1.25f, 0.1f);
+                        GTA.Math.Vector3 to1 = Function.Call<GTA.Math.Vector3>(Hash.GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS, vehicle, v1.X, v1.Y + 100f, 0.1f);
+
+                        Function.Call(Hash.SHOOT_SINGLE_BULLET_BETWEEN_COORDS, from0.X, from0.Y, from0.Z, to0.X, to0.Y, to0.Z, 250, 1, weaponAsset, player, 1, 0, -1f);
+                        Function.Call(Hash.SHOOT_SINGLE_BULLET_BETWEEN_COORDS, from1.X, from1.Y, from1.Z, to1.X, to1.Y, to1.Z, 250, 1, weaponAsset, player, 1, 0, -1f);
 
                         _vehicleRocketFrames = Trainer.FrameCounter;
                     }
                 }
+
             }
 
             /// <summary>

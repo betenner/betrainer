@@ -161,6 +161,18 @@ namespace GTAVBETrainerDotNet
         }
 
         /// <summary>
+        /// Parses a boolean string value
+        /// </summary>
+        /// <param name="value">Value</param>
+        /// <returns></returns>
+        public static bool ParseBoolStr(string value)
+        {
+            bool v = false;
+            if (bool.TryParse(value, out v)) return v;
+            return false;
+        }
+
+        /// <summary>
         /// Parses a nullable boolean value
         /// </summary>
         /// <param name="value">Value</param>

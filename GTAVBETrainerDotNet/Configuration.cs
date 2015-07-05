@@ -150,7 +150,7 @@ namespace GTAVBETrainerDotNet
                 IniFile ini = new IniFile(CONFIG_FILE);
 
                 // Trainer
-                Feature.Config.AutoSave = Utils.ParseBool(ini.GetValue(CONFIG_TRAINER, CONFIG_TRAINER_AUTO_SAVE));
+                Feature.Config.AutoSave = Utils.ParseBoolStr(ini.GetValue(CONFIG_TRAINER, CONFIG_TRAINER_AUTO_SAVE));
 
                 // Keys
                 InputKey.ToggleMenu = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_TOGGLE_MENU));
@@ -165,42 +165,42 @@ namespace GTAVBETrainerDotNet
                 InputKey.VehicleRocket = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_VEHICLE_ROCKET));
 
                 // Player
-                Feature.Player.Invincible = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_INVINCIBLE)); 
-                Feature.Player.InfiniteAbility = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_INFINITE_ABILITY)); 
-                Feature.Player.FastRun = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_FAST_RUN)); 
-                Feature.Player.FastSwim = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_FAST_SWIM)); 
-                Feature.Player.SuperJump = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_SUPER_JUMP)); 
-                Feature.Player.Noiseless = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_NOISELESS)); 
-                Feature.Player.Wanted.NeverWanted = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_NEVER_WANTED)); 
-                Feature.Player.Wanted.PoliceIgnored = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_POLICE_IGNORED)); 
-                Feature.Player.Wanted.EveryoneIgnored = Utils.ParseBool(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_EVERYONE_IGNORED)); 
+                Feature.Player.Invincible = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_INVINCIBLE)); 
+                Feature.Player.InfiniteAbility = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_INFINITE_ABILITY)); 
+                Feature.Player.FastRun = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_FAST_RUN)); 
+                Feature.Player.FastSwim = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_FAST_SWIM)); 
+                Feature.Player.SuperJump = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_SUPER_JUMP)); 
+                Feature.Player.Noiseless = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_NOISELESS)); 
+                Feature.Player.Wanted.NeverWanted = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_NEVER_WANTED)); 
+                Feature.Player.Wanted.PoliceIgnored = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_POLICE_IGNORED)); 
+                Feature.Player.Wanted.EveryoneIgnored = Utils.ParseBoolStr(ini.GetValue(CONFIG_PLAYER, CONFIG_PLAYER_EVERYONE_IGNORED)); 
 
                 // Player MSP Custom Sets
                 MSPCustomSets.LoadMSPCustomSets();
 
                 // Location
-                Feature.Location.ShowCoordinates = Utils.ParseBool(ini.GetValue(CONFIG_LOCATION, CONFIG_LOCATION_SHOW_COORDINATES)); 
+                Feature.Location.ShowCoordinates = Utils.ParseBoolStr(ini.GetValue(CONFIG_LOCATION, CONFIG_LOCATION_SHOW_COORDINATES)); 
                 Location.LoadCustomLocations();
 
                 // Vehicle
-                Feature.Vehicle.Boost = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_BOOST)); 
-                Feature.Vehicle.Invincible = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_INVINCIBLE)); 
-                Feature.Vehicle.SeatBelt = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SEATBELT)); 
-                Feature.Vehicle.SpawnIntoVehicle = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPAWN_INTO)); 
-                Feature.Vehicle.SpeedMeter.Show = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPEEDMETER_SHOW)); 
-                Feature.Vehicle.SpeedMeter.ShowInMetric = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPEEDMETER_SHOW_IN_METRIC)); 
-                Feature.Vehicle.SpeedMeter.ShowWithoutVehicle = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPEEDMETER_SHOW_WITHOUT_VEHICLE)); 
-                Feature.Vehicle.Door.InstantOpenClose = Utils.ParseBool(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_DOOR_INSTANT)); 
+                Feature.Vehicle.Boost = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_BOOST)); 
+                Feature.Vehicle.Invincible = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_INVINCIBLE)); 
+                Feature.Vehicle.SeatBelt = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SEATBELT)); 
+                Feature.Vehicle.SpawnIntoVehicle = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPAWN_INTO)); 
+                Feature.Vehicle.SpeedMeter.Show = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPEEDMETER_SHOW)); 
+                Feature.Vehicle.SpeedMeter.ShowInMetric = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPEEDMETER_SHOW_IN_METRIC)); 
+                Feature.Vehicle.SpeedMeter.ShowWithoutVehicle = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPEEDMETER_SHOW_WITHOUT_VEHICLE)); 
+                Feature.Vehicle.Door.InstantOpenClose = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_DOOR_INSTANT)); 
                 Vehicle.LoadCustomVehicles();
 
                 // Weapon
-                Feature.Weapon.ExplosiveAmmo = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_EXPLOSIVE_AMMO));
-                Feature.Weapon.ExplosiveMelee = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_EXPLOSIVE_MELEE));
-                Feature.Weapon.FireAmmo = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_FIRE_AMMO));
-                Feature.Weapon.InfiniteAmmo = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_INFINITE_AMMO));
-                Feature.Weapon.NoReload = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_NO_RELOAD));
-                Feature.Weapon.PermanentParachute = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_PERMANENT_PARACHUTE));
-                Feature.Weapon.VehicleRocket = Utils.ParseBool(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_VEHICLE_ROCKETS));
+                Feature.Weapon.ExplosiveAmmo = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_EXPLOSIVE_AMMO));
+                Feature.Weapon.ExplosiveMelee = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_EXPLOSIVE_MELEE));
+                Feature.Weapon.FireAmmo = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_FIRE_AMMO));
+                Feature.Weapon.InfiniteAmmo = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_INFINITE_AMMO));
+                Feature.Weapon.NoReload = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_NO_RELOAD));
+                Feature.Weapon.PermanentParachute = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_PERMANENT_PARACHUTE));
+                Feature.Weapon.VehicleRocket = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_VEHICLE_ROCKETS));
 
                 Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_LOADED);
             }
