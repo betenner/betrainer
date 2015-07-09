@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using GTAVBETrainerDotNet.Model;
 using GTAVBETrainerDotNet.Teleport;
 using GTAVBETrainerDotNet.Vehicle;
+using GTAVBETrainerDotNet.Weapon;
 
 namespace GTAVBETrainerDotNet.Menu
 {
@@ -602,7 +603,7 @@ namespace GTAVBETrainerDotNet.Menu
         {
             Menus.Weapon = new Menu(MenuText.Weapon.I00_TITLE);
             MenuItems.Weapon.GetAllWeapons = AddMenuItem(Menus.Weapon, MenuText.Weapon.I01_GET_ALL_WEAPONS, false, false, null, Feature.Weapon.GetAllWeapons);
-            // TODO: InitSpecificWeaponMenu()
+            InitSpecificWeaponMenu();
             MenuItems.Weapon.GetSpecificWeapon = AddMenuItem(Menus.Weapon, MenuText.Weapon.I02_GET_SPECIFIC_WEAPON, false, false, Menus.Weapons.GetSpecificWeapon);
             MenuItems.Weapon.InfiniteAmmo = AddMenuItem(Menus.Weapon, MenuText.Weapon.I03_INFINITE_AMMO, true, Feature.Weapon.InfiniteAmmo, null, Feature.Weapon.SetInfiniteAmmo);
             MenuItems.Weapon.PermanentParachute = AddMenuItem(Menus.Weapon, MenuText.Weapon.I04_PERMANENT_PARACHUTE, true, Feature.Weapon.PermanentParachute, null, Feature.Weapon.SetPermanentParachute);
@@ -611,6 +612,26 @@ namespace GTAVBETrainerDotNet.Menu
             MenuItems.Weapon.ExplosiveAmmo = AddMenuItem(Menus.Weapon, MenuText.Weapon.I07_EXPLOSIVE_AMMO, true, Feature.Weapon.FireAmmo, null, Feature.Weapon.SetFireAmmo);
             MenuItems.Weapon.ExplosiveMelee = AddMenuItem(Menus.Weapon, MenuText.Weapon.I08_EXPLOSIVE_MELEE, true, Feature.Weapon.ExplosiveMelee, null, Feature.Weapon.SetExplosiveMelee);
             MenuItems.Weapon.VehicleRockets = AddMenuItem(Menus.Weapon, MenuText.Weapon.I09_VEHICLE_ROCKETS, true, Feature.Weapon.VehicleRocket, null, Feature.Weapon.SetVehicleRocket);
+        }
+
+        /// <summary>
+        /// Initializes get specific weapon menu
+        /// </summary>
+        private static void InitSpecificWeaponMenu()
+        {
+            Menus.Weapons.GetSpecificWeapon = new Menu(MenuText.Weapon.SpecificWeapon.I00_TITLE);
+            Menu[] mCategory = new Menu[WeaponStorage.WEAPON_CATEGORY_COUNT];
+            for (int i = 0; i < WeaponStorage.WEAPON_CATEGORY_COUNT; i++)
+            {
+                mCategory[i] = new Menu(WeaponStorage.WEAPON_CATEGORY_NAMES[i]);
+                Menu[] mWeapon = new Menu[Weapon.WeaponStorage.WEAPONS[i].Length];
+                for (int j = 0; j < WeaponStorage.WEAPONS[i].Length; j++)
+                {
+                    mWeapon[j] = new Menu(WeaponStorage.WEAPONS[i][j].Name);
+                    AddMenuItem(mCategory[i], WeaponStorage.WEAPONS[i][j].Name, false, false, mWeapon[j], null, Feature.Weapon.PreEnterSpecificWeaponMenu, null, WeaponStorage.WEAPONS[i][j]);
+                }
+                AddMenuItem(Menus.Weapons.GetSpecificWeapon, WeaponStorage.WEAPON_CATEGORY_NAMES[i], false, false, mCategory[i]);
+            }
         }
 
         /// <summary>

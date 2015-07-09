@@ -420,6 +420,19 @@ namespace GTAVBETrainerDotNet.Menu
             public const string I07_EXPLOSIVE_AMMO = "Explosive Ammo";
             public const string I08_EXPLOSIVE_MELEE = "Explosive Melee";
             public const string I09_VEHICLE_ROCKETS = "Vehicle Rockets";
+
+            /// <summary>
+            /// Specific weapon menu
+            /// </summary>
+            public static class SpecificWeapon
+            {
+                public const string I00_TITLE = "Select Weapon Category";
+
+                public const string HAS = "Has this Weapon";
+                public const string FILL_AMMO_CLIP = "Fill Ammo & Clip";
+                public const string TINT = "Weapon Tint";
+                public const string SELECT_TINT = "Select Tint";
+            }
         }
 
         /// <summary>

@@ -55,6 +55,7 @@ namespace GTAVBETrainerDotNet.Weapon
         public const int TOTAL_WEAPONS_COUNT = 54;
         public const int TOTAL_WEAPONS_SLOTS = 57;
         public const int MAX_ATTACHMENT_SLOTS = 15;
+        public const string WEAPON_UNARMED = "WEAPON_UNARMED";
 
         public static readonly string[] WEAPON_CATEGORY_NAMES = { "Melee", "Handguns", "Submachine Guns", "Assault Rifles", "Shotguns", "Sniper Rifles", "Heavy Weapons", "Thrown Weapons" };
 

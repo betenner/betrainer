@@ -67,6 +67,11 @@ namespace GTAVBETrainerDotNet.Menu
         public bool On = false;
 
         /// <summary>
+        /// Index in parent, for reference only
+        /// </summary>
+        public int Index = -1;
+
+        /// <summary>
         /// Text color
         /// </summary>
         public Color TextColor = Color.White;

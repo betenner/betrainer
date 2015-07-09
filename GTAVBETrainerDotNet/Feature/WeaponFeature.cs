@@ -114,7 +114,15 @@ namespace GTAVBETrainerDotNet
             /// <param name="sender">Source menu item</param>
             public static void GetAllWeapons(MenuItem sender)
             {
-
+                for (int i = 0; i < WeaponStorage.WEAPON_CATEGORY_COUNT; i++)
+                {
+                    for (int j = 0; j < WeaponStorage.WEAPONS[i].Length; j++)
+                    {
+                        Function.Call(Hash.GIVE_DELAYED_WEAPON_TO_PED, Game.Player.Character.Handle, Function.Call<int>(Hash.GET_HASH_KEY, WeaponStorage.WEAPONS[i][j].InternalValue), 1000, 0);
+                    }
+                }
+                Function.Call(Hash.GIVE_DELAYED_WEAPON_TO_PED, Game.Player.Character.Handle, WeaponStorage.PARACHUTE_HASH, 1, 0);
+                Utils.ShowNotificationAboveMap(GlobalConst.Message.WEAPON_ALL);
             }
 
             /// <summary>
@@ -233,6 +241,153 @@ namespace GTAVBETrainerDotNet
                     }
                 }
 
+            }
+
+            /// <summary>
+            /// Pre-enters specific weapn menu
+            /// </summary>
+            /// <param name="sender">Source menu item</param>
+            public static void PreEnterSpecificWeaponMenu(MenuItem sender)
+            {
+                WeaponData weapon = (sender.Data as WeaponData);
+                GenerateSpecificWeaponMenu(sender.SubMenu, weapon);
+            }
+
+            private static void GenerateSpecificWeaponMenu(Menu.Menu menu, WeaponData weapon)
+            {
+                menu.Clear();
+                int weaponHash = Function.Call<int>(Hash.GET_HASH_KEY, weapon.InternalValue);
+                bool hasWeapon = HasWeapon(weaponHash);
+                MenuStorage.AddMenuItem(menu, MenuText.Weapon.SpecificWeapon.HAS, true, hasWeapon, null, SetHasWeapon, null, null, weapon);
+                if (hasWeapon)
+                {
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character.Handle, weaponHash, true);
+                    int maxAmmo = Function.Call<int>(Hash.GET_MAX_AMMO_IN_CLIP, Game.Player.Character.Handle, weaponHash, false);
+                    if (maxAmmo > 0)
+                    {
+                        MenuStorage.AddMenuItem(menu, MenuText.Weapon.SpecificWeapon.FILL_AMMO_CLIP, false, false, null, SetFillAmmoClip, null, null, weapon);
+                    }
+                    if (weapon.AttachmentCount > 0)
+                    {
+                        for (int i = 0; i < weapon.AttachmentCount; i++)
+                        {
+                            WeaponData wd = weapon.Clone();
+                            wd.SelectedAttachmentIndex = i;
+                            WeaponAttachmentData wad = weapon.GetAttachmentData(i);
+                            int hash = Function.Call<int>(Hash.GET_HASH_KEY, wad.InternalValue);
+                            bool has = HasAttachment(weaponHash, hash);
+                            MenuStorage.AddMenuItem(menu, wad.Name, true, has, null, SetAttachment, null, null, wd);
+                        }
+                    }
+                    if (weapon.HasTint)
+                    {
+                        int index = Function.Call<int>(Hash.GET_PED_WEAPON_TINT_INDEX, Game.Player.Character.Handle, weaponHash);
+                        Menu.Menu menuTint = new Menu.Menu(MenuText.Weapon.SpecificWeapon.SELECT_TINT);
+                        for (int i = (int)WeaponStorage.WeaponTint.Normal; i <= (int)WeaponStorage.WeaponTint.Platinum; i++)
+                        {
+                            MenuStorage.AddMenuItem(menuTint, Enum.GetName(typeof(WeaponStorage.WeaponTint), (WeaponStorage.WeaponTint)i), false, false, null, null, null, SetWeaponTint, weapon);
+                        }
+                        menuTint.SelectedIndex = index;
+                        MenuStorage.AddMenuItem(menu, MenuText.Weapon.SpecificWeapon.TINT, false, false, menuTint);
+                    }
+                }
+                else
+                {
+                    int unarmed = Function.Call<int>(Hash.GET_HASH_KEY, WeaponStorage.WEAPON_UNARMED);
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character.Handle, unarmed, true);
+                }
+            }
+
+            /// <summary>
+            /// Sets weaopn tint
+            /// </summary>
+            /// <param name="sender">Source menu item</param>
+            public static void SetWeaponTint(MenuItem sender)
+            {
+                WeaponData wd = (sender.Data as WeaponData);
+                int wHash = Function.Call<int>(Hash.GET_HASH_KEY, wd.InternalValue);
+                Function.Call(Hash.SET_PED_WEAPON_TINT_INDEX, Game.Player.Character.Handle, wHash, sender.Index);
+            }
+
+            /// <summary>
+            /// Does player's specified weapon has the specified attachment?
+            /// </summary>
+            /// <param name="weaponHash">Weapon hash</param>
+            /// <param name="attachmentHash">Attachment hash</param>
+            /// <returns></returns>
+            public static bool HasAttachment(int weaponHash, int attachmentHash)
+            {
+                return Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON_COMPONENT, Game.Player.Character.Handle, weaponHash, attachmentHash);
+            }
+
+            /// <summary>
+            /// Sets attachment
+            /// </summary>
+            /// <param name="sender">Source menu item</param>
+            public static void SetAttachment(MenuItem sender)
+            {
+                int player= Game.Player.Character.Handle;
+                WeaponData wd = (sender.Data as WeaponData);
+                int wHash = Function.Call<int>(Hash.GET_HASH_KEY, wd.InternalValue);
+                int aHash = Function.Call<int>(Hash.GET_HASH_KEY, wd.GetAttachmentData(wd.SelectedAttachmentIndex).InternalValue);
+                bool has = Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON_COMPONENT, player, wHash, aHash);
+                if (sender.On && !has)
+                {
+                    Function.Call(Hash.GIVE_WEAPON_COMPONENT_TO_PED, player, wHash, aHash);
+                }
+                else if (!sender.On && has)
+                {
+                    Function.Call(Hash.REMOVE_WEAPON_COMPONENT_FROM_PED, player, wHash, aHash);
+                }
+            }
+
+            /// <summary>
+            /// Sets fill ammo & clip
+            /// </summary>
+            /// <param name="sender">Source menu item</param>
+            public static void SetFillAmmoClip(MenuItem sender)
+            {
+                int player = Game.Player.Character.Handle;
+                int weaponHash = Function.Call<int>(Hash.GET_HASH_KEY, (sender.Data as WeaponData).InternalValue);
+                int maxClipAmmo = Function.Call<int>(Hash.GET_MAX_AMMO_IN_CLIP, player, weaponHash, false);
+                Function.Call(Hash.SET_AMMO_IN_CLIP, player, weaponHash, maxClipAmmo);
+                Function.Call(Hash.SET_PED_AMMO, player, weaponHash, 9999);
+            }
+
+            /// <summary>
+            /// Does player have this weapon
+            /// </summary>
+            /// <param name="weaponHash">Weapon hash</param>
+            /// <returns></returns>
+            public static bool HasWeapon(int weaponHash)
+            {
+                return Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character.Handle, weaponHash);
+            }
+
+            /// <summary>
+            /// Sets has weapon
+            /// </summary>
+            /// <param name="sender">Source menu item</param>
+            public static void SetHasWeapon(MenuItem sender)
+            {
+                int player = Game.Player.Character.Handle;
+                WeaponData weapon = (sender.Data as WeaponData);
+                int weaponHash = Function.Call<int>(Hash.GET_HASH_KEY, weapon.InternalValue);
+                bool hasWeapon = HasWeapon(weaponHash);
+                if (sender.On && !hasWeapon)
+                {
+                    Function.Call(Hash.GIVE_WEAPON_TO_PED, player, weaponHash, 1000, 0, 0);
+                    int maxClipAmmo = Function.Call<int>(Hash.GET_MAX_AMMO_IN_CLIP, player, weaponHash, false);
+                    Function.Call(Hash.SET_PED_AMMO, player, weaponHash, maxClipAmmo);
+                    Function.Call(Hash.SET_AMMO_IN_CLIP, player, weaponHash, maxClipAmmo);
+                }
+                else if (!sender.On && hasWeapon)
+                {
+                    int unarmed = Function.Call<int>(Hash.GET_HASH_KEY, WeaponStorage.WEAPON_UNARMED);
+                    Function.Call(Hash.REMOVE_WEAPON_FROM_PED, player, weaponHash);
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, player, unarmed, true);
+                }
+                GenerateSpecificWeaponMenu(sender.Parent, weapon);
             }
 
             /// <summary>

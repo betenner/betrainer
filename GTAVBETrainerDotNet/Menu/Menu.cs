@@ -516,6 +516,7 @@ namespace GTAVBETrainerDotNet.Menu
         public void Add(MenuItem item)
         {
             if (item != null) _items.Add(item);
+            item.Index = _items.Count - 1;
             item.Parent = this;
             EnsurePage();
             EnsureSelectedIndexInCurrentPage();
@@ -528,6 +529,10 @@ namespace GTAVBETrainerDotNet.Menu
         public void Add(MenuItem[] items)
         {
             _items.AddRange(items);
+            for (int i = 0; i < _items.Count; i++)
+            {
+                _items[i].Index = i;
+            }
             EnsurePage();
             EnsureSelectedIndexInCurrentPage();
         }

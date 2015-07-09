@@ -113,6 +113,8 @@ namespace GTAVBETrainerDotNet
             public const string CV_CV = "Custom vehicle";
             public const string CV_SPAWN_FAILED = "Custom vehicle spawn failed.";
 
+            public const string WEAPON_ALL = "All weapons acquired.";
+
             public const string TRAINER_INITIALIZING = "BE Trainer.NET " + TRAINER_VERSION + " initializing...";
             public const string TRAINER_INITIALIZED = "BE Trainer.NET " + TRAINER_VERSION + " initialized.";
             

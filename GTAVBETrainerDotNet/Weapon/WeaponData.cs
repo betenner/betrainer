@@ -23,7 +23,19 @@ namespace GTAVBETrainerDotNet.Weapon
         private string _name = null;
         private string _internal = null;
         private WeaponAttachmentData[] _attachments = null;
+        private int _selectedAttachmentIndex = 0;
         private bool _tint = false;
+
+        /// <summary>
+        /// Creates a clone of this weapon data.<br />
+        /// Selected attachment index will not be cloned.<br />
+        /// Attachment data only clones reference.
+        /// </summary>
+        /// <returns></returns>
+        public WeaponData Clone()
+        {
+            return new WeaponData(_name, _internal, _tint, _attachments);
+        }
 
         /// <summary>
         /// Name of the weapon
@@ -78,6 +90,24 @@ namespace GTAVBETrainerDotNet.Weapon
         public WeaponAttachmentData GetAttachmentData(int index)
         {
             return _attachments[index];
+        }
+
+        /// <summary>
+        /// Gets or sets the selected index of attachment data (for menu use only)
+        /// </summary>
+        public int SelectedAttachmentIndex
+        {
+            get
+            {
+                return _selectedAttachmentIndex;
+            }
+            set
+            {
+                _selectedAttachmentIndex = value;
+                if (_selectedAttachmentIndex < -1) _selectedAttachmentIndex = -1;
+                if (_attachments == null || _attachments.Length == 0) _selectedAttachmentIndex = -1;
+                else if (_selectedAttachmentIndex > _attachments.Length - 1) _selectedAttachmentIndex = _attachments.Length - 1;
+            }
         }
 
         /// <summary>
