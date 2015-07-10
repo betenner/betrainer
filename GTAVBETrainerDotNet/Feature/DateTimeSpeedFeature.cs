@@ -225,14 +225,6 @@ namespace GTAVBETrainerDotNet
             {
                 Paused = sender.On;
                 Function.Call(Hash.PAUSE_CLOCK, Paused);
-                if (Paused)
-                {
-                    Utils.ShowNotificationAboveMap(GlobalConst.Message.DTS_PAUSED);
-                }
-                else
-                {
-                    Utils.ShowNotificationAboveMap(GlobalConst.Message.DTS_UNPAUSED);
-                }
                 Config.DoAutoSave();
             }
 

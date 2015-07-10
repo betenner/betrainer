@@ -115,9 +115,6 @@ namespace GTAVBETrainerDotNet
 
             public const string WEAPON_ALL = "All weapons acquired.";
 
-            public const string DTS_PAUSED = "Game clock paused.";
-            public const string DTS_UNPAUSED = "Game clock unpaused.";
-
             public const string TRAINER_INITIALIZING = "BE Trainer.NET " + TRAINER_VERSION + " initializing...";
             public const string TRAINER_INITIALIZED = "BE Trainer.NET " + TRAINER_VERSION + " initialized.";
             

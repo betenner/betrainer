@@ -55,6 +55,7 @@
     <Compile Include="Feature\DateTimeSpeedFeature.cs" />
     <Compile Include="Feature\VehicleFeature.cs" />
     <Compile Include="Feature\WeaponFeature.cs" />
+    <Compile Include="Feature\WorldFeature.cs" />
     <Compile Include="GlobalConst.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="Menu\Menu.cs" />

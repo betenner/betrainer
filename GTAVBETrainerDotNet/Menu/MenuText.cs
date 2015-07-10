@@ -501,6 +501,20 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         /// <summary>
+        /// World menu
+        /// </summary>
+        public static class World
+        {
+            public const string I00_TITLE = "World Options";
+            public const string I01_MOON_GRAVITY = "Moon Gravity";
+            public const string I02_RANDOM_COPS = "Random Cops";
+            public const string I03_RANDOM_TRAINS = "Random Trains";
+            public const string I04_RANDOM_BOATS = "Random Boats";
+            public const string I05_GARBAGE_TRUCKS = "Garbage Trucks";
+            public const string I06_RESTRICTED_ZONES = "Restricted Zones";
+        }
+
+        /// <summary>
         /// Configuration menu
         /// </summary>
         public static class Configuration

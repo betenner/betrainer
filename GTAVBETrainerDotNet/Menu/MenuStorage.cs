@@ -324,6 +324,11 @@ namespace GTAVBETrainerDotNet.Menu
             }
 
             /// <summary>
+            /// World menu
+            /// </summary>
+            public static Menu World = null;
+
+            /// <summary>
             /// Configuration menu
             /// </summary>
             public static Menu Configuration = null;
@@ -569,6 +574,19 @@ namespace GTAVBETrainerDotNet.Menu
             }
 
             /// <summary>
+            /// World menu items
+            /// </summary>
+            public static class World
+            {
+                public static MenuItem MoonGravity = null;
+                public static MenuItem RandomCops = null;
+                public static MenuItem RandomTrains = null;
+                public static MenuItem RandomBoats = null;
+                public static MenuItem GarbageTrucks = null;
+                public static MenuItem RestrictedZones = null;
+            }
+
+            /// <summary>
             /// Configuration menu items
             /// </summary>
             public static class Configuration
@@ -668,8 +686,24 @@ namespace GTAVBETrainerDotNet.Menu
             InitVehicleMenu();
             InitWeaponMenu();
             InitDateTimeSpeedMenu();
+            InitWorldMenu();
             InitConfigurationMenu();
             InitMainMenu();
+        }
+
+        
+        /// <summary>
+        /// Initializes world menu
+        /// </summary>
+        private static void InitWorldMenu()
+        {
+            Menus.World = new Menu(MenuText.World.I00_TITLE);
+            MenuItems.World.MoonGravity = AddMenuItem(Menus.World, MenuText.World.I01_MOON_GRAVITY, true, Feature.World.MoonGravity, null, Feature.World.SetMoonGravity);
+            MenuItems.World.RandomCops = AddMenuItem(Menus.World, MenuText.World.I02_RANDOM_COPS, true, Feature.World.RandomCops, null, Feature.World.SetRandomCops);
+            MenuItems.World.RandomTrains = AddMenuItem(Menus.World, MenuText.World.I03_RANDOM_TRAINS, true, Feature.World.RandomTrains, null, Feature.World.SetRandomTrains);
+            MenuItems.World.RandomBoats = AddMenuItem(Menus.World, MenuText.World.I04_RANDOM_BOATS, true, Feature.World.RandomBoats, null, Feature.World.SetRandomBoats);
+            MenuItems.World.GarbageTrucks = AddMenuItem(Menus.World, MenuText.World.I05_GARBAGE_TRUCKS, true, Feature.World.GarbageTrucks, null, Feature.World.SetGarbageTrucks);
+            MenuItems.World.RestrictedZones = AddMenuItem(Menus.World, MenuText.World.I06_RESTRICTED_ZONES, true, Feature.World.RestrictedZones, null, Feature.World.SetRestrictedZones);
         }
 
         /// <summary>
@@ -1324,7 +1358,7 @@ namespace GTAVBETrainerDotNet.Menu
             AddMenuItem(Menus.Main, MenuText.Main.I03_VEHICLE, false, false, Menus.Vehicle);
             AddMenuItem(Menus.Main, MenuText.Main.I04_WEAPON, false, false, Menus.Weapon);
             AddMenuItem(Menus.Main, MenuText.Main.I05_DATE_TIME_SPEED, false, false, Menus.DateTimeSpeed);
-            AddMenuItem(Menus.Main, MenuText.Main.I06_WORLD, false, false);
+            AddMenuItem(Menus.Main, MenuText.Main.I06_WORLD, false, false, Menus.World);
             AddMenuItem(Menus.Main, MenuText.Main.I07_WEATHER, false, false);
             AddMenuItem(Menus.Main, MenuText.Main.I08_MISC, false, false);
             AddMenuItem(Menus.Main, MenuText.Main.I09_CONFIGURATION, false, false, Menus.Configuration);

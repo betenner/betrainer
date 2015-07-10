@@ -139,6 +139,14 @@ namespace GTAVBETrainerDotNet
         private const string CONFIG_TIME_PAUSED = "Paused";
         private const string CONFIG_TIME_SYNC_WITH_SYSTEM = "Sync With System";
 
+        private const string CONFIG_WORLD = "World";
+        private const string CONFIG_WORLD_MOON_GRAVITY = "MoonGravity";
+        private const string CONFIG_WORLD_RANDOM_COPS = "RandomCops";
+        private const string CONFIG_WORLD_RANDOM_TRAINS = "RandomTrains";
+        private const string CONFIG_WORLD_RANDOM_BOATS = "RandomBoats";
+        private const string CONFIG_WORLD_GARBATE_TRUCKS = "GarbageTrucks";
+        private const string CONFIG_WORLD_RESTRICTED_ZONES = "RestrictedZones";
+
         /// <summary>
         /// Load configurations
         /// </summary>
@@ -213,6 +221,14 @@ namespace GTAVBETrainerDotNet
                 Feature.DateTimeSpeed.Paused = Utils.ParseBoolStr(ini.GetValue(CONFIG_TIME, CONFIG_TIME_PAUSED));
                 Feature.DateTimeSpeed.SyncWithSystem = Utils.ParseBoolStr(ini.GetValue(CONFIG_TIME, CONFIG_TIME_SYNC_WITH_SYSTEM));
 
+                // World
+                Feature.World.MoonGravity = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_MOON_GRAVITY));
+                Feature.World.RandomCops = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_COPS), true);
+                Feature.World.RandomTrains = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_TRAINS), true);
+                Feature.World.RandomBoats = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_BOATS), true);
+                Feature.World.GarbageTrucks = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_GARBATE_TRUCKS), true);
+                Feature.World.RestrictedZones = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_RESTRICTED_ZONES), true);
+
                 Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_LOADED);
             }
             catch
@@ -286,6 +302,14 @@ namespace GTAVBETrainerDotNet
                 ini.SetValue(CONFIG_TIME, CONFIG_TIME_SHOW_TIME, Feature.DateTimeSpeed.ShowTime.ToString());
                 ini.SetValue(CONFIG_TIME, CONFIG_TIME_PAUSED, Feature.DateTimeSpeed.Paused.ToString());
                 ini.SetValue(CONFIG_TIME, CONFIG_TIME_SYNC_WITH_SYSTEM, Feature.DateTimeSpeed.Paused.ToString());
+
+                // World
+                ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_MOON_GRAVITY, Feature.World.MoonGravity.ToString());
+                ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_COPS, Feature.World.RandomCops.ToString());
+                ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_TRAINS, Feature.World.RandomTrains.ToString());
+                ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_BOATS, Feature.World.RandomBoats.ToString());
+                ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_GARBATE_TRUCKS, Feature.World.GarbageTrucks.ToString());
+                ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_RESTRICTED_ZONES, Feature.World.RestrictedZones.ToString());
 
                 ini.Save();
 
