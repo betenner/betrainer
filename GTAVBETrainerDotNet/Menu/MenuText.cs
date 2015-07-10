@@ -30,7 +30,7 @@ namespace GTAVBETrainerDotNet.Menu
             public const string I02_LOCATION = "Location";
             public const string I03_VEHICLE = "Vehicle";
             public const string I04_WEAPON = "Weapon";
-            public const string I05_TIME = "Time";
+            public const string I05_DATE_TIME_SPEED = "Date & Time & Speed";
             public const string I06_WORLD = "World";
             public const string I07_WEATHER = "Weather";
             public const string I08_MISC = "Misc";
@@ -433,6 +433,71 @@ namespace GTAVBETrainerDotNet.Menu
                 public const string TINT = "Weapon Tint";
                 public const string SELECT_TINT = "Select Tint";
             }
+        }
+
+        /// <summary>
+        /// Time menu
+        /// </summary>
+        public static class DateTimeSpeed
+        {
+            public const string I00_TITLE = "Date & Time & Speed Options";
+            public const string I01_SET_DATETIME = "Set Date & Time";
+            public const string I02_SET_GAME_SPEED = "Set Game Speed";
+            public const string I03_SET_AIMING_SPEED = "Set Aiming Speed";
+            public const string I04_HOUR_FORWARD = "Hour Forward";
+            public const string I05_HOUR_BACKWARD = "Hour Backward";
+            public const string I06_DAY_FORWARD = "Day Forward";
+            public const string I07_DAY_BACKWARD = "Day Backward";
+            public const string I08_SHOW_TIME = "Show Time";
+            public const string I09_TIME_PAUSED = "Time Paused";
+            public const string I10_SYNC_WITH_SYSTEM = "Sync with System";
+
+            /// <summary>
+            /// Set date time menu
+            /// </summary>
+            public static class SetDateTime
+            {
+                public const string I00_TITLE = "Set Date & Time";
+                public const string I01_YEAR = "Year: {0:0000}";
+                public const string I02_MONTH = "Month: {0:00}";
+                public const string I03_DAY = "Day: {0:00}";
+                public const string I04_HOUR = "Hour: {0:00}";
+                public const string I05_MINUTE = "Minute: {0:00}";
+                public const string I06_SECOND = "Second: {0:00}";
+                public const string I07_SET_TO_CURRENT = "Set to Current";
+                public const string I08_SET_TO_SYSTEM = "Set to System";
+            }
+
+            /// <summary>
+            /// Set game speed menu
+            /// </summary>
+            public static class SetGameSpeed
+            {
+                public const string I00_TITLE = "Change Game Speed";
+                public const string I01_SPEED = "Speed: {0:#0%}";
+                public const string I02_SET_TO_100 = "Set to 100%";
+                public const string I03_SET_TO_75 = "Set to 75%";
+                public const string I04_SET_TO_50 = "Set to 50%";
+                public const string I05_SET_TO_25 = "Set to 25%";
+                public const string I06_SET_TO_10 = "Set to 10%";
+                public const string I07_SET_TO_0 = "Set to 0%";
+            }
+
+            /// <summary>
+            /// Set aiming speed menu
+            /// </summary>
+            public static class SetAimingSpeed
+            {
+                public const string I00_TITLE = "Change Aiming Speed";
+                public const string I01_SPEED = "Speed: {0:#0%}";
+                public const string I02_SET_TO_100 = "Set to 100%";
+                public const string I03_SET_TO_75 = "Set to 75%";
+                public const string I04_SET_TO_50 = "Set to 50%";
+                public const string I05_SET_TO_25 = "Set to 25%";
+                public const string I06_SET_TO_10 = "Set to 10%";
+                public const string I07_SET_TO_0 = "Set to 0%";
+            }
+
         }
 
         /// <summary>

@@ -52,6 +52,7 @@
     <Compile Include="Feature\Feature.cs" />
     <Compile Include="Feature\LocationFeature.cs" />
     <Compile Include="Feature\PlayerFeature.cs" />
+    <Compile Include="Feature\DateTimeSpeedFeature.cs" />
     <Compile Include="Feature\VehicleFeature.cs" />
     <Compile Include="Feature\WeaponFeature.cs" />
     <Compile Include="GlobalConst.cs" />

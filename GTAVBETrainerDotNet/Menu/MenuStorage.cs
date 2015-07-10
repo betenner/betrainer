@@ -309,6 +309,21 @@ namespace GTAVBETrainerDotNet.Menu
             }
 
             /// <summary>
+            /// Date time speed menu
+            /// </summary>
+            public static Menu DateTimeSpeed = null;
+
+            /// <summary>
+            /// Date time speed sub menus
+            /// </summary>
+            public static class DateTimeSpeeds
+            {
+                public static Menu SetDateTime = null;
+                public static Menu SetGameSpeed = null;
+                public static Menu SetAimingSpeed = null;
+            }
+
+            /// <summary>
             /// Configuration menu
             /// </summary>
             public static Menu Configuration = null;
@@ -494,6 +509,66 @@ namespace GTAVBETrainerDotNet.Menu
             }
 
             /// <summary>
+            /// Date time speed menu items
+            /// </summary>
+            public static class DateTimeSpeed
+            {
+                public static MenuItem SetDateTime = null;
+                public static MenuItem SetGameSpeed = null;
+                public static MenuItem SetAimingSpeed = null;
+                public static MenuItem HourForward = null;
+                public static MenuItem HourBackward = null;
+                public static MenuItem DayForward = null;
+                public static MenuItem DayBackward = null;
+                public static MenuItem ShowTime = null;
+                public static MenuItem Paused = null;
+                public static MenuItem SyncWithSystem = null;
+
+                /// <summary>
+                /// Set date time menu items
+                /// </summary>
+                public static class SetDateTimeMenu
+                {
+                    public static MenuItem Year = null;
+                    public static MenuItem Month = null;
+                    public static MenuItem Day = null;
+                    public static MenuItem Hour = null;
+                    public static MenuItem Minute = null;
+                    public static MenuItem Second = null;
+                    public static MenuItem SetToCurrent = null;
+                    public static MenuItem SetToSystem = null;
+                }
+
+                /// <summary>
+                /// Set game speed menu items
+                /// </summary>
+                public static class SetGameSpeedMenu
+                {
+                    public static MenuItem Speed = null;
+                    public static MenuItem SetTo100 = null;
+                    public static MenuItem SetTo075 = null;
+                    public static MenuItem SetTo050 = null;
+                    public static MenuItem SetTo025 = null;
+                    public static MenuItem SetTo010 = null;
+                    public static MenuItem SetTo000 = null;
+                }
+
+                /// <summary>
+                /// Set aiming speed menu items
+                /// </summary>
+                public static class SetAimingSpeedMenu
+                {
+                    public static MenuItem Speed = null;
+                    public static MenuItem SetTo100 = null;
+                    public static MenuItem SetTo075 = null;
+                    public static MenuItem SetTo050 = null;
+                    public static MenuItem SetTo025 = null;
+                    public static MenuItem SetTo010 = null;
+                    public static MenuItem SetTo000 = null;
+                }
+            }
+
+            /// <summary>
             /// Configuration menu items
             /// </summary>
             public static class Configuration
@@ -592,8 +667,102 @@ namespace GTAVBETrainerDotNet.Menu
             InitLocationMenu();
             InitVehicleMenu();
             InitWeaponMenu();
+            InitDateTimeSpeedMenu();
             InitConfigurationMenu();
             InitMainMenu();
+        }
+
+        /// <summary>
+        /// Initializes date time speed menu
+        /// </summary>
+        private static void InitDateTimeSpeedMenu()
+        {
+            Menus.DateTimeSpeed = new Menu(MenuText.DateTimeSpeed.I00_TITLE);
+            InitSetDateTimeMenu();
+            MenuItems.DateTimeSpeed.SetDateTime = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I01_SET_DATETIME, false, false, Menus.DateTimeSpeeds.SetDateTime, null, Feature.DateTimeSpeed.PreEnterSetDateTime);
+            InitSetGameSpeedMenu();
+            MenuItems.DateTimeSpeed.SetGameSpeed = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I02_SET_GAME_SPEED, false, false, Menus.DateTimeSpeeds.SetGameSpeed);
+            InitSetAimingSpeedMenu();
+            MenuItems.DateTimeSpeed.SetAimingSpeed = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I03_SET_AIMING_SPEED, false, false, Menus.DateTimeSpeeds.SetAimingSpeed);
+            MenuItems.DateTimeSpeed.HourForward = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I04_HOUR_FORWARD, false, false, null, Feature.DateTimeSpeed.HourForward);
+            MenuItems.DateTimeSpeed.HourBackward = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I05_HOUR_BACKWARD, false, false, null, Feature.DateTimeSpeed.HourBackward);
+            MenuItems.DateTimeSpeed.DayForward = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I06_DAY_FORWARD, false, false, null, Feature.DateTimeSpeed.DayForward);
+            MenuItems.DateTimeSpeed.DayBackward = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I07_DAY_BACKWARD, false, false, null, Feature.DateTimeSpeed.DayBackward);
+            MenuItems.DateTimeSpeed.ShowTime = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I08_SHOW_TIME, true, Feature.DateTimeSpeed.ShowTime, null, Feature.DateTimeSpeed.SetShowTime);
+            MenuItems.DateTimeSpeed.Paused = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I09_TIME_PAUSED, true, Feature.DateTimeSpeed.Paused, null, Feature.DateTimeSpeed.SetPaused);
+            MenuItems.DateTimeSpeed.SyncWithSystem = AddMenuItem(Menus.DateTimeSpeed, MenuText.DateTimeSpeed.I10_SYNC_WITH_SYSTEM, true, Feature.DateTimeSpeed.SyncWithSystem, null, Feature.DateTimeSpeed.SetSyncWithSystem);
+        }
+
+        /// <summary>
+        /// Initializes set aiming speed menu
+        /// </summary>
+        private static void InitSetAimingSpeedMenu()
+        {
+            Menus.DateTimeSpeeds.SetAimingSpeed = new Menu(MenuText.DateTimeSpeed.I03_SET_AIMING_SPEED);
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.Speed = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, null);
+            Feature.DateTimeSpeed.UpdateAimingSpeed();
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.Speed.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.Speed.LeftPressed += Feature.DateTimeSpeed.DecAimingSpeed;
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.Speed.RightPressed += Feature.DateTimeSpeed.IncAimingSpeed;
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.SetTo100 = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, MenuText.DateTimeSpeed.SetAimingSpeed.I02_SET_TO_100, false, false, null, Feature.DateTimeSpeed.SetAimingSpeedTo100);
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.SetTo075 = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, MenuText.DateTimeSpeed.SetAimingSpeed.I03_SET_TO_75, false, false, null, Feature.DateTimeSpeed.SetAimingSpeedTo075);
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.SetTo025 = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, MenuText.DateTimeSpeed.SetAimingSpeed.I04_SET_TO_50, false, false, null, Feature.DateTimeSpeed.SetAimingSpeedTo050);
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.SetTo050 = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, MenuText.DateTimeSpeed.SetAimingSpeed.I05_SET_TO_25, false, false, null, Feature.DateTimeSpeed.SetAimingSpeedTo025);
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.SetTo010 = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, MenuText.DateTimeSpeed.SetAimingSpeed.I06_SET_TO_10, false, false, null, Feature.DateTimeSpeed.SetAimingSpeedTo010);
+            MenuItems.DateTimeSpeed.SetAimingSpeedMenu.SetTo000 = AddMenuItem(Menus.DateTimeSpeeds.SetAimingSpeed, MenuText.DateTimeSpeed.SetAimingSpeed.I07_SET_TO_0, false, false, null, Feature.DateTimeSpeed.SetAimingSpeedTo000);
+        }
+
+        /// <summary>
+        /// Initializes set game speed menu
+        /// </summary>
+        private static void InitSetGameSpeedMenu()
+        {
+            Menus.DateTimeSpeeds.SetGameSpeed = new Menu(MenuText.DateTimeSpeed.I02_SET_GAME_SPEED);
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.Speed = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, null);
+            Feature.DateTimeSpeed.UpdateGameSpeed();
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.Speed.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.Speed.LeftPressed += Feature.DateTimeSpeed.DecGameSpeed;
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.Speed.RightPressed += Feature.DateTimeSpeed.IncGameSpeed;
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.SetTo100 = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, MenuText.DateTimeSpeed.SetGameSpeed.I02_SET_TO_100, false, false, null, Feature.DateTimeSpeed.SetGameSpeedTo100);
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.SetTo075 = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, MenuText.DateTimeSpeed.SetGameSpeed.I03_SET_TO_75, false, false, null, Feature.DateTimeSpeed.SetGameSpeedTo075);
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.SetTo025 = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, MenuText.DateTimeSpeed.SetGameSpeed.I04_SET_TO_50, false, false, null, Feature.DateTimeSpeed.SetGameSpeedTo050);
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.SetTo050 = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, MenuText.DateTimeSpeed.SetGameSpeed.I05_SET_TO_25, false, false, null, Feature.DateTimeSpeed.SetGameSpeedTo025);
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.SetTo010 = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, MenuText.DateTimeSpeed.SetGameSpeed.I06_SET_TO_10, false, false, null, Feature.DateTimeSpeed.SetGameSpeedTo010);
+            MenuItems.DateTimeSpeed.SetGameSpeedMenu.SetTo000 = AddMenuItem(Menus.DateTimeSpeeds.SetGameSpeed, MenuText.DateTimeSpeed.SetGameSpeed.I07_SET_TO_0, false, false, null, Feature.DateTimeSpeed.SetGameSpeedTo000);
+        }
+
+        /// <summary>
+        /// Initializes set date time menu
+        /// </summary>
+        private static void InitSetDateTimeMenu()
+        {
+            Menus.DateTimeSpeeds.SetDateTime = new Menu(MenuText.DateTimeSpeed.SetDateTime.I00_TITLE);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Year = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, null, false, false, null, Feature.DateTimeSpeed.Set);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Year.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Year.LeftPressed += Feature.DateTimeSpeed.DecYear;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Year.RightPressed += Feature.DateTimeSpeed.IncYear;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Month = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, null, false, false, null, Feature.DateTimeSpeed.Set);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Month.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Month.LeftPressed += Feature.DateTimeSpeed.DecMonth;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Month.RightPressed += Feature.DateTimeSpeed.IncMonth;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Day = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, null, false, false, null, Feature.DateTimeSpeed.Set);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Day.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Day.LeftPressed += Feature.DateTimeSpeed.DecDay;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Day.RightPressed += Feature.DateTimeSpeed.IncDay;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Hour = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, null, false, false, null, Feature.DateTimeSpeed.Set);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Hour.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Hour.LeftPressed += Feature.DateTimeSpeed.DecHour;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Hour.RightPressed += Feature.DateTimeSpeed.IncHour;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Minute = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, null, false, false, null, Feature.DateTimeSpeed.Set);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Minute.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Minute.LeftPressed += Feature.DateTimeSpeed.DecMinute;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Minute.RightPressed += Feature.DateTimeSpeed.IncMinute;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Second = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, null, false, false, null, Feature.DateTimeSpeed.Set);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Second.ShowLeftRightAdjustableSign = true;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Second.LeftPressed += Feature.DateTimeSpeed.DecSecond;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.Second.RightPressed += Feature.DateTimeSpeed.IncSecond;
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.SetToCurrent = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, MenuText.DateTimeSpeed.SetDateTime.I07_SET_TO_CURRENT, false, false, null, Feature.DateTimeSpeed.SetToCurrent);
+            MenuItems.DateTimeSpeed.SetDateTimeMenu.SetToSystem = AddMenuItem(Menus.DateTimeSpeeds.SetDateTime, MenuText.DateTimeSpeed.SetDateTime.I08_SET_TO_SYSTEM, false, false, null, Feature.DateTimeSpeed.SetToSystem);
         }
 
         /// <summary>
@@ -1154,7 +1323,7 @@ namespace GTAVBETrainerDotNet.Menu
             AddMenuItem(Menus.Main, MenuText.Main.I02_LOCATION, false, false, Menus.Location);
             AddMenuItem(Menus.Main, MenuText.Main.I03_VEHICLE, false, false, Menus.Vehicle);
             AddMenuItem(Menus.Main, MenuText.Main.I04_WEAPON, false, false, Menus.Weapon);
-            AddMenuItem(Menus.Main, MenuText.Main.I05_TIME, false, false);
+            AddMenuItem(Menus.Main, MenuText.Main.I05_DATE_TIME_SPEED, false, false, Menus.DateTimeSpeed);
             AddMenuItem(Menus.Main, MenuText.Main.I06_WORLD, false, false);
             AddMenuItem(Menus.Main, MenuText.Main.I07_WEATHER, false, false);
             AddMenuItem(Menus.Main, MenuText.Main.I08_MISC, false, false);

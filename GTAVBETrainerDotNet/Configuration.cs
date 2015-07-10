@@ -133,6 +133,12 @@ namespace GTAVBETrainerDotNet
         private const string CONFIG_WEAPON_EXPLOSIVE_MELEE = "ExplosiveMelee";
         private const string CONFIG_WEAPON_VEHICLE_ROCKETS = "VehicleRockets";
 
+        private const string CONFIG_TIME = "Time";
+        private const string CONFIG_TIME_SHOW_TIME = "ShowTime";
+        private const string CONFIG_TIME_BULLET_TIME = "BulletTime";
+        private const string CONFIG_TIME_PAUSED = "Paused";
+        private const string CONFIG_TIME_SYNC_WITH_SYSTEM = "Sync With System";
+
         /// <summary>
         /// Load configurations
         /// </summary>
@@ -202,6 +208,11 @@ namespace GTAVBETrainerDotNet
                 Feature.Weapon.PermanentParachute = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_PERMANENT_PARACHUTE));
                 Feature.Weapon.VehicleRocket = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEAPON, CONFIG_WEAPON_VEHICLE_ROCKETS));
 
+                // Time
+                Feature.DateTimeSpeed.ShowTime = Utils.ParseBoolStr(ini.GetValue(CONFIG_TIME, CONFIG_TIME_SHOW_TIME));
+                Feature.DateTimeSpeed.Paused = Utils.ParseBoolStr(ini.GetValue(CONFIG_TIME, CONFIG_TIME_PAUSED));
+                Feature.DateTimeSpeed.SyncWithSystem = Utils.ParseBoolStr(ini.GetValue(CONFIG_TIME, CONFIG_TIME_SYNC_WITH_SYSTEM));
+
                 Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_LOADED);
             }
             catch
@@ -270,6 +281,11 @@ namespace GTAVBETrainerDotNet
                 ini.SetValue(CONFIG_WEAPON, CONFIG_WEAPON_NO_RELOAD, Feature.Weapon.NoReload.ToString());
                 ini.SetValue(CONFIG_WEAPON, CONFIG_WEAPON_PERMANENT_PARACHUTE, Feature.Weapon.PermanentParachute.ToString());
                 ini.SetValue(CONFIG_WEAPON, CONFIG_WEAPON_VEHICLE_ROCKETS, Feature.Weapon.VehicleRocket.ToString());
+
+                // Time
+                ini.SetValue(CONFIG_TIME, CONFIG_TIME_SHOW_TIME, Feature.DateTimeSpeed.ShowTime.ToString());
+                ini.SetValue(CONFIG_TIME, CONFIG_TIME_PAUSED, Feature.DateTimeSpeed.Paused.ToString());
+                ini.SetValue(CONFIG_TIME, CONFIG_TIME_SYNC_WITH_SYSTEM, Feature.DateTimeSpeed.Paused.ToString());
 
                 ini.Save();
 
