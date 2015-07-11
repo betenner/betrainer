@@ -147,6 +147,14 @@ namespace GTAVBETrainerDotNet
         private const string CONFIG_WORLD_GARBATE_TRUCKS = "GarbageTrucks";
         private const string CONFIG_WORLD_RESTRICTED_ZONES = "RestrictedZones";
 
+        private const string CONFIG_WEATHER = "Weather";
+        private const string CONFIG_WEATHER_WIND = "Wind";
+        private const string CONFIG_WEATHER_FREEZE = "Freeze";
+
+        private const string CONFIG_MISC = "Misc";
+        private const string CONFIG_MISC_PORTABLE_RADIO = "PortableRadio";
+        private const string CONFIG_MISC_HIDE_HUD = "HideHUD";
+
         /// <summary>
         /// Load configurations
         /// </summary>
@@ -229,6 +237,14 @@ namespace GTAVBETrainerDotNet
                 Feature.World.GarbageTrucks = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_GARBATE_TRUCKS), true);
                 Feature.World.RestrictedZones = Utils.ParseBoolStr(ini.GetValue(CONFIG_WORLD, CONFIG_WORLD_RESTRICTED_ZONES), true);
 
+                // Weather
+                Feature.Weather.Wind = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEATHER, CONFIG_WEATHER_WIND));
+                Feature.Weather.Freeze = Utils.ParseBoolStr(ini.GetValue(CONFIG_WEATHER, CONFIG_WEATHER_FREEZE));
+
+                // Misc
+                Feature.Misc.PortableRadio = Utils.ParseBoolStr(ini.GetValue(CONFIG_MISC, CONFIG_MISC_PORTABLE_RADIO));
+                Feature.Misc.HideHud = Utils.ParseBoolStr(ini.GetValue(CONFIG_MISC, CONFIG_MISC_HIDE_HUD));
+
                 Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_LOADED);
             }
             catch
@@ -310,6 +326,10 @@ namespace GTAVBETrainerDotNet
                 ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_RANDOM_BOATS, Feature.World.RandomBoats.ToString());
                 ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_GARBATE_TRUCKS, Feature.World.GarbageTrucks.ToString());
                 ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_RESTRICTED_ZONES, Feature.World.RestrictedZones.ToString());
+
+                // Misc
+                ini.SetValue(CONFIG_MISC, CONFIG_MISC_PORTABLE_RADIO, Feature.Misc.PortableRadio.ToString());
+                ini.SetValue(CONFIG_MISC, CONFIG_MISC_HIDE_HUD, Feature.Misc.HideHud.ToString());
 
                 ini.Save();
 

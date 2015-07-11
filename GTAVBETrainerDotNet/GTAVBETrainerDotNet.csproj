@@ -51,10 +51,12 @@
     <Compile Include="Feature\ConfigurationFeature.cs" />
     <Compile Include="Feature\Feature.cs" />
     <Compile Include="Feature\LocationFeature.cs" />
+    <Compile Include="Feature\MiscFeature.cs" />
     <Compile Include="Feature\PlayerFeature.cs" />
     <Compile Include="Feature\DateTimeSpeedFeature.cs" />
     <Compile Include="Feature\VehicleFeature.cs" />
     <Compile Include="Feature\WeaponFeature.cs" />
+    <Compile Include="Feature\WeatherFeature.cs" />
     <Compile Include="Feature\WorldFeature.cs" />
     <Compile Include="GlobalConst.cs" />
     <Compile Include="IniFile.cs" />
@@ -85,6 +87,8 @@
     <Compile Include="Weapon\SavedWeaponItem.cs" />
     <Compile Include="Weapon\WeaponSet.cs" />
     <Compile Include="Weapon\WeaponStorage.cs" />
+    <Compile Include="Weather\WeatherData.cs" />
+    <Compile Include="Weather\WeatherStorage.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

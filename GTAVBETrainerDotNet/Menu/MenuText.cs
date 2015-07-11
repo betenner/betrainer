@@ -515,6 +515,27 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         /// <summary>
+        /// Weather menu
+        /// </summary>
+        public static class Weather
+        {
+            public const string I00_TITLE = "Weather Options";
+            public const string I01_WIND = "Wind";
+            public const string I02_FREEZE_WEATHER = "Freeze Weather";
+        }
+
+        /// <summary>
+        /// Misc menu
+        /// </summary>
+        public static class Misc
+        {
+            public const string I00_TITLE = "Misc Options";
+            public const string I01_PORTABLE_RADIO = "Portable Radio";
+            public const string I02_HIDE_HUD = "Hide HUD";
+            public const string I03_NEXT_RADIO_TRACK = "Next Radio Track";
+        }
+
+        /// <summary>
         /// Configuration menu
         /// </summary>
         public static class Configuration

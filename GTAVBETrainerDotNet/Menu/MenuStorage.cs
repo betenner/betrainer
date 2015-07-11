@@ -16,6 +16,7 @@ using GTAVBETrainerDotNet.Model;
 using GTAVBETrainerDotNet.Teleport;
 using GTAVBETrainerDotNet.Vehicle;
 using GTAVBETrainerDotNet.Weapon;
+using GTAVBETrainerDotNet.Weather;
 
 namespace GTAVBETrainerDotNet.Menu
 {
@@ -329,6 +330,16 @@ namespace GTAVBETrainerDotNet.Menu
             public static Menu World = null;
 
             /// <summary>
+            /// Weather menu
+            /// </summary>
+            public static Menu Weather = null;
+
+            /// <summary>
+            /// Misc menu
+            /// </summary>
+            public static Menu Misc = null;
+
+            /// <summary>
             /// Configuration menu
             /// </summary>
             public static Menu Configuration = null;
@@ -587,6 +598,25 @@ namespace GTAVBETrainerDotNet.Menu
             }
 
             /// <summary>
+            /// Weather menu items
+            /// </summary>
+            public static class Weather
+            {
+                public static MenuItem Wind = null;
+                public static MenuItem Freeze = null;
+            }
+
+            /// <summary>
+            /// Misc menu items
+            /// </summary>
+            public static class Misc
+            {
+                public static MenuItem PortableRadio = null;
+                public static MenuItem HideHud = null;
+                public static MenuItem NextRadioTrack = null;
+            }
+
+            /// <summary>
             /// Configuration menu items
             /// </summary>
             public static class Configuration
@@ -687,8 +717,35 @@ namespace GTAVBETrainerDotNet.Menu
             InitWeaponMenu();
             InitDateTimeSpeedMenu();
             InitWorldMenu();
+            InitWeatherMenu();
+            InitMiscMenu();
             InitConfigurationMenu();
             InitMainMenu();
+        }
+
+        /// <summary>
+        /// Initializes misc menu
+        /// </summary>
+        private static void InitMiscMenu()
+        {
+            Menus.Misc = new Menu(MenuText.Misc.I00_TITLE);
+            MenuItems.Misc.PortableRadio = AddMenuItem(Menus.Misc, MenuText.Misc.I01_PORTABLE_RADIO, true, Feature.Misc.PortableRadio, null, Feature.Misc.SetPortableRadio);
+            MenuItems.Misc.HideHud = AddMenuItem(Menus.Misc, MenuText.Misc.I02_HIDE_HUD, true, Feature.Misc.HideHud, null, Feature.Misc.SetHideHud);
+            MenuItems.Misc.NextRadioTrack = AddMenuItem(Menus.Misc, MenuText.Misc.I03_NEXT_RADIO_TRACK, false, false, null, Feature.Misc.NextRadioTrack);
+        }
+
+        /// <summary>
+        /// Initializes weather menu
+        /// </summary>
+        private static void InitWeatherMenu()
+        {
+            Menus.Weather = new Menu(MenuText.Weather.I00_TITLE);
+            MenuItems.Weather.Wind = AddMenuItem(Menus.Weather, MenuText.Weather.I01_WIND, true, Feature.Weather.Wind, null, Feature.Weather.SetWind);
+            MenuItems.Weather.Freeze = AddMenuItem(Menus.Weather, MenuText.Weather.I02_FREEZE_WEATHER, true, Feature.Weather.Freeze, null, Feature.Weather.SetFreeze);
+            for (int i = 0; i < WeatherStorage.WEATHERS.Length; i++)
+            {
+                AddMenuItem(Menus.Weather, WeatherStorage.WEATHERS[i].Name, false, false, null, Feature.Weather.SetWeather, null, null, WeatherStorage.WEATHERS[i]);
+            }
         }
 
         
@@ -1359,8 +1416,8 @@ namespace GTAVBETrainerDotNet.Menu
             AddMenuItem(Menus.Main, MenuText.Main.I04_WEAPON, false, false, Menus.Weapon);
             AddMenuItem(Menus.Main, MenuText.Main.I05_DATE_TIME_SPEED, false, false, Menus.DateTimeSpeed);
             AddMenuItem(Menus.Main, MenuText.Main.I06_WORLD, false, false, Menus.World);
-            AddMenuItem(Menus.Main, MenuText.Main.I07_WEATHER, false, false);
-            AddMenuItem(Menus.Main, MenuText.Main.I08_MISC, false, false);
+            AddMenuItem(Menus.Main, MenuText.Main.I07_WEATHER, false, false, Menus.Weather);
+            AddMenuItem(Menus.Main, MenuText.Main.I08_MISC, false, false, Menus.Misc);
             AddMenuItem(Menus.Main, MenuText.Main.I09_CONFIGURATION, false, false, Menus.Configuration);
 
             EnterMenu(Menus.Main);

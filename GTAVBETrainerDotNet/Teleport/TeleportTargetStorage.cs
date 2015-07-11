@@ -354,9 +354,9 @@ namespace GTAVBETrainerDotNet.Teleport
             new TeleportCategory(MenuText.Location.LocationTeleporter.I05_UNDERWATER, UNDERWATER),
             new TeleportCategory(MenuText.Location.LocationTeleporter.I06_INTERIORS, INTERIORS),
             new TeleportCategory(MenuText.Location.LocationTeleporter.I07_SPECIALS, SPECIALS),
-            new TeleportCategory(MenuText.Location.LocationTeleporter.I08_STUNT_JUMPS, STUNT_JUMPS),
-            new TeleportCategory(MenuText.Location.LocationTeleporter.I09_SPACESHIP_PARTS, SPACESHIP_PARTS),
-            new TeleportCategory(MenuText.Location.LocationTeleporter.I10_LETTER_SCRAPS, LETTER_SCRAPS),
+            //new TeleportCategory(MenuText.Location.LocationTeleporter.I08_STUNT_JUMPS, STUNT_JUMPS),
+            //new TeleportCategory(MenuText.Location.LocationTeleporter.I09_SPACESHIP_PARTS, SPACESHIP_PARTS),
+            //new TeleportCategory(MenuText.Location.LocationTeleporter.I10_LETTER_SCRAPS, LETTER_SCRAPS),
         };
 
     }

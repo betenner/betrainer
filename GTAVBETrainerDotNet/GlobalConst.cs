@@ -115,6 +115,8 @@ namespace GTAVBETrainerDotNet
 
             public const string WEAPON_ALL = "All weapons acquired.";
 
+            public const string WEATHER_SET = "Weather set to {0}.";
+
             public const string TRAINER_INITIALIZING = "BE Trainer.NET " + TRAINER_VERSION + " initializing...";
             public const string TRAINER_INITIALIZED = "BE Trainer.NET " + TRAINER_VERSION + " initialized.";
             
