@@ -53,6 +53,7 @@ namespace GTAVBETrainerDotNet
                 SetFastRun(MenuStorage.MenuItems.Player.FastRun);
                 SetFastSwim(MenuStorage.MenuItems.Player.FastSwim);
                 SetSuperJump(MenuStorage.MenuItems.Player.SuperJump);
+                SetNoiseless(MenuStorage.MenuItems.Player.Noiseless);
 
                 Wanted.SetNeverWanted(MenuStorage.MenuItems.Player.Wanted.NeverWanted);
                 Wanted.SetPoliceIgnored(MenuStorage.MenuItems.Player.Wanted.PoliceIgnored);
@@ -79,6 +80,15 @@ namespace GTAVBETrainerDotNet
                 if (Feature.Player.SuperJump)
                 {
                     Function.Call(Hash.SET_SUPER_JUMP_THIS_FRAME, Game.Player.Handle);
+                }
+
+                if (Feature.Player.Noiseless)
+                {
+                    Function.Call(Hash.SET_PLAYER_NOISE_MULTIPLIER, Game.Player.Handle, NOISELESS_MULTIPLIER);
+                }
+                else
+                {
+                    Function.Call(Hash.SET_PLAYER_NOISE_MULTIPLIER, Game.Player.Handle, NOISENESS_MULTIPLIER);
                 }
 
                 if (Feature.Player.Wanted.EveryoneIgnored)
@@ -172,14 +182,6 @@ namespace GTAVBETrainerDotNet
             public static void SetNoiseless(MenuItem sender)
             {
                 Feature.Player.Noiseless = sender.On;
-                if (sender.On)
-                {
-                    Function.Call(Hash.SET_PLAYER_NOISE_MULTIPLIER, Game.Player.Handle, NOISELESS_MULTIPLIER);
-                }
-                else
-                {
-                    Function.Call(Hash.SET_PLAYER_NOISE_MULTIPLIER, Game.Player.Handle, NOISENESS_MULTIPLIER);
-                }
                 Config.DoAutoSave();
             }
 
@@ -542,7 +544,7 @@ namespace GTAVBETrainerDotNet
                     SetModel(sender.Data as ModelData);
                 }
             }
-        
+
             /// <summary>
             /// Skin features
             /// </summary>
@@ -728,7 +730,7 @@ namespace GTAVBETrainerDotNet
                     Utils.ShowNotificationAboveMap(GlobalConst.Message.PLAYER_RANDOM_SKIN);
                 }
             }
-        
+
             /// <summary>
             /// Prop features
             /// </summary>
@@ -924,7 +926,7 @@ namespace GTAVBETrainerDotNet
                     Function.Call(Hash.CLEAR_ALL_PED_PROPS, Game.Player.Character.Handle);
                 }
             }
-     
+
             /// <summary>
             /// Model & Skin & Props custom set features
             /// </summary>
@@ -933,7 +935,7 @@ namespace GTAVBETrainerDotNet
                 private const string FORMAT_SET_NAME = "[{0}]";
                 private const string FORMAT_NEW_SET_NAME = "Custom Set {0}";
                 private const int NAME_MAX_LENGTH = 40;
- 
+
                 /// <summary>
                 /// Generates custom set item list
                 /// </summary>
@@ -1041,7 +1043,7 @@ namespace GTAVBETrainerDotNet
 
                     // Props
                     Function.Call(Hash.CLEAR_ALL_PED_PROPS, Game.Player.Character.Handle);
-                    for (int i = 0 ; i < SkinPropUtils.PROP_CATEGORY_COUNT; i++)
+                    for (int i = 0; i < SkinPropUtils.PROP_CATEGORY_COUNT; i++)
                     {
                         if (set.PropDrawables[i] != -1)
                         {

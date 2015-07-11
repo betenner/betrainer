@@ -1062,6 +1062,7 @@ namespace GTAVBETrainerDotNet.Menu
             Menus.Players.MSPs.CustomSet = new Menu(MenuText.Player.ModelSkinProps.CustomSet.I00_TITLE);
             Menus.Players.MSPs.CustomSet.Width = 600;
             Menus.Players.MSPs.CustomSet.HasSubmenuSignOffset = new System.Drawing.Point(570, 5);
+            Menus.Players.MSPs.CustomSet.PageTextOffset = new System.Drawing.Point(535, 5);
             MenuItems.Player.MSPCustomSet.Create = AddMenuItem(Menus.Players.MSPs.CustomSet, MenuText.Player.ModelSkinProps.CustomSet.I01_CREATE, false, false, null, Feature.Player.MSPCustomSets.Create);
         }
 
@@ -1118,6 +1119,7 @@ namespace GTAVBETrainerDotNet.Menu
             Menus.Locations.CLTeleporter = new Menu(MenuText.Location.CustomLocationTeleporter.I00_TITLE);
             Menus.Locations.CLTeleporter.Width = 600;
             Menus.Locations.CLTeleporter.HasSubmenuSignOffset = new System.Drawing.Point(570, 5);
+            Menus.Locations.CLTeleporter.PageTextOffset = new System.Drawing.Point(535, 5);
             MenuItems.Location.CustomLocationTeleporter.SaveCurrentLocation = AddMenuItem(Menus.Locations.CLTeleporter, MenuText.Location.CustomLocationTeleporter.I01_SAVE, false, false, null, Feature.Location.CustomLocationTeleporter.SaveCurrentLocation);
         }
 
@@ -1248,6 +1250,7 @@ namespace GTAVBETrainerDotNet.Menu
             Menus.Vehicles.CustomVehicle = new Menu(MenuText.Vehicle.CustomVehicle.I00_TITLE);
             Menus.Vehicles.CustomVehicle.Width = 600;
             Menus.Vehicles.CustomVehicle.HasSubmenuSignOffset = new System.Drawing.Point(570, 5);
+            Menus.Vehicles.CustomVehicle.PageTextOffset = new System.Drawing.Point(535, 5);
             MenuItems.Vehicle.CustomVehicle.SaveCurrent = AddMenuItem(Menus.Vehicles.CustomVehicle, MenuText.Vehicle.CustomVehicle.I01_SAVE, false, false, null, Feature.Vehicle.Custom.SaveCurrent);
             Menus.Vehicles.CustomVehicles.Item = new Menu(null);
             Menus.Vehicles.CustomVehicles.Item.Width = 700;
