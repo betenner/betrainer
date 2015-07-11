@@ -317,7 +317,7 @@ namespace GTAVBETrainerDotNet
                 // Time
                 ini.SetValue(CONFIG_TIME, CONFIG_TIME_SHOW_TIME, Feature.DateTimeSpeed.ShowTime.ToString());
                 ini.SetValue(CONFIG_TIME, CONFIG_TIME_PAUSED, Feature.DateTimeSpeed.Paused.ToString());
-                ini.SetValue(CONFIG_TIME, CONFIG_TIME_SYNC_WITH_SYSTEM, Feature.DateTimeSpeed.Paused.ToString());
+                ini.SetValue(CONFIG_TIME, CONFIG_TIME_SYNC_WITH_SYSTEM, Feature.DateTimeSpeed.SyncWithSystem.ToString());
 
                 // World
                 ini.SetValue(CONFIG_WORLD, CONFIG_WORLD_MOON_GRAVITY, Feature.World.MoonGravity.ToString());
