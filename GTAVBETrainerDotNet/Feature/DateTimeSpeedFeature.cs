@@ -204,7 +204,15 @@ namespace GTAVBETrainerDotNet
                 int hour = Function.Call<int>(Hash.GET_CLOCK_HOURS);
                 int minute = Function.Call<int>(Hash.GET_CLOCK_MINUTES);
                 int second = Function.Call<int>(Hash.GET_CLOCK_SECONDS);
-                return new DateTime(year, month, day, hour, minute, second);
+                try
+                {
+                    return new DateTime(year, month, day, hour, minute, second);
+                }
+                catch
+                {
+                    return DateTime.Now;
+                }
+
             }
 
             /// <summary>
