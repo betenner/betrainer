@@ -103,6 +103,7 @@ namespace GTAVBETrainerDotNet.Teleport
 	        new TeleportTarget ( "Sandy Shores Building Site Crane", 1051.209f, 2280.452f, 89.727f ),
 	        new TeleportTarget ( "Satellite Dish Antenna", 2034.988f, 2953.105f, 74.602f ),
 	        new TeleportTarget ( "Stab City", 126.975f, 3714.419f, 46.827f ),
+            new TeleportTarget ( "Top of the Crane", -120.0392f, -976.374f, 306.33f ),
 	        new TeleportTarget ( "Very High Up", -129.964f, 8130.873f, 6705.307f ),
 	        new TeleportTarget ( "Windmill Top", 2026.677f, 1842.684f, 133.313f )
         };
@@ -389,7 +390,56 @@ namespace GTAVBETrainerDotNet.Teleport
         /// </summary>
         public static readonly TeleportTarget[] LETTER_SCRAPS =
         {
-
+            new TeleportTarget("#01", 65.34869f, 6666.156f, 31.78671f),
+            new TeleportTarget("#02", 1466.263f, 6553.133f, 14.00003f),
+            new TeleportTarget("#03", 1439.065f, 6339.318f, 23.97289f),
+            new TeleportTarget("#04", -407.6179f, 6317.704f, 32.22429f),
+            new TeleportTarget("#05", 448.968f, 5571.466f, 781.1895f),
+            new TeleportTarget("#06", -577.3812f, 5475.307f, 59.59092f),
+            new TeleportTarget("#07", 3439.125f, 5171.243f, 7.382134f),
+            new TeleportTarget("#08", 1885.61f, 5072.688f, 49.91392f),
+            new TeleportTarget("#09", -998.3422f, 4851.768f, 274.6058f),
+            new TeleportTarget("#10", -6.790287f, 4333.423f, 30.95481f),
+            new TeleportTarget("#11", 1340.616f, 4310.821f, 38.05003f),
+            new TeleportTarget("#12", -1615.989f, 4254.568f, 104.6422f),
+            new TeleportTarget("#13", 1560.667f, 3570.773f, 34.21519f),
+            new TeleportTarget("#14", 1296.115f, 2999.824f, 57.45974f),
+            new TeleportTarget("#15", 270.2968f, 2864.539f, 74.17455f),
+            new TeleportTarget("#16", -289.0979f, 2845.869f, 54.49178f),
+            new TeleportTarget("#17", -863.0441f, 2764.57f, 12.18814f),
+            new TeleportTarget("#18", -2375.308f, 2653.895f, 1.945716f),
+            new TeleportTarget("#19", 927.8638f, 2443.79f, 49.96547f),
+            new TeleportTarget("#20", 181.7735f, 2260.24f, 91.67735f),
+            new TeleportTarget("#21", 3072.118f, 2209.815f, 2.095346f),
+            new TeleportTarget("#22", -598.6772f, 2095.236f, 131.0359f),
+            new TeleportTarget("#23", 3086.63f, 1650.125f, 2.997782f),
+            new TeleportTarget("#24", -424.2659f, 1593.65f, 356.0899f),
+            new TeleportTarget("#25", -1552.149f, 1379.944f, 126.3862f),
+            new TeleportTarget("#26", 683.9818f, 1204.636f, 345.3259f),
+            new TeleportTarget("#27", -142.4939f, 865.4499f, 232.6988f),
+            new TeleportTarget("#28", -2301.925f, 214.8605f, 167.6018f),
+            new TeleportTarget("#29", 1054.501f, 172.1009f, 88.7405f),
+            new TeleportTarget("#30", -348.2878f, 53.02789f, 53.97811f),
+            new TeleportTarget("#31", -3019.106f, 38.84162f, 10.11778f),
+            new TeleportTarget("#32", 265.6096f, -196.0606f, 61.78744f),
+            new TeleportTarget("#33", -1724.862f, -199.2318f, 57.67747f),
+            new TeleportTarget("#34", 1093.903f, -212.4823f, 56.64005f),
+            new TeleportTarget("#35", 84.11265f, -437.2677f, 38.28443f),
+            new TeleportTarget("#36", -1241.847f, -509.9374f, 38.60191f),
+            new TeleportTarget("#37", -120.4983f, -977.9604f, 304.2492f),
+            new TeleportTarget("#38", 641.1895f, -1034.883f, 36.88861f),
+            new TeleportTarget("#39", -1817.849f, -1200.371f, 19.16463f),
+            new TeleportTarget("#40", -1031.167f, -1281.027f, 1.886165f),
+            new TeleportTarget("#41", 2864.857f, -1377.007f, 2.462856f),
+            new TeleportTarget("#42", -1385.745f, -1406.125f, 3.223899f),
+            new TeleportTarget("#43", 1.632038f, -1732.346f, 31.42474f),
+            new TeleportTarget("#44", 66.54893f, -1963.919f, 20.91306f),
+            new TeleportTarget("#45", 1509.555f, -2125.469f, 76.20045f),
+            new TeleportTarget("#46", 751.3604f, -2298.847f, 19.30667f),
+            new TeleportTarget("#47", -918.9688f, -2530.136f, 23.32149f),
+            new TeleportTarget("#48", -79.09715f, -2726.035f, 8.7402f),
+            new TeleportTarget("#49", -1047.428f, -2733.717f, 13.82589f),
+            new TeleportTarget("#50", 1022.074f, -3026.501f, 14.32748f),
         };
 
         /// <summary>
@@ -405,7 +455,7 @@ namespace GTAVBETrainerDotNet.Teleport
             new TeleportCategory(MenuText.Location.LocationTeleporter.I07_SPECIALS, SPECIALS),
             //new TeleportCategory(MenuText.Location.LocationTeleporter.I08_STUNT_JUMPS, STUNT_JUMPS),
             new TeleportCategory(MenuText.Location.LocationTeleporter.I09_SPACESHIP_PARTS, SPACESHIP_PARTS),
-            //new TeleportCategory(MenuText.Location.LocationTeleporter.I10_LETTER_SCRAPS, LETTER_SCRAPS),
+            new TeleportCategory(MenuText.Location.LocationTeleporter.I10_LETTER_SCRAPS, LETTER_SCRAPS),
         };
 
     }
