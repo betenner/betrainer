@@ -10,7 +10,7 @@ namespace GTAVBETrainerDotNet
     /// Multi-string class.<br />
     /// A string class that contains a default string and multiple sub strings.
     /// </summary>
-    public class MString
+    public class MString : IComparable<MString>
     {
         // Implicit conversion
         public static implicit operator String(MString a)
@@ -89,6 +89,16 @@ namespace GTAVBETrainerDotNet
         public override string ToString()
         {
             return _default;
+        }
+
+        public string Replace(string old, string newOne)
+        {
+            return Utils.ML(this).Replace(old, newOne);
+        }
+
+        public int CompareTo(MString other)
+        {
+            return Utils.ML(this).CompareTo(Utils.ML(other));
         }
     }
 }

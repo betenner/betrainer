@@ -110,9 +110,9 @@ namespace GTAVBETrainerDotNet.Menu
                 public static class ModelSelector
                 {
                     public static readonly MString I00_TITLE = Utils.CTML("Model Selector", "模型選擇");
-                    public static readonly MString I01_MICHAEL = Utils.CTML("Michael", "邁克爾");
+                    public static readonly MString I01_MICHAEL = Utils.CTML("Michael", "麥可");
                     public static readonly MString I02_FRANKLIN = Utils.CTML("Franklin", "富蘭克林");
-                    public static readonly MString I03_TREVOR = Utils.CTML("Trevor", "特雷弗");
+                    public static readonly MString I03_TREVOR = Utils.CTML("Trevor", "崔佛");
                     public static readonly MString I04_ANIMALS = Utils.CTML("Animals", "動物");
                     public static readonly MString I05_NPCS = Utils.CTML("NPCs", "人物");
                     public static readonly MString I06_RANDOM = Utils.CTML("Random", "隨機");

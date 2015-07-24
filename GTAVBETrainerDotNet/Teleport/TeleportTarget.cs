@@ -20,7 +20,7 @@ namespace GTAVBETrainerDotNet.Teleport
     /// </summary>
     public class TeleportTarget
     {
-        private string _name = null;
+        private MString _name = null;
         private GTA.Math.Vector3 _coords;
         private string[] _requiredIPLs = null;
         private string[] _removeIPLs = null;
@@ -28,7 +28,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <summary>
         /// Name of the target
         /// </summary>
-        public string Name
+        public MString Name
         {
             get
             {
@@ -101,7 +101,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <param name="requiredIPLs">Required IPLs to load</param>
         /// <param name="removeIPLs">Required IPLs to remove</param>
         /// <param name="isLoaded">Is loaded</param>
-        public TeleportTarget(string name, float x, float y, float z, string[] requiredIPLs = null, string[] removeIPLs = null)
+        public TeleportTarget(MString name, float x, float y, float z, string[] requiredIPLs = null, string[] removeIPLs = null)
         {
             _name = name;
             _coords = new GTA.Math.Vector3(x, y, z);

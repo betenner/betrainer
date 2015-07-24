@@ -23,7 +23,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <summary>
         /// Name of this category
         /// </summary>
-        public string Name = null;
+        public MString Name = null;
 
         /// <summary>
         /// Teleport targets
@@ -35,7 +35,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// </summary>
         /// <param name="name">Name</param>
         /// <param name="targets">Targets</param>
-        public TeleportCategory(string name, TeleportTarget[] targets)
+        public TeleportCategory(MString name, TeleportTarget[] targets)
         {
             Name = name;
             Targets = targets;

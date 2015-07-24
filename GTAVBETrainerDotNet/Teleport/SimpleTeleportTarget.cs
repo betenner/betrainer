@@ -23,7 +23,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <summary>
         /// Name of the target
         /// </summary>
-        public string Name = null;
+        public MString Name = null;
 
         /// <summary>
         /// Coordinates of the target
@@ -42,7 +42,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
-        public SimpleTeleportTarget(string name, float x, float y, float z)
+        public SimpleTeleportTarget(MString name, float x, float y, float z)
         {
             Name = name;
             Coords = new GTA.Math.Vector3(x, y, z);

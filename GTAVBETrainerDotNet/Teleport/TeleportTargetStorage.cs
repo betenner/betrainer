@@ -26,18 +26,18 @@ namespace GTAVBETrainerDotNet.Teleport
         /// </summary>
         public static readonly TeleportTarget[] SAFEHOUSES =
         {
-	        new TeleportTarget ( "Michael's Safehouse", -827.138f, 176.368f, 70.4999f ),
-	        new TeleportTarget ( "Michael's Safehouse Inside", -813.603f, 179.474f, 72.1548f ),
-	        new TeleportTarget ( "Franklin's Safehouse 1", -18.0355f, -1456.94f, 30.4548f ),
-	        new TeleportTarget ( "Franklin's Safehouse 1 Inside", -14.3803f, -1438.51f, 31.1073f ),
-	        new TeleportTarget ( "Franklin's Safehouse 2", 10.8766f, 545.654f, 175.419f ),
-	        new TeleportTarget ( "Franklin's Safehouse 2 Inside", 7.11903f, 536.615f, 176.028f ),
-	        new TeleportTarget ( "Trevor's Safehouse 1", 1982.13f, 3829.44f, 32.3662f ),
-	        new TeleportTarget ( "Trevor's Safehouse 1 Inside", 1972.61f, 3817.04f, 33.4278f ),
-	        new TeleportTarget ( "Trevor's Safehouse 2", -1157.05f, -1512.73f, 4.2127f ),
-	        new TeleportTarget ( "Trevor's Safehouse 2 Inside", -1151.77f, -1518.14f, 10.6327f ),
-	        new TeleportTarget ( "Trevor's Safehouse 3", 91.1407f, -1280.65f, 29.1353f ),
-	        new TeleportTarget ( "Trevor's Safehouse 3 Inside", 96.1536f, -1290.73f, 29.2664f ),
+	        new TeleportTarget ( Utils.CTML("Michael's Safehouse", "麥可的家"), -827.138f, 176.368f, 70.4999f ),
+	        new TeleportTarget ( Utils.CTML("Michael's Safehouse Inside", "麥可的家內部"), -813.603f, 179.474f, 72.1548f ),
+	        new TeleportTarget ( Utils.CTML("Franklin's Safehouse 1", "富蘭克林的家1"), -18.0355f, -1456.94f, 30.4548f ),
+	        new TeleportTarget ( Utils.CTML("Franklin's Safehouse 1 Inside", "富蘭克林的家1內部"), -14.3803f, -1438.51f, 31.1073f ),
+	        new TeleportTarget ( Utils.CTML("Franklin's Safehouse 2", "富蘭克林的家2"), 10.8766f, 545.654f, 175.419f ),
+	        new TeleportTarget ( Utils.CTML("Franklin's Safehouse 2 Inside", "富蘭克林的家2內部"), 7.11903f, 536.615f, 176.028f ),
+	        new TeleportTarget ( Utils.CTML("Trevor's Safehouse 1", "崔佛的家1"), 1982.13f, 3829.44f, 32.3662f ),
+	        new TeleportTarget ( Utils.CTML("Trevor's Safehouse 1 Inside", "崔佛的家1內部"), 1972.61f, 3817.04f, 33.4278f ),
+	        new TeleportTarget ( Utils.CTML("Trevor's Safehouse 2", "崔佛的家2"), -1157.05f, -1512.73f, 4.2127f ),
+	        new TeleportTarget ( Utils.CTML("Trevor's Safehouse 2 Inside", "崔佛的家2內部"), -1151.77f, -1518.14f, 10.6327f ),
+	        new TeleportTarget ( Utils.CTML("Trevor's Safehouse 3", "崔佛的家3"), 91.1407f, -1280.65f, 29.1353f ),
+	        new TeleportTarget ( Utils.CTML("Trevor's Safehouse 3 Inside", "崔佛的家3內部"), 96.1536f, -1290.73f, 29.2664f ),
         };
 
         /// <summary>
