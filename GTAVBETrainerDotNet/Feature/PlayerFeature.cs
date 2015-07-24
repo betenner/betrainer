@@ -244,7 +244,7 @@ namespace GTAVBETrainerDotNet
                     {
                         amount *= 10;
                     }
-                    sender.Text = string.Format(MenuText.Player.I03_CASH, (amount < 0 ? "-" : "+"), Math.Abs(amount));
+                    sender.Text = Utils.FormatML(MenuText.Player.I03_CASH, (amount < 0 ? "-" : "+"), Math.Abs(amount));
                     sender.Data = amount;
                     if (sender.Parent.PlayBeep) MenuStorage.PlayMenuBeep();
                 }
@@ -275,7 +275,7 @@ namespace GTAVBETrainerDotNet
                     {
                         amount *= 10;
                     }
-                    sender.Text = string.Format(MenuText.Player.I03_CASH, (amount < 0 ? "-" : "+"), Math.Abs(amount));
+                    sender.Text = Utils.FormatML(MenuText.Player.I03_CASH, (amount < 0 ? "-" : "+"), Math.Abs(amount));
                     sender.Data = amount;
                     if (sender.Parent.PlayBeep) MenuStorage.PlayMenuBeep();
                 }
@@ -462,7 +462,7 @@ namespace GTAVBETrainerDotNet
                         Function.Call(Hash.SET_PED_DEFAULT_COMPONENT_VARIATION, Game.Player.Character.Handle);
                         if (!string.IsNullOrEmpty(modelName))
                         {
-                            Utils.ShowNotificationAboveMap(string.Format(GlobalConst.Message.PLAYER_MODEL_SET, modelName));
+                            Utils.ShowNotificationAboveMap(Utils.FormatML(GlobalConst.Message.PLAYER_MODEL_SET, modelName));
                         }
                         Script.Wait(0);
 
@@ -609,7 +609,7 @@ namespace GTAVBETrainerDotNet
                         if (drawableCount > 1 || textureCount > 1)
                         {
                             count++;
-                            MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Skin, string.Format(MenuText.Player.ModelSkinProps.SkinCategories.I01_SLOT, i + 1,
+                            MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Skin, Utils.FormatML(MenuText.Player.ModelSkinProps.SkinCategories.I01_SLOT, i + 1,
                                 SkinPropUtils.GetSkinCategoryDesc(i), drawableCount), false, false, MenuStorage.Menus.Players.MSPs.Skins.Drawable, GenerateSkinDrawableSelectorMenu);
                             mi.Data = new SkinPropDetail() { Category = i, DrawableCount = drawableCount };
                         }
@@ -631,7 +631,7 @@ namespace GTAVBETrainerDotNet
                     for (int i = 0; i < detail.DrawableCount; i++)
                     {
                         int textureCount = Function.Call<int>(Hash.GET_NUMBER_OF_PED_TEXTURE_VARIATIONS, Game.Player.Character.Handle, detail.Category, i);
-                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Skins.Drawable, string.Format(MenuText.Player.ModelSkinProps.SkinCategories.DrawableSelector.I01_DRAWABLE, i, textureCount),
+                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Skins.Drawable, Utils.FormatML(MenuText.Player.ModelSkinProps.SkinCategories.DrawableSelector.I01_DRAWABLE, i, textureCount),
                             false, false, (textureCount > 1 ? MenuStorage.Menus.Players.MSPs.Skins.Texture : null), GenerateSkinTextureSelectorMenu);
                         mi.Data = new SkinPropDetail() { Drawable = i, Category = detail.Category, TextureCount = textureCount };
                         mi.Highlighted += SetSkinDrawable;
@@ -649,7 +649,7 @@ namespace GTAVBETrainerDotNet
                     MenuStorage.Menus.Players.MSPs.Skins.Texture.Clear();
                     for (int i = 0; i < detail.TextureCount; i++)
                     {
-                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Skins.Texture, string.Format(MenuText.Player.ModelSkinProps.SkinCategories.DrawableSelector.TextureSelector.I01_TEXTURE, i));
+                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Skins.Texture, Utils.FormatML(MenuText.Player.ModelSkinProps.SkinCategories.DrawableSelector.TextureSelector.I01_TEXTURE, i));
                         mi.Data = new SkinPropDetail() { Drawable = detail.Drawable, Texture = i, Category = detail.Category };
                         mi.Highlighted += SetSkinDrawableTexture;
                     }
@@ -790,7 +790,7 @@ namespace GTAVBETrainerDotNet
                         if (drawableCount > 0)
                         {
                             count++;
-                            MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Prop, string.Format(MenuText.Player.ModelSkinProps.PropCategories.I01_SLOT, i + 1,
+                            MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Prop, Utils.FormatML(MenuText.Player.ModelSkinProps.PropCategories.I01_SLOT, i + 1,
                                 SkinPropUtils.GetPropCategoryDesc(i), drawableCount), false, false, MenuStorage.Menus.Players.MSPs.Props.Drawable, GeneratePropSelectorMenu);
                             mi.Data = new SkinPropDetail() { Category = i, DrawableCount = drawableCount };
                         }
@@ -815,12 +815,12 @@ namespace GTAVBETrainerDotNet
                         int textureCount = 0;
                         if (i == -1)
                         {
-                            mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Props.Drawable, string.Format(MenuText.Player.ModelSkinProps.PropCategories.PropsSelector.I01_NOTHING));
+                            mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Props.Drawable, Utils.FormatML(MenuText.Player.ModelSkinProps.PropCategories.PropsSelector.I01_NOTHING));
                         }
                         else
                         {
                             textureCount = Function.Call<int>((Hash)0xA6E7F1CEB523E171, Game.Player.Character.Handle, detail.Category, i);
-                            mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Props.Drawable, string.Format(MenuText.Player.ModelSkinProps.PropCategories.PropsSelector.I02_PROP, i, textureCount),
+                            mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Props.Drawable, Utils.FormatML(MenuText.Player.ModelSkinProps.PropCategories.PropsSelector.I02_PROP, i, textureCount),
                                 false, false, (textureCount > 1 ? MenuStorage.Menus.Players.MSPs.Props.Texture : null), GeneratePropTextureSelectorMenu);
                         }
                         mi.Data = new SkinPropDetail() { Drawable = i, Category = detail.Category, TextureCount = textureCount };
@@ -839,7 +839,7 @@ namespace GTAVBETrainerDotNet
                     MenuStorage.Menus.Players.MSPs.Props.Texture.Clear();
                     for (int i = 0; i < detail.TextureCount; i++)
                     {
-                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Props.Texture, string.Format(MenuText.Player.ModelSkinProps.PropCategories.PropsSelector.TextureSelector.I01_TEXTURE, i));
+                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.Props.Texture, Utils.FormatML(MenuText.Player.ModelSkinProps.PropCategories.PropsSelector.TextureSelector.I01_TEXTURE, i));
                         mi.Data = new SkinPropDetail() { Drawable = detail.Drawable, Texture = i, Category = detail.Category };
                         mi.Highlighted += SetPropDrawableTexture;
                     }
@@ -949,7 +949,7 @@ namespace GTAVBETrainerDotNet
                     {
                         MSPCustomSet set = Configuration.MSPCustomSets.Items[i];
                         set.Index = i;
-                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.CustomSet, string.Format(FORMAT_SET_NAME, set.Name), false, false, MenuStorage.Menus.Players.MSPs.CustomSets.Item, Enter, null, null, set);
+                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Players.MSPs.CustomSet, Utils.FormatML(FORMAT_SET_NAME, set.Name), false, false, MenuStorage.Menus.Players.MSPs.CustomSets.Item, Enter, null, null, set);
                     }
                 }
 
@@ -960,7 +960,7 @@ namespace GTAVBETrainerDotNet
                 public static void Enter(MenuItem sender)
                 {
                     MSPCustomSet set = (sender.Data as MSPCustomSet);
-                    MenuStorage.Menus.Players.MSPs.CustomSets.Item.Title = string.Format(FORMAT_SET_NAME, set.Name);
+                    MenuStorage.Menus.Players.MSPs.CustomSets.Item.Title = Utils.FormatML(FORMAT_SET_NAME, set.Name);
                     MenuStorage.MenuItems.Player.MSPCustomSet.Item.Apply.Data = set;
                     MenuStorage.MenuItems.Player.MSPCustomSet.Item.Rename.Data = set;
                     MenuStorage.MenuItems.Player.MSPCustomSet.Item.Overwrite.Data = set;
@@ -974,7 +974,7 @@ namespace GTAVBETrainerDotNet
                 /// <param name="sender">Source menu item</param>
                 public static void Create(MenuItem sender)
                 {
-                    string name = Utils.ShowInGameKeyboard(null, string.Format(FORMAT_NEW_SET_NAME, Configuration.MSPCustomSets.Items.Count + 1), NAME_MAX_LENGTH);
+                    string name = Utils.ShowInGameKeyboard(null, Utils.FormatML(FORMAT_NEW_SET_NAME, Configuration.MSPCustomSets.Items.Count + 1), NAME_MAX_LENGTH);
                     if (string.IsNullOrEmpty(name)) return;
 
                     MSPCustomSet set = GetCurrent();
@@ -1065,7 +1065,7 @@ namespace GTAVBETrainerDotNet
                     string name = Utils.ShowInGameKeyboard(null, set.Name, NAME_MAX_LENGTH);
                     if (string.IsNullOrEmpty(name)) return;
                     set.Name = name;
-                    MenuStorage.Menus.Players.MSPs.CustomSets.Item.Title = string.Format(FORMAT_SET_NAME, name);
+                    MenuStorage.Menus.Players.MSPs.CustomSets.Item.Title = Utils.FormatML(FORMAT_SET_NAME, name);
                     GenerateItemList(null);
                     Configuration.MSPCustomSets.SaveMSPCustomSets();
                     Utils.ShowNotificationAboveMap(GlobalConst.Message.PLAYER_MSPCS_RENAMED);

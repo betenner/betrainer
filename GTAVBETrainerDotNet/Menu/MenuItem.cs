@@ -54,7 +54,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Text
         /// </summary>
-        public string Text = null;
+        public MString Text = null;
 
         /// <summary>
         /// Is toggle able item
@@ -82,6 +82,16 @@ namespace GTAVBETrainerDotNet.Menu
         public Color BackColor = Color.FromArgb(96, Color.Black);
 
         /// <summary>
+        /// Shadow offset
+        /// </summary>
+        public Point ShadowOffset = new Point();
+
+        /// <summary>
+        /// Shadow color
+        /// </summary>
+        public Color ShadowColor = Color.Black;
+
+        /// <summary>
         /// Selected text color
         /// </summary>
         public Color SelectedTextColor = Color.Black;
@@ -97,7 +107,7 @@ namespace GTAVBETrainerDotNet.Menu
         public bool PreventsEnteringSubMenuOnce = false;
 
         // Text x scale
-        private float _xScale = 0.45f;
+        private float _xScale = 0.35f;
 
         /// <summary>
         /// Bind data
@@ -121,7 +131,7 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         // Text y scale
-        private float _yScale = 0.45f;
+        private float _yScale = 0.35f;
 
         /// <summary>
         /// Text Y scale
@@ -140,7 +150,7 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         // Selected text x scale
-        private float _selectedXScale = 0.45f;
+        private float _selectedXScale = 0.35f;
 
         /// <summary>
         /// Selected text X scale
@@ -159,7 +169,7 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         // Selected text y scale
-        private float _selectedYScale = 0.45f;
+        private float _selectedYScale = 0.35f;
 
         /// <summary>
         /// Selected text Y scale
@@ -180,7 +190,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Font
         /// </summary>
-        public GTA.Font Font = GTA.Font.ChaletComprimeCologne;
+        public GTA.Font Font = GTA.Font.ChaletLondon;
 
         /// <summary>
         /// Alignment

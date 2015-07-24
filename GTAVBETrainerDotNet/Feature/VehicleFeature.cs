@@ -307,7 +307,7 @@ namespace GTAVBETrainerDotNet
                     Script.Wait(SPAWN_WAIT);
                     Function.Call(Hash.SET_MODEL_AS_NO_LONGER_NEEDED, model);
                     if (cleanUp) Function.Call(Hash.SET_VEHICLE_AS_NO_LONGER_NEEDED, &vehicle);
-                    Utils.ShowNotificationAboveMap(string.Format(GlobalConst.Message.VEHICLE_SPAWNED, name));
+                    Utils.ShowNotificationAboveMap(Utils.FormatML(GlobalConst.Message.VEHICLE_SPAWNED, name));
                     return vehicle;
                 }
 
@@ -380,7 +380,7 @@ namespace GTAVBETrainerDotNet
                     {
                         CustomVehicle cv = Configuration.Vehicle.CustomVehicles[i];
                         cv.Index = i;
-                        MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.CustomVehicle, string.Format(MenuText.Vehicle.CustomVehicle.I02_ITEM, cv.Name), false, false, MenuStorage.Menus.Vehicles.CustomVehicles.Item, null, PreEnterItemMenu, null, cv);
+                        MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.CustomVehicle, Utils.FormatML(MenuText.Vehicle.CustomVehicle.I02_ITEM, cv.Name), false, false, MenuStorage.Menus.Vehicles.CustomVehicles.Item, null, PreEnterItemMenu, null, cv);
                     }
                 }
 
@@ -391,7 +391,7 @@ namespace GTAVBETrainerDotNet
                 public static void PreEnterItemMenu(MenuItem sender)
                 {
                     CustomVehicle cv = (sender.Data as CustomVehicle);
-                    MenuStorage.Menus.Vehicles.CustomVehicles.Item.Title = string.Format(MenuText.Vehicle.CustomVehicle.Item.I00_TITLE, cv.Name);
+                    MenuStorage.Menus.Vehicles.CustomVehicles.Item.Title = Utils.FormatML(MenuText.Vehicle.CustomVehicle.Item.I00_TITLE, cv.Name);
                     MenuStorage.MenuItems.Vehicle.CustomVehicle.Item.Delete.Data = cv;
                     MenuStorage.MenuItems.Vehicle.CustomVehicle.Item.Overwrite.Data = cv;
                     MenuStorage.MenuItems.Vehicle.CustomVehicle.Item.Rename.Data = cv;
@@ -407,7 +407,7 @@ namespace GTAVBETrainerDotNet
                 {
                     if (!Vehicle.CheckInVehicle()) return;
 
-                    string name = Utils.ShowInGameKeyboard(null, string.Format(DEFAULT_NAME, Configuration.Vehicle.CustomVehicles.Count + 1), MAX_INPUT_LENGTH);
+                    string name = Utils.ShowInGameKeyboard(null, Utils.FormatML(DEFAULT_NAME, Configuration.Vehicle.CustomVehicles.Count + 1), MAX_INPUT_LENGTH);
                     if (string.IsNullOrEmpty(name)) return;
 
                     CustomVehicle cv = GetCurrentVehicleData();
@@ -510,7 +510,7 @@ namespace GTAVBETrainerDotNet
                 {
                     CustomVehicle cv = (sender.Data as CustomVehicle);
 
-                    int vehicle = Vehicle.SpawnVehicle(cv.Model, GlobalConst.Message.CV_CV, false);
+                    int vehicle = Vehicle.SpawnVehicle(cv.Model, cv.Name, false);
                     if (vehicle == -1)
                     {
                         Utils.ShowNotificationAboveMap(GlobalConst.Message.CV_SPAWN_FAILED);
@@ -680,25 +680,25 @@ namespace GTAVBETrainerDotNet
                             if (mods > 0)
                             {
                                 MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod,
-                                    string.Format(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(i), mods + 1),
+                                    Utils.FormatML(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(i), mods + 1),
                                     false, false, MenuStorage.Menus.Vehicles.Mods.ModItem, null, PreEnterModItem, null, i);
                             }
                         }
 
                         int tintCount = Function.Call<int>(Hash.GET_NUM_VEHICLE_WINDOW_TINTS);
                         MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod,
-                            string.Format(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_WINDOW_TINT), tintCount),
+                            Utils.FormatML(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_WINDOW_TINT), tintCount),
                             false, false, MenuStorage.Menus.Vehicles.Mods.ModItem, null, PreEnterModItem, null, ModStorage.SPECIAL_ID_FOR_WINDOW_TINT);
 
                         int plateCount = Function.Call<int>(Hash.GET_NUMBER_OF_VEHICLE_NUMBER_PLATES);
                         MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod,
-                            string.Format(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_LICENSE_PLATES), plateCount),
+                            Utils.FormatML(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_LICENSE_PLATES), plateCount),
                             false, false, MenuStorage.Menus.Vehicles.Mods.ModItem, null, PreEnterModItem, null, ModStorage.SPECIAL_ID_FOR_LICENSE_PLATES);
 
                         if (!isBike)
                         {
                             MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod,
-                                string.Format(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_WHEEL_CATEGORY), ModStorage.WHEEL_CATEGORY_COUNT),
+                                Utils.FormatML(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_WHEEL_CATEGORY), ModStorage.WHEEL_CATEGORY_COUNT),
                                 false, false, MenuStorage.Menus.Vehicles.Mods.ModItem, null, PreEnterModItem, null, ModStorage.SPECIAL_ID_FOR_WHEEL_CATEGORY);
                         }
 
@@ -717,7 +717,7 @@ namespace GTAVBETrainerDotNet
                             wheelCount = ModStorage.WHEEL_CATEGORY_COUNTS[wheelType];
                         }
                         MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod,
-                            string.Format(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_WHEEL_SELECTION), wheelCount),
+                            Utils.FormatML(MenuText.Vehicle.Mod.FORMAT_MOD_CATEGORY, ModStorage.GetModCategoryName(ModStorage.SPECIAL_ID_FOR_WHEEL_SELECTION), wheelCount),
                             false, false, MenuStorage.Menus.Vehicles.Mods.ModItem, null, PreEnterModItem, null, ModStorage.SPECIAL_ID_FOR_WHEEL_SELECTION);
                         MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod, MenuText.Vehicle.Mod.TURBO_TUNING, true, GetTurboTuning(), null, SetTurboTuning);
                         MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod, MenuText.Vehicle.Mod.TURBO_XEON_LIGHTS, true, GetXeonLight(), null, SetXeonLight);
@@ -729,7 +729,7 @@ namespace GTAVBETrainerDotNet
                     for (int i = 0; i < EXTRA_COUNT; i++)
                     {
                         if (!Function.Call<bool>(Hash.DOES_EXTRA_EXIST, vehicle, i)) continue;
-                        MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod, string.Format(MenuText.Vehicle.Mod.EXTRA, extraIndex++), true, GetExtra(i), null, SetExtra, null, null, i);
+                        MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mod, Utils.FormatML(MenuText.Vehicle.Mod.EXTRA, extraIndex++), true, GetExtra(i), null, SetExtra, null, null, i);
                     }
 
                     if (!isSpecial && !isAircraft)
@@ -951,7 +951,7 @@ namespace GTAVBETrainerDotNet
                         }
                         else
                         {
-                            name = string.Format(MenuText.Vehicle.Mod.MOD_ITEM, ModStorage.GetModCategoryName(category), i);
+                            name = Utils.FormatML(MenuText.Vehicle.Mod.MOD_ITEM, ModStorage.GetModCategoryName(category), i);
                         }
                         MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Mods.ModItem, name, false, false, null, ApplyMod, null, null, values[i]);
                     }
@@ -975,7 +975,7 @@ namespace GTAVBETrainerDotNet
                     {
                         Function.Call(Hash.SET_VEHICLE_MOD_KIT, vehicle, 0);
                         Function.Call(Hash.SET_VEHICLE_MOD, vehicle, _lastSelectedMod, value, 1);
-                        Utils.ShowNotificationAboveMap(string.Format(GlobalConst.Message.VM_APPLIED, ModStorage.GetNormalItemTitle(vehicle, _lastSelectedMod, value, _lastSelectedMod)));
+                        Utils.ShowNotificationAboveMap(Utils.FormatML(GlobalConst.Message.VM_APPLIED, ModStorage.GetNormalItemTitle(vehicle, _lastSelectedMod, value, _lastSelectedMod)));
                     }
                     else
                     {
@@ -1159,7 +1159,7 @@ namespace GTAVBETrainerDotNet
                     int liveryCount = Function.Call<int>(Hash.GET_VEHICLE_LIVERY_COUNT, Game.Player.Character.CurrentVehicle.Handle);
                     if (liveryCount > 0)
                     {
-                        MenuStorage.MenuItems.Vehicle.Paint.Livery.Text = string.Format(MenuText.Vehicle.Paint.I05_LIVERY, liveryCount);
+                        MenuStorage.MenuItems.Vehicle.Paint.Livery.Text = Utils.FormatML(MenuText.Vehicle.Paint.I05_LIVERY, liveryCount);
                         MenuStorage.Menus.Vehicles.Paint.Add(MenuStorage.MenuItems.Vehicle.Paint.Livery);
                     }
                 }
@@ -1174,7 +1174,7 @@ namespace GTAVBETrainerDotNet
                     int count = Function.Call<int>(Hash.GET_VEHICLE_LIVERY_COUNT, Game.Player.Character.CurrentVehicle.Handle);
                     for (int i = 0; i < count; i++)
                     {
-                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Paints.Livery, string.Format(MenuText.Vehicle.Paint.Livery.I01_ITEM, i + 1));
+                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Vehicles.Paints.Livery, Utils.FormatML(MenuText.Vehicle.Paint.Livery.I01_ITEM, i + 1));
                         mi.Data = i;
                         mi.Highlighted += ApplyLivery;
                     }
@@ -1410,10 +1410,10 @@ namespace GTAVBETrainerDotNet
                         float speed = Function.Call<float>(Hash.GET_ENTITY_SPEED, handle);
                         speed *= (ShowInMetric ? SPEEDMETER_SPEED_FACTOR_KPH : SPEEDMETER_SPEED_FACTOR_MPH);
 
-                        Utils.DrawText(string.Format((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
+                        Utils.DrawText(Utils.FormatML((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
                             SPEEDMETER_POS.X + SPEEDMETER_SHADOW_OFFSET.X, SPEEDMETER_POS.Y + SPEEDMETER_SHADOW_OFFSET.Y,
                             SPEEDMETER_ALIGN, SPEEDMETER_SHADOW_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_Y_SCALE, SPEEDMETER_FONT);
-                        Utils.DrawText(string.Format((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
+                        Utils.DrawText(Utils.FormatML((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
                             SPEEDMETER_POS.X, SPEEDMETER_POS.Y, SPEEDMETER_ALIGN, SPEEDMETER_TEXT_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_Y_SCALE, SPEEDMETER_FONT);
                     }
                 }

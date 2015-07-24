@@ -65,11 +65,9 @@ namespace GTAVBETrainerDotNet
             {
                 if (Feature.Location.ShowCoordinates)
                 {
-                    string coord = string.Format(COORDINATE_FORMAT, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z);
-                    Utils.DrawText(coord, COORDINATE_POS.X + COORDINATE_SHADOW_OFFSET.X, COORDINATE_POS.Y + COORDINATE_SHADOW_OFFSET.Y, COORDINATE_ALIGN, COORDINATE_SHADOW_COLOR,
-                        COORDINATE_X_SCALE, COORDINATE_Y_SCALE, COORDINATE_FONT, GlobalConst.DEFAULT_SCREEN_WIDTH, GlobalConst.DEFAULT_SCREEN_HEIGHT);
+                    string coord = Utils.FormatML(COORDINATE_FORMAT, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z);
                     Utils.DrawText(coord, COORDINATE_POS.X, COORDINATE_POS.Y, COORDINATE_ALIGN, COORDINATE_TEXT_COLOR,
-                        COORDINATE_X_SCALE, COORDINATE_Y_SCALE, COORDINATE_FONT, GlobalConst.DEFAULT_SCREEN_WIDTH, GlobalConst.DEFAULT_SCREEN_HEIGHT);
+                        COORDINATE_X_SCALE, COORDINATE_Y_SCALE, COORDINATE_FONT, COORDINATE_SHADOW_OFFSET, COORDINATE_SHADOW_COLOR);
                 }
             }
 
@@ -247,7 +245,7 @@ namespace GTAVBETrainerDotNet
                     {
                         SimpleTeleportTarget target = Configuration.Location.Targets[i];
                         target.Index = i;
-                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Locations.CLTeleporter, string.Format(FORMAT_TARGET_NAME, target.Name), false, false, MenuStorage.Menus.Locations.CLTeleporters.Item, null, PreEnterTargetItem, null, target);
+                        MenuItem mi = MenuStorage.AddMenuItem(MenuStorage.Menus.Locations.CLTeleporter, Utils.FormatML(FORMAT_TARGET_NAME, target.Name), false, false, MenuStorage.Menus.Locations.CLTeleporters.Item, null, PreEnterTargetItem, null, target);
                     }
                 }
 
@@ -258,7 +256,7 @@ namespace GTAVBETrainerDotNet
                 public static void SaveCurrentLocation(MenuItem sender)
                 {
                     GTA.Math.Vector3 coords = Game.Player.Character.Position;
-                    string name = Utils.ShowInGameKeyboard(null, string.Format(FORMAT_DEFAULT_NAME, coords.X, coords.Y, coords.Z), MAX_INPUT_LENGTH);
+                    string name = Utils.ShowInGameKeyboard(null, Utils.FormatML(FORMAT_DEFAULT_NAME, coords.X, coords.Y, coords.Z), MAX_INPUT_LENGTH);
                     if (string.IsNullOrEmpty(name)) return;
 
                     SimpleTeleportTarget target = new SimpleTeleportTarget(name, coords.X, coords.Y, coords.Z);
@@ -276,7 +274,7 @@ namespace GTAVBETrainerDotNet
                 public static void PreEnterTargetItem(MenuItem sender)
                 {
                     SimpleTeleportTarget target = (sender.Data as SimpleTeleportTarget);
-                    MenuStorage.Menus.Locations.CLTeleporters.Item.Title = string.Format(FORMAT_TARGET_NAME, target.Name);
+                    MenuStorage.Menus.Locations.CLTeleporters.Item.Title = Utils.FormatML(FORMAT_TARGET_NAME, target.Name);
                     MenuStorage.MenuItems.Location.CustomLocationTeleporter.Item.Teleport.Data = target;
                     MenuStorage.MenuItems.Location.CustomLocationTeleporter.Item.Rename.Data = target;
                     MenuStorage.MenuItems.Location.CustomLocationTeleporter.Item.Overwrite.Data = target;
@@ -454,7 +452,7 @@ namespace GTAVBETrainerDotNet
                     /// </summary>
                     public static void UpdateXMenuText()
                     {
-                        MenuStorage.MenuItems.Location.XyzTeleporter.Coordinates.X.Text = string.Format(MenuText.Location.XyzTeleporter.Coordinates.I01_X, _x);
+                        MenuStorage.MenuItems.Location.XyzTeleporter.Coordinates.X.Text = Utils.FormatML(MenuText.Location.XyzTeleporter.Coordinates.I01_X, _x);
                     }
 
                     /// <summary>
@@ -462,7 +460,7 @@ namespace GTAVBETrainerDotNet
                     /// </summary>
                     public static void UpdateYMenuText()
                     {
-                        MenuStorage.MenuItems.Location.XyzTeleporter.Coordinates.Y.Text = string.Format(MenuText.Location.XyzTeleporter.Coordinates.I02_Y, _y);
+                        MenuStorage.MenuItems.Location.XyzTeleporter.Coordinates.Y.Text = Utils.FormatML(MenuText.Location.XyzTeleporter.Coordinates.I02_Y, _y);
                     }
 
                     /// <summary>
@@ -470,7 +468,7 @@ namespace GTAVBETrainerDotNet
                     /// </summary>
                     public static void UpdateZMenuText()
                     {
-                        MenuStorage.MenuItems.Location.XyzTeleporter.Coordinates.Z.Text = string.Format(MenuText.Location.XyzTeleporter.Coordinates.I03_Z, _z);
+                        MenuStorage.MenuItems.Location.XyzTeleporter.Coordinates.Z.Text = Utils.FormatML(MenuText.Location.XyzTeleporter.Coordinates.I03_Z, _z);
                     }
 
                     /// <summary>
@@ -650,7 +648,7 @@ namespace GTAVBETrainerDotNet
                     /// </summary>
                     public static void UpdateXMenuText()
                     {
-                        MenuStorage.MenuItems.Location.XyzTeleporter.Offset.X.Text = string.Format(MenuText.Location.XyzTeleporter.Offset.I01_X, _x);
+                        MenuStorage.MenuItems.Location.XyzTeleporter.Offset.X.Text = Utils.FormatML(MenuText.Location.XyzTeleporter.Offset.I01_X, _x);
                     }
 
                     /// <summary>
@@ -658,7 +656,7 @@ namespace GTAVBETrainerDotNet
                     /// </summary>
                     public static void UpdateYMenuText()
                     {
-                        MenuStorage.MenuItems.Location.XyzTeleporter.Offset.Y.Text = string.Format(MenuText.Location.XyzTeleporter.Offset.I02_Y, _y);
+                        MenuStorage.MenuItems.Location.XyzTeleporter.Offset.Y.Text = Utils.FormatML(MenuText.Location.XyzTeleporter.Offset.I02_Y, _y);
                     }
 
                     /// <summary>
@@ -666,7 +664,7 @@ namespace GTAVBETrainerDotNet
                     /// </summary>
                     public static void UpdateZMenuText()
                     {
-                        MenuStorage.MenuItems.Location.XyzTeleporter.Offset.Z.Text = string.Format(MenuText.Location.XyzTeleporter.Offset.I03_Z, _z);
+                        MenuStorage.MenuItems.Location.XyzTeleporter.Offset.Z.Text = Utils.FormatML(MenuText.Location.XyzTeleporter.Offset.I03_Z, _z);
                     }
 
                     /// <summary>

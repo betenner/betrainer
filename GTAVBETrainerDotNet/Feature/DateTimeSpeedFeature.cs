@@ -81,11 +81,9 @@ namespace GTAVBETrainerDotNet
                     sbShowTime.Clear();
                     sbShowTime.AppendFormat(SHOW_TIME_FORMAT, GetGameDateTime(), DateTime.Now);
 
-                    Utils.DrawText(sbShowTime.ToString(), SHOWTIME_POS.X + SHOWTIME_SHADOW_OFFSET.X,
-                        SHOWTIME_POS.Y + SHOWTIME_SHADOW_OFFSET.Y, SHOWTIME_ALIGN, SHOWTIME_SHADOW_COLOR,
-                        SHOWTIME_X_SCALE, SHOWTIME_Y_SCALE, SHOWTIME_FONT);
                     Utils.DrawText(sbShowTime.ToString(), SHOWTIME_POS.X, SHOWTIME_POS.Y,
-                        SHOWTIME_ALIGN, SHOWTIME_TEXT_COLOR, SHOWTIME_X_SCALE, SHOWTIME_Y_SCALE, SHOWTIME_FONT);
+                        SHOWTIME_ALIGN, SHOWTIME_TEXT_COLOR, SHOWTIME_X_SCALE, SHOWTIME_Y_SCALE, SHOWTIME_FONT, 
+                        SHOWTIME_SHADOW_OFFSET, SHOWTIME_SHADOW_COLOR);
                 }
 
                 // Game & aiming speed
@@ -402,12 +400,12 @@ namespace GTAVBETrainerDotNet
             /// </summary>
             public static void RefreshSetDateTimeMenu()
             {
-                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Year.Text = string.Format(MenuText.DateTimeSpeed.SetDateTime.I01_YEAR, _setDateTime.Year);
-                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Month.Text = string.Format(MenuText.DateTimeSpeed.SetDateTime.I02_MONTH, _setDateTime.Month);
-                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Day.Text = string.Format(MenuText.DateTimeSpeed.SetDateTime.I03_DAY, _setDateTime.Day);
-                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Hour.Text = string.Format(MenuText.DateTimeSpeed.SetDateTime.I04_HOUR, _setDateTime.Hour);
-                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Minute.Text = string.Format(MenuText.DateTimeSpeed.SetDateTime.I05_MINUTE, _setDateTime.Minute);
-                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Second.Text = string.Format(MenuText.DateTimeSpeed.SetDateTime.I06_SECOND, _setDateTime.Second);
+                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Year.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetDateTime.I01_YEAR, _setDateTime.Year);
+                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Month.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetDateTime.I02_MONTH, _setDateTime.Month);
+                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Day.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetDateTime.I03_DAY, _setDateTime.Day);
+                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Hour.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetDateTime.I04_HOUR, _setDateTime.Hour);
+                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Minute.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetDateTime.I05_MINUTE, _setDateTime.Minute);
+                MenuStorage.MenuItems.DateTimeSpeed.SetDateTimeMenu.Second.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetDateTime.I06_SECOND, _setDateTime.Second);
             }
 
             /// <summary>
@@ -415,7 +413,7 @@ namespace GTAVBETrainerDotNet
             /// </summary>
             public static void UpdateGameSpeed()
             {
-                MenuStorage.MenuItems.DateTimeSpeed.SetGameSpeedMenu.Speed.Text = string.Format(MenuText.DateTimeSpeed.SetGameSpeed.I01_SPEED, _gameSpeed);
+                MenuStorage.MenuItems.DateTimeSpeed.SetGameSpeedMenu.Speed.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetGameSpeed.I01_SPEED, _gameSpeed);
             }
 
             /// <summary>
@@ -423,7 +421,7 @@ namespace GTAVBETrainerDotNet
             /// </summary>
             public static void UpdateAimingSpeed()
             {
-                MenuStorage.MenuItems.DateTimeSpeed.SetAimingSpeedMenu.Speed.Text = string.Format(MenuText.DateTimeSpeed.SetAimingSpeed.I01_SPEED, _aimingSpeed);
+                MenuStorage.MenuItems.DateTimeSpeed.SetAimingSpeedMenu.Speed.Text = Utils.FormatML(MenuText.DateTimeSpeed.SetAimingSpeed.I01_SPEED, _aimingSpeed);
             }
 
             /// <summary>

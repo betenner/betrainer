@@ -57,7 +57,17 @@ namespace GTAVBETrainerDotNet.Weapon
         public const int MAX_ATTACHMENT_SLOTS = 15;
         public const string WEAPON_UNARMED = "WEAPON_UNARMED";
 
-        public static readonly string[] WEAPON_CATEGORY_NAMES = { "Melee", "Handguns", "Submachine Guns", "Assault Rifles", "Shotguns", "Sniper Rifles", "Heavy Weapons", "Thrown Weapons" };
+        public static readonly MString[] WEAPON_CATEGORY_NAMES = 
+        { 
+            Utils.CTML("Melee", "近戰武器"), 
+            Utils.CTML("Handguns", "手槍"), 
+            Utils.CTML("Submachine Guns", "機關槍"), 
+            Utils.CTML("Assault Rifles", "衝鋒槍"), 
+            Utils.CTML("Shotguns", "散彈槍"), 
+            Utils.CTML("Sniper Rifles", "阻擊槍"), 
+            Utils.CTML("Heavy Weapons", "重型武器"), 
+            Utils.CTML("Thrown Weapons", "投擲武器"), 
+        };
 
         public static readonly WeaponData[][] WEAPONS = 
         {

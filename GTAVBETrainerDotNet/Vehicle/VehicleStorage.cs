@@ -28,15 +28,44 @@ namespace GTAVBETrainerDotNet.Vehicle
         /// <summary>
         /// Names of main categories
         /// </summary>
-        public static readonly string[] MAIN_CATEGORIES = { "Cars", "Industrial", "Emergency and Military", "Motorcycles", "Planes", "Helicopters", "Boats", "Bicycles" };
+        public static readonly MString[] MAIN_CATEGORIES = 
+        { 
+            Utils.CTML("Cars", "家用"), 
+            Utils.CTML("Industrial", "商用"), 
+            Utils.CTML("Emergency and Military", "特種車輛與軍車"), 
+            Utils.CTML("Motorcycles", "摩托車"), 
+            Utils.CTML("Planes", "飛機"), 
+            Utils.CTML("Helicopters", "直升機"), 
+            Utils.CTML("Boats", "船隻"), 
+            Utils.CTML("Bicycles", "自行車"),
+        };
 
         /// <summary>
         /// Name of sub categories
         /// </summary>
-        public static readonly string[][] SUB_CATEGORIES =
+        public static readonly MString[][] SUB_CATEGORIES =
         {
-            new string[] { "Supercars", "Sports", "Sport Classics", "Coupes", "Muscle", "Offroad", "SUVs", "Sedans", "Compacts" },
-            new string[] { "Pickups", "Vans", "Trucks", "Service/Utility", "Trailers", "Trains (Undriveable)" },
+            new MString[] 
+            { 
+                Utils.CTML("Supercars", "超級跑車"), 
+                Utils.CTML("Sports", "跑車"), 
+                Utils.CTML("Sport Classics", "經典跑車"), 
+                Utils.CTML("Coupes", "房車"), 
+                Utils.CTML("Muscle", "肌肉車"), 
+                Utils.CTML("Offroad", "越野車") ,
+                Utils.CTML("SUVs", "SUV"), 
+                Utils.CTML("Sedans", "轎車"), 
+                Utils.CTML("Compacts", "緊湊型車"),
+            },
+            new MString[] 
+            { 
+                Utils.CTML("Pickups", "皮卡"), 
+                Utils.CTML("Vans", "廂式貨車"), 
+                Utils.CTML("Trucks", "卡車"), 
+                Utils.CTML("Service/Utility", "服務車/工具車"), 
+                Utils.CTML("Trailers", "拖車"), 
+                Utils.CTML("Trains (Undriveable)" , "火車(不可駕駛)"),
+            },
         };
 
         /// <summary>

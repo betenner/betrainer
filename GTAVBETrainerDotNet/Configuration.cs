@@ -155,6 +155,9 @@ namespace GTAVBETrainerDotNet
         private const string CONFIG_MISC_PORTABLE_RADIO = "PortableRadio";
         private const string CONFIG_MISC_HIDE_HUD = "HideHUD";
 
+        private const string CONFIG_LANGUAGE = "Language";
+        private const string CONFIG_LANGUAGE_VALUE = "Value";
+
         /// <summary>
         /// Load configurations
         /// </summary>
@@ -245,6 +248,9 @@ namespace GTAVBETrainerDotNet
                 Feature.Misc.PortableRadio = Utils.ParseBoolStr(ini.GetValue(CONFIG_MISC, CONFIG_MISC_PORTABLE_RADIO));
                 Feature.Misc.HideHud = Utils.ParseBoolStr(ini.GetValue(CONFIG_MISC, CONFIG_MISC_HIDE_HUD));
 
+                // Language
+                Trainer.LanguageCode = Utils.ParseInt(ini.GetValue(CONFIG_LANGUAGE, CONFIG_LANGUAGE_VALUE));
+
                 Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_LOADED);
             }
             catch
@@ -331,6 +337,9 @@ namespace GTAVBETrainerDotNet
                 ini.SetValue(CONFIG_MISC, CONFIG_MISC_PORTABLE_RADIO, Feature.Misc.PortableRadio.ToString());
                 ini.SetValue(CONFIG_MISC, CONFIG_MISC_HIDE_HUD, Feature.Misc.HideHud.ToString());
 
+                // Language
+                ini.SetValue(CONFIG_LANGUAGE, CONFIG_LANGUAGE_VALUE, Trainer.LanguageCode.ToString());
+
                 ini.Save();
 
                 if (showNotification) Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_SAVED);
@@ -373,7 +382,7 @@ namespace GTAVBETrainerDotNet
 
                 for (int i = 1; i <= count; i++)
                 {
-                    MSPCustomSet set = MSPCustomSet.Deserialize(ini.GetValue(CONFIG_MSPCS, string.Format(CONFIG_MSPCS_ENTRY, i)));
+                    MSPCustomSet set = MSPCustomSet.Deserialize(ini.GetValue(CONFIG_MSPCS, Utils.FormatML(CONFIG_MSPCS_ENTRY, i)));
                     if (set != null) Items.Add(set);
                 }
 
@@ -394,7 +403,7 @@ namespace GTAVBETrainerDotNet
                 for (int i = 1; i <= Items.Count; i++)
                 {
                     MSPCustomSet set = Items[i - 1];
-                    ini.SetValue(CONFIG_MSPCS, string.Format(CONFIG_MSPCS_ENTRY, i), set.Serialize());
+                    ini.SetValue(CONFIG_MSPCS, Utils.FormatML(CONFIG_MSPCS_ENTRY, i), set.Serialize());
                 }
 
                 ini.Save();
@@ -430,7 +439,7 @@ namespace GTAVBETrainerDotNet
                 ini.SetValue(CONFIG_CL, CONFIG_CL_COUNT, Targets.Count.ToString());
                 for (int i = 0; i < Targets.Count; i++)
                 {
-                    ini.SetValue(CONFIG_CL, string.Format(CONFIG_CL_ENTRY, i + 1), Targets[i].Serialize());
+                    ini.SetValue(CONFIG_CL, Utils.FormatML(CONFIG_CL_ENTRY, i + 1), Targets[i].Serialize());
                 }
 
                 ini.Save();
@@ -453,7 +462,7 @@ namespace GTAVBETrainerDotNet
 
                 for (int i = 0; i < count; i++)
                 {
-                    SimpleTeleportTarget target = SimpleTeleportTarget.Deserialize(ini.GetValue(CONFIG_CL, string.Format(CONFIG_CL_ENTRY, i + 1)));
+                    SimpleTeleportTarget target = SimpleTeleportTarget.Deserialize(ini.GetValue(CONFIG_CL, Utils.FormatML(CONFIG_CL_ENTRY, i + 1)));
                     if (target != null) Targets.Add(target);
                 }
                 Targets.Sort();
@@ -488,7 +497,7 @@ namespace GTAVBETrainerDotNet
 
                 for (int i = 0; i < count; i++)
                 {
-                    string data = ini.GetValue(CONFIG_CV, string.Format(CONFIG_CV_ITEM, i + 1));
+                    string data = ini.GetValue(CONFIG_CV, Utils.FormatML(CONFIG_CV_ITEM, i + 1));
                     CustomVehicle cv = CustomVehicle.Deserialize(data);
                     if (cv != null)
                     {
@@ -512,7 +521,7 @@ namespace GTAVBETrainerDotNet
                 ini.SetValue(CONFIG_CV, CONFIG_CV_COUNT, CustomVehicles.Count.ToString());
                 for (int i = 0; i < CustomVehicles.Count; i++)
                 {
-                    ini.SetValue(CONFIG_CV, string.Format(CONFIG_CV_ITEM, i + 1), CustomVehicles[i].Serialize());
+                    ini.SetValue(CONFIG_CV, Utils.FormatML(CONFIG_CV_ITEM, i + 1), CustomVehicles[i].Serialize());
                 }
                 ini.Save();
             }

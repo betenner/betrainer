@@ -62,11 +62,13 @@
     <Compile Include="Feature\WorldFeature.cs" />
     <Compile Include="GlobalConst.cs" />
     <Compile Include="IniFile.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuItemEventHandler.cs" />
     <Compile Include="Menu\MenuText.cs" />
     <Compile Include="Menu\MenuStorage.cs" />
+    <Compile Include="MString.cs" />
     <Compile Include="Model\ModelData.cs" />
     <Compile Include="Model\ModelStorage.cs" />
     <Compile Include="SkinProps\SkinPropDetail.cs" />

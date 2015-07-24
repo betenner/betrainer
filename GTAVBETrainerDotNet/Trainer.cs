@@ -34,6 +34,11 @@ namespace GTAVBETrainerDotNet
         /// </summary>
         public static bool ShowingTrainerMenu = false;
 
+        /// <summary>
+        /// Language code
+        /// </summary>
+        public static int LanguageCode = Language.CODE_ENGLISH;
+
         public Trainer()
         {
             IsInitializing = true;

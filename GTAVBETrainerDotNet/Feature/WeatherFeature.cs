@@ -100,7 +100,7 @@ namespace GTAVBETrainerDotNet
                 Function.Call(Hash.SET_WEATHER_TYPE_NOW, wd.InternalName);
                 Function.Call(Hash.CLEAR_TIMECYCLE_MODIFIER);
                 _weather = wd.InternalName;
-                Utils.ShowNotificationAboveMap(string.Format(GlobalConst.Message.WEATHER_SET, wd.Name));
+                Utils.ShowNotificationAboveMap(Utils.FormatML(GlobalConst.Message.WEATHER_SET, wd.Name));
             }
         }
     }

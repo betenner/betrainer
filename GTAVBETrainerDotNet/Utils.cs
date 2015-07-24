@@ -28,10 +28,10 @@ namespace GTAVBETrainerDotNet
         /// Shows a notification above in-game mini-map
         /// </summary>
         /// <param name="message">Message to show</param>
-        public static void ShowNotificationAboveMap(string message)
+        public static void ShowNotificationAboveMap(MString message)
         {
             Function.Call(Hash._SET_NOTIFICATION_TEXT_ENTRY, "STRING");
-            Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, message);
+            Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, message[Trainer.LanguageCode]);
             Function.Call(Hash._DRAW_NOTIFICATION, 0, 1);
         }
 
@@ -65,14 +65,19 @@ namespace GTAVBETrainerDotNet
         /// <param name="xScale">X Scale</param>
         /// <param name="yScale">Y Scale</param>
         /// <param name="font">Font</param>
+        /// <param name="shadowOffset">Offset of shadow</param>
+        /// <param name="shadowColor">Color of shadow</param>
         /// <param name="screenHeight">Height of screen in pixel</param>
         /// <param name="screenWidth">Width of screen in pixel</param>
-        public static void DrawText(string text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.45f, float yScale = 0.45f, GTA.Font font = GTA.Font.ChaletLondon, int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
+        public static void DrawText(MString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, float yScale = 0.35f, GTA.Font font = GTA.Font.ChaletLondon, Point shadowOffset = new Point(), Color shadowColor = new Color(), int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
         {
+            if (shadowOffset.X != 0 || shadowOffset.Y != 0)
+            {
+                DrawText(text, x + shadowOffset.X, y + shadowOffset.Y, align, shadowColor, xScale, yScale, font, new Point(), Color.Black, screenWidth, screenHeight);
+            }
             Function.Call(Hash.SET_TEXT_FONT, (int)font);
             Function.Call(Hash.SET_TEXT_SCALE, xScale, yScale);
             Function.Call(Hash.SET_TEXT_COLOUR, color.R, color.G, color.B, color.A);
-            Function.Call(Hash.SET_TEXT_WRAP, 0.0f, 1.0f);
             switch (align)
             {
                 case GlobalConst.HAlign.Left:
@@ -87,10 +92,8 @@ namespace GTAVBETrainerDotNet
                     Function.Call(Hash.SET_TEXT_RIGHT_JUSTIFY, 1);
                     break;
             }
-            //Function.Call(Hash.SET_TEXT_DROP_SHADOW, 0, 0, 0, 0, 0);
-            //Function.Call(Hash.SET_TEXT_EDGE, 0, 0, 0, 0, 0);
             Function.Call(Hash._SET_TEXT_ENTRY, "STRING");
-            Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, text);
+            Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, ML(text));
             Function.Call(Hash._DRAW_TEXT, (float)x / screenWidth, (float)y / screenHeight);
         }
 
@@ -209,5 +212,37 @@ namespace GTAVBETrainerDotNet
             if (Enum.TryParse<Keys>(value, out key)) return key;
             return Keys.None;
         }
+
+        /// <summary>
+        /// Generates a multi-string with a default string and a Chinese Traditional string
+        /// </summary>
+        /// <param name="defaultString">Default string</param>
+        /// <param name="chineseTraditional">Chinese triditional string</param>
+        /// <returns></returns>
+        public static MString CTML(string defaultString, string chineseTraditional)
+        {
+            return new MString(defaultString, new KeyValuePair<int, string>(Language.CODE_CHINESE_TRADITIONAL, chineseTraditional));
+        }
+
+        /// <summary>
+        /// Gets the string with current language code.
+        /// </summary>
+        /// <param name="str">Multi-string</param>
+        /// <returns></returns>
+        public static string ML(MString str)
+        {
+            return str[Trainer.LanguageCode];
+        }
+
+        public static string FormatML(MString format, params object[] args)
+        {
+            return string.Format(ML(format), args);
+        }
+
+        public static string FormatML(MString format, MString arg)
+        {
+            return string.Format(ML(format), ML(arg));
+        }
+
     }
 }

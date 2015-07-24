@@ -344,6 +344,10 @@ namespace GTAVBETrainerDotNet.Menu
             /// </summary>
             public static Menu Configuration = null;
 
+            /// <summary>
+            /// Lanugage menu
+            /// </summary>
+            public static Menu Language = null;
         }
 
         /// <summary>
@@ -623,6 +627,15 @@ namespace GTAVBETrainerDotNet.Menu
             {
                 public static MenuItem AutoSave = null;
             }
+
+            /// <summary>
+            /// Language menu items
+            /// </summary>
+            public static class Language
+            {
+                public static MenuItem English = null;
+                public static MenuItem ChineseTraditional = null;
+            }
         }
 
         /// <summary>
@@ -720,6 +733,7 @@ namespace GTAVBETrainerDotNet.Menu
             InitWeatherMenu();
             InitMiscMenu();
             InitConfigurationMenu();
+            InitLanguageMenu();
             InitMainMenu();
         }
 
@@ -915,7 +929,7 @@ namespace GTAVBETrainerDotNet.Menu
             miCash.ShowLeftRightAdjustableSign = true;
             miCash.LeftPressed += Feature.Player.DecreaseCash;
             miCash.RightPressed += Feature.Player.IncreaseCash;
-            miCash.Text = string.Format(MenuText.Player.I03_CASH, POSITIVE_SIGN, DEFAULT_CASH_AMOUNT);
+            miCash.Text = Utils.FormatML(MenuText.Player.I03_CASH, POSITIVE_SIGN, DEFAULT_CASH_AMOUNT);
 
             AddMenuItem(Menus.Player, MenuText.Player.I04_HEAL, false, false, null, Feature.Player.QuickHeal);
             MenuItems.Player.Invincible = AddMenuItem(Menus.Player, MenuText.Player.I05_INVINCIBLE, true, Feature.Player.Invincible, null, Feature.Player.SetInvincible);
@@ -1408,6 +1422,16 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         /// <summary>
+        /// Initialize language menu
+        /// </summary>
+        private static void InitLanguageMenu()
+        {
+            Menus.Language = new Menu(MenuText.Language.I00_TITLE);
+            AddMenuItem(Menus.Language, MenuText.Language.I01_ENGLISH, false, false, null, Language.SetToEnglish);
+            AddMenuItem(Menus.Language, MenuText.Language.I02_CHINESE_TRADITIONAL, false, false, null, Language.SetToChineseTraditional);
+        }
+
+        /// <summary>
         /// Initialize main menu
         /// </summary>
         private static void InitMainMenu()
@@ -1422,6 +1446,7 @@ namespace GTAVBETrainerDotNet.Menu
             AddMenuItem(Menus.Main, MenuText.Main.I07_WEATHER, false, false, Menus.Weather);
             AddMenuItem(Menus.Main, MenuText.Main.I08_MISC, false, false, Menus.Misc);
             AddMenuItem(Menus.Main, MenuText.Main.I09_CONFIGURATION, false, false, Menus.Configuration);
+            AddMenuItem(Menus.Main, MenuText.Main.I10_LANGUAGE, false, false, Menus.Language);
 
             EnterMenu(Menus.Main);
         }
@@ -1437,7 +1462,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="activateEventHandler">Activated event handler</param>
         /// <param name="highlightedEventHandler">Highlighted event handler</param>
         /// <param name="preActivateEventHandler">Pre-activated event handler</param>
-        public static MenuItem AddMenuItem(Menu parent, string text, bool toggle = false, bool on = false, Menu subMenu = null, MenuItemEventHandler activateEventHandler = null, MenuItemEventHandler preActivateEventHandler = null, MenuItemEventHandler highlightedEventHandler = null, object data = null)
+        public static MenuItem AddMenuItem(Menu parent, MString text, bool toggle = false, bool on = false, Menu subMenu = null, MenuItemEventHandler activateEventHandler = null, MenuItemEventHandler preActivateEventHandler = null, MenuItemEventHandler highlightedEventHandler = null, object data = null)
         {
             MenuItem mi = new MenuItem()
             {

@@ -23,7 +23,7 @@ namespace GTAVBETrainerDotNet.Weather
         /// <summary>
         /// Name
         /// </summary>
-        public string Name = null;
+        public MString Name = null;
 
         /// <summary>
         /// Internal name
@@ -35,7 +35,7 @@ namespace GTAVBETrainerDotNet.Weather
         /// </summary>
         /// <param name="name">Name</param>
         /// <param name="internalName">Internal name</param>
-        public WeatherData(string name, string internalName)
+        public WeatherData(MString name, string internalName)
         {
             Name = name;
             InternalName = internalName;

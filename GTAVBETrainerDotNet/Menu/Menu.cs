@@ -27,12 +27,12 @@ namespace GTAVBETrainerDotNet.Menu
         private const string TOGGLE_BRACE = "[     ]";
 
         // On
-        private const string TOGGLE_ON = "  On";
+        private static readonly MString TOGGLE_ON = Utils.CTML(" On", "  開");
         private static readonly Color TOGGLE_ON_COLOR = Color.LightGreen;
         private static readonly Color TOGGLE_ON_COLOR_SELECTED = Color.DarkGreen;
 
         // Off
-        private const string TOGGLE_OFF = "  Off";
+        private static readonly MString TOGGLE_OFF = Utils.CTML(" Off", "  關");
         private static readonly Color TOGGLE_OFF_COLOR = Color.Red;
         private static readonly Color TOGGLE_OFF_COLOR_SELECTED = Color.DarkRed;
 
@@ -55,7 +55,17 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Menu title
         /// </summary>
-        public string Title = null;
+        public MString Title = null;
+
+        /// <summary>
+        /// Menu title offset
+        /// </summary>
+        public Point TitleShadowDistance = new Point();
+
+        /// <summary>
+        /// Menu title shadow color
+        /// </summary>
+        public Color TitleShadowColor = Color.Black;
 
         /// <summary>
         /// Menu title text color
@@ -88,10 +98,10 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Menu title font
         /// </summary>
-        public GTA.Font TitleFont = GTA.Font.ChaletComprimeCologne;
+        public GTA.Font TitleFont = GTA.Font.ChaletLondon;
 
         // Menu title text x scale
-        private float _titleXScale = 0.55f;
+        private float _titleXScale = 0.4f;
 
         /// <summary>
         /// Gets or sets the title text X scale
@@ -110,7 +120,7 @@ namespace GTAVBETrainerDotNet.Menu
         }
 
         // Menu title text y scale
-        private float _titleYScale = 0.55f;
+        private float _titleYScale = 0.4f;
 
         /// <summary>
         /// Gets or sets the title text Y scale
@@ -143,7 +153,7 @@ namespace GTAVBETrainerDotNet.Menu
         private int _page = 1;
 
         // Menu width
-        private int _width = 300;
+        private int _width = 350;
 
         // Menu item height
         private int _itemHeight = 50;
@@ -168,22 +178,22 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Gets or sets the page text offset
         /// </summary>
-        public Point PageTextOffset = new Point(235, 5);
+        public Point PageTextOffset = new Point(280, 5);
 
         /// <summary>
         /// Gets or sets the toggle text offset
         /// </summary>
-        public Point ToggleTextOffset = new Point(255, 5);
+        public Point ToggleTextOffset = new Point(300, 5);
 
         /// <summary>
         /// Gets or sets the has submenu sign offset
         /// </summary>
-        public Point HasSubmenuSignOffset = new Point(270, 5);
+        public Point HasSubmenuSignOffset = new Point(315, 5);
 
         /// <summary>
         /// Gets or sets the left/right adjustable sign offset
         /// </summary>
-        public Point LeftRightAdjustableSignOffset = new Point(265, 5);
+        public Point LeftRightAdjustableSignOffset = new Point(310, 5);
 
         /// <summary>
         /// Gets menu item count
@@ -362,7 +372,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// Creates an instance of a menu.
         /// </summary>
         /// <param name="title">Title of the menu</param>
-        public Menu(string title)
+        public Menu(MString title)
         {
             Title = title;
             _items = new List<MenuItem>();
@@ -374,7 +384,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="title">Title of the menu</param>
         /// <param name="x">X position of the menu</param>
         /// <param name="y">Y position of the menu</param>
-        public Menu(string title, int x, int y)
+        public Menu(MString title, int x, int y)
             : this(title, new Point(x, y))
         {
         }
@@ -384,7 +394,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// </summary>
         /// <param name="title">Title of menu</param>
         /// <param name="location">Location of the menu</param>
-        public Menu(string title, Point location)
+        public Menu(MString title, Point location)
         {
             _items = new List<MenuItem>();
             Title = title;
@@ -398,7 +408,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="x">X position of the menu</param>
         /// <param name="y">Y position of the menu</param>
         /// <param name="items">Menu items</param>
-        public Menu(string title, int x, int y, MenuItem[] items)
+        public Menu(MString title, int x, int y, MenuItem[] items)
             : this(title, new Point(x, y), items)
         {
         }
@@ -409,7 +419,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="title">Title of menu</param>
         /// <param name="location">Location of the menu</param>
         /// <param name="items">Menu items</param>
-        public Menu(string title, Point location, MenuItem[] items)
+        public Menu(MString title, Point location, MenuItem[] items)
         {
             _items = new List<MenuItem>(items);
             Title = title;
@@ -425,7 +435,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="width">Width of the menu in pixel</param>
         /// <param name="itemHeight">Item height of the menu in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(string title, int x, int y, int width, int itemHeight, int itemPerPage)
+        public Menu(MString title, int x, int y, int width, int itemHeight, int itemPerPage)
             : this(title, new Point(x, y), width, itemHeight, itemPerPage)
         {
         }
@@ -438,7 +448,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="width">Width of the menu in pixel</param>
         /// <param name="itemHeight">Item height of the menu in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(string title, Point location, int width, int itemHeight, int itemPerPage)
+        public Menu(MString title, Point location, int width, int itemHeight, int itemPerPage)
         {
             Title = title;
             _width = width;
@@ -448,7 +458,7 @@ namespace GTAVBETrainerDotNet.Menu
             _items = new List<MenuItem>();
         }
 
-                /// <summary>
+            /// <summary>
         /// Creates an instance of menu and set initial values.
         /// </summary>
         /// <param name="title">Title of menu</param>
@@ -459,7 +469,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="screenWidth">Screen width in pixel</param>
         /// <param name="screenHeight">Screen height in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(string title, int x, int y, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
+        public Menu(MString title, int x, int y, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
             : this(title, new Point(x, y), width, itemHeight, screenWidth, screenHeight, itemPerPage)
         {
         }
@@ -474,7 +484,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="screenWidth">Screen width in pixel</param>
         /// <param name="screenHeight">Screen height in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(string title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
+        public Menu(MString title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
         {
             Title = title;
             _width = width;
@@ -497,7 +507,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="screenHeight">Screen height in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
         /// <param name="items">Menu items</param>
-        public Menu(string title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage, MenuItem[] items)
+        public Menu(MString title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage, MenuItem[] items)
         {
             Title = title;
             _width = width;
@@ -759,15 +769,15 @@ namespace GTAVBETrainerDotNet.Menu
         {
             // Title
             Utils.DrawRect(Location.X, Location.Y, _width, _titleHeight, TitleBackColor, _screenWidth, _screenHeight);
-            if (!string.IsNullOrEmpty(Title))
+            if (!string.IsNullOrEmpty(Utils.ML(Title)))
             {
-                Utils.DrawText(Title, Location.X + TitleOffset.X, Location.Y + TitleOffset.Y, TitleAlign, TitleTextColor, TitleXScale, TitleYScale, TitleFont, _screenWidth, _screenHeight);
+                Utils.DrawText(Title, Location.X + TitleOffset.X, Location.Y + TitleOffset.Y, TitleAlign, TitleTextColor, TitleXScale, TitleYScale, TitleFont, TitleShadowDistance, TitleShadowColor, _screenWidth, _screenHeight);
             }
 
             // Page
             if (PageCount > 1)
             {
-                Utils.DrawText(string.Format(PAGE_FORMAT, _page, PageCount), Location.X + PageTextOffset.X, Location.Y + PageTextOffset.Y, GlobalConst.HAlign.Left, TitleTextColor, TitleXScale, TitleYScale, TitleFont, _screenWidth, _screenHeight);
+                Utils.DrawText(Utils.FormatML(PAGE_FORMAT, _page, PageCount), Location.X + PageTextOffset.X, Location.Y + PageTextOffset.Y, GlobalConst.HAlign.Left, TitleTextColor, TitleXScale, TitleYScale, TitleFont, TitleShadowDistance, TitleShadowColor, _screenWidth, _screenHeight);
             }
 
             // Menu items
@@ -789,15 +799,15 @@ namespace GTAVBETrainerDotNet.Menu
                 }
 
                 // Text
-                if (!string.IsNullOrEmpty(mi.Text))
+                if (!string.IsNullOrEmpty(Utils.ML(mi.Text)))
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                     else
                     {
-                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.TextColor, mi.XScale, mi.YScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                 }
 
@@ -806,13 +816,13 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, _screenWidth, _screenHeight);
-                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR_SELECTED : TOGGLE_OFF_COLOR_SELECTED), mi.SelectedXScale, mi.SelectedYScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR_SELECTED : TOGGLE_OFF_COLOR_SELECTED), mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                     else
                     {
-                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, _screenWidth, _screenHeight);
-                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR : TOGGLE_OFF_COLOR), mi.XScale, mi.YScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR : TOGGLE_OFF_COLOR), mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                 }
 
@@ -821,11 +831,11 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                     else
                     {
-                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                 }
 
@@ -834,11 +844,11 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                     else
                     {
-                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, _screenWidth, _screenHeight);
+                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
                     }
                 }
 
