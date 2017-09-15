@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GTAVBETrainerDotNet.Menu;
+﻿using GTAVBETrainerDotNet.Menu;
 
 namespace GTAVBETrainerDotNet
 {
@@ -15,12 +10,12 @@ namespace GTAVBETrainerDotNet
         /// <summary>
         /// Language code for English
         /// </summary>
-        public const int CODE_ENGLISH = 0;
+        public const string CODE_ENGLISH = "enUS";
 
         /// <summary>
         /// Language code for Chinese Traditional
         /// </summary>
-        public const int CODE_CHINESE_TRADITIONAL = 100;
+        public const string CODE_CHINESE_TRADITIONAL = "zhTW";
 
         /// <summary>
         /// Sets trainer language to English

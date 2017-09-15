@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -249,7 +249,7 @@ namespace GTAVBETrainerDotNet
                 Feature.Misc.HideHud = Utils.ParseBoolStr(ini.GetValue(CONFIG_MISC, CONFIG_MISC_HIDE_HUD));
 
                 // Language
-                Trainer.LanguageCode = Utils.ParseInt(ini.GetValue(CONFIG_LANGUAGE, CONFIG_LANGUAGE_VALUE));
+                Trainer.LanguageCode = ini.GetValue(CONFIG_LANGUAGE, CONFIG_LANGUAGE_VALUE);
 
                 Utils.ShowNotificationAboveMap(GlobalConst.Message.CONFIGURATION_LOADED);
             }

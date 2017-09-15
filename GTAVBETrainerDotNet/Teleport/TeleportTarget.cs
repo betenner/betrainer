@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -20,7 +20,7 @@ namespace GTAVBETrainerDotNet.Teleport
     /// </summary>
     public class TeleportTarget
     {
-        private MString _name = null;
+        private MLString _name = null;
         private GTA.Math.Vector3 _coords;
         private string[] _requiredIPLs = null;
         private string[] _removeIPLs = null;
@@ -28,7 +28,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <summary>
         /// Name of the target
         /// </summary>
-        public MString Name
+        public MLString Name
         {
             get
             {
@@ -101,7 +101,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <param name="requiredIPLs">Required IPLs to load</param>
         /// <param name="removeIPLs">Required IPLs to remove</param>
         /// <param name="isLoaded">Is loaded</param>
-        public TeleportTarget(MString name, float x, float y, float z, string[] requiredIPLs = null, string[] removeIPLs = null)
+        public TeleportTarget(MLString name, float x, float y, float z, string[] requiredIPLs = null, string[] removeIPLs = null)
         {
             _name = name;
             _coords = new GTA.Math.Vector3(x, y, z);

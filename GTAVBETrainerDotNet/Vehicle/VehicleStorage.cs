@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -28,7 +28,7 @@ namespace GTAVBETrainerDotNet.Vehicle
         /// <summary>
         /// Names of main categories
         /// </summary>
-        public static readonly MString[] MAIN_CATEGORIES = 
+        public static readonly MLString[] MAIN_CATEGORIES = 
         { 
             Utils.CTML("Cars", "家用"), 
             Utils.CTML("Industrial", "商用"), 
@@ -43,9 +43,9 @@ namespace GTAVBETrainerDotNet.Vehicle
         /// <summary>
         /// Name of sub categories
         /// </summary>
-        public static readonly MString[][] SUB_CATEGORIES =
+        public static readonly MLString[][] SUB_CATEGORIES =
         {
-            new MString[] 
+            new MLString[] 
             { 
                 Utils.CTML("Supercars", "超級跑車"), 
                 Utils.CTML("Sports", "跑車"), 
@@ -57,7 +57,7 @@ namespace GTAVBETrainerDotNet.Vehicle
                 Utils.CTML("Sedans", "轎車"), 
                 Utils.CTML("Compacts", "緊湊型車"),
             },
-            new MString[] 
+            new MLString[] 
             { 
                 Utils.CTML("Pickups", "皮卡"), 
                 Utils.CTML("Vans", "廂式貨車"), 

@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -57,7 +57,7 @@ namespace GTAVBETrainerDotNet.Weapon
         public const int MAX_ATTACHMENT_SLOTS = 15;
         public const string WEAPON_UNARMED = "WEAPON_UNARMED";
 
-        public static readonly MString[] WEAPON_CATEGORY_NAMES = 
+        public static readonly MLString[] WEAPON_CATEGORY_NAMES = 
         { 
             Utils.CTML("Melee", "近戰武器"), 
             Utils.CTML("Handguns", "手槍"), 

@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -23,7 +23,7 @@ namespace GTAVBETrainerDotNet.Weather
         /// <summary>
         /// Name
         /// </summary>
-        public MString Name = null;
+        public MLString Name = null;
 
         /// <summary>
         /// Internal name
@@ -35,7 +35,7 @@ namespace GTAVBETrainerDotNet.Weather
         /// </summary>
         /// <param name="name">Name</param>
         /// <param name="internalName">Internal name</param>
-        public WeatherData(MString name, string internalName)
+        public WeatherData(MLString name, string internalName)
         {
             Name = name;
             InternalName = internalName;

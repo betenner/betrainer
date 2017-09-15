@@ -7,29 +7,29 @@ using System.Threading.Tasks;
 namespace GTAVBETrainerDotNet
 {
     /// <summary>
-    /// Multi-string class.<br />
-    /// A string class that contains a default string and multiple sub strings.
+    /// Multi-language string class.<br />
+    /// A string class that supports multi-language.
     /// </summary>
-    public class MString : IComparable<MString>
+    public class MLString : IComparable<MLString>
     {
         // Implicit conversion
-        public static implicit operator String(MString a)
+        public static implicit operator String(MLString a)
         {
             return a._default;
         }
 
         // Implicit conversion
-        public static implicit operator MString(String a)
+        public static implicit operator MLString(String a)
         {
-            return new MString(a);
+            return new MLString(a);
         }
 
         /// <summary>
-        /// Gets or sets the specified sub string
+        /// Gets or sets the text of specified language
         /// </summary>
-        /// <param name="code">Code of sub string</param>
+        /// <param name="code">Language code</param>
         /// <returns></returns>
-        public string this[int code]
+        public string this[string code]
         {
             get
             {
@@ -50,37 +50,37 @@ namespace GTAVBETrainerDotNet
         }
 
         // Inner dictionary
-        private Dictionary<int, string> _dict = new Dictionary<int, string>();
+        private Dictionary<string, string> _dict = new Dictionary<string, string>();
 
         // Default string
         private string _default = null;
 
         /// <summary>
-        /// Creates an instance of MLString that only contains a default empty string.
+        /// Creates an instance that only contains a default empty string.
         /// </summary>
-        public MString()
+        public MLString()
         {
             _default = string.Empty;
         }
 
         /// <summary>
-        /// Creates an instance of MLString that only contains a default string.
+        /// Creates an instance that only contains a default string.
         /// </summary>
         /// <param name="defaultString">Default string</param>
-        public MString(string defaultString)
+        public MLString(string defaultString)
         {
             _default = defaultString;
         }
 
         /// <summary>
-        /// Creates an instance of MLString that contains a default string and multiple sub strings.
+        /// Creates an instance that contains a default string and multiple language sub strings.
         /// </summary>
         /// <param name="defaultString">Default string.</param>
         /// <param name="strings">Sub string params</param>
-        public MString(string defaultString, params KeyValuePair<int, string>[] strings)
+        public MLString(string defaultString, params KeyValuePair<string, string>[] strings)
         {
             _default = defaultString;
-            foreach (KeyValuePair<int, string> kvp in strings)
+            foreach (KeyValuePair<string, string> kvp in strings)
             {
                 _dict.Add(kvp.Key, kvp.Value);
             }
@@ -96,7 +96,7 @@ namespace GTAVBETrainerDotNet
             return Utils.ML(this).Replace(old, newOne);
         }
 
-        public int CompareTo(MString other)
+        public int CompareTo(MLString other)
         {
             return Utils.ML(this).CompareTo(Utils.ML(other));
         }

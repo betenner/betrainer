@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -23,7 +23,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <summary>
         /// Name of this category
         /// </summary>
-        public MString Name = null;
+        public MLString Name = null;
 
         /// <summary>
         /// Teleport targets
@@ -35,7 +35,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// </summary>
         /// <param name="name">Name</param>
         /// <param name="targets">Targets</param>
-        public TeleportCategory(MString name, TeleportTarget[] targets)
+        public TeleportCategory(MLString name, TeleportTarget[] targets)
         {
             Name = name;
             Targets = targets;

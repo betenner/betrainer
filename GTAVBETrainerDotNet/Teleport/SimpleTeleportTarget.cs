@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -23,7 +23,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <summary>
         /// Name of the target
         /// </summary>
-        public MString Name = null;
+        public MLString Name = null;
 
         /// <summary>
         /// Coordinates of the target
@@ -42,7 +42,7 @@ namespace GTAVBETrainerDotNet.Teleport
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
-        public SimpleTeleportTarget(MString name, float x, float y, float z)
+        public SimpleTeleportTarget(MLString name, float x, float y, float z)
         {
             Name = name;
             Coords = new GTA.Math.Vector3(x, y, z);

@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -1462,7 +1462,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="activateEventHandler">Activated event handler</param>
         /// <param name="highlightedEventHandler">Highlighted event handler</param>
         /// <param name="preActivateEventHandler">Pre-activated event handler</param>
-        public static MenuItem AddMenuItem(Menu parent, MString text, bool toggle = false, bool on = false, Menu subMenu = null, MenuItemEventHandler activateEventHandler = null, MenuItemEventHandler preActivateEventHandler = null, MenuItemEventHandler highlightedEventHandler = null, object data = null)
+        public static MenuItem AddMenuItem(Menu parent, MLString text, bool toggle = false, bool on = false, Menu subMenu = null, MenuItemEventHandler activateEventHandler = null, MenuItemEventHandler preActivateEventHandler = null, MenuItemEventHandler highlightedEventHandler = null, object data = null)
         {
             MenuItem mi = new MenuItem()
             {

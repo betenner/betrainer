@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -9,9 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using GTA;
 using GTA.Native;
@@ -28,7 +25,7 @@ namespace GTAVBETrainerDotNet
         /// Shows a notification above in-game mini-map
         /// </summary>
         /// <param name="message">Message to show</param>
-        public static void ShowNotificationAboveMap(MString message)
+        public static void ShowNotificationAboveMap(MLString message)
         {
             Function.Call(Hash._SET_NOTIFICATION_TEXT_ENTRY, "STRING");
             Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, message[Trainer.LanguageCode]);
@@ -69,7 +66,7 @@ namespace GTAVBETrainerDotNet
         /// <param name="shadowColor">Color of shadow</param>
         /// <param name="screenHeight">Height of screen in pixel</param>
         /// <param name="screenWidth">Width of screen in pixel</param>
-        public static void DrawText(MString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, float yScale = 0.35f, GTA.Font font = GTA.Font.ChaletLondon, Point shadowOffset = new Point(), Color shadowColor = new Color(), int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
+        public static void DrawText(MLString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, float yScale = 0.35f, GTA.Font font = GTA.Font.ChaletLondon, Point shadowOffset = new Point(), Color shadowColor = new Color(), int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
         {
             if (shadowOffset.X != 0 || shadowOffset.Y != 0)
             {
@@ -214,14 +211,14 @@ namespace GTAVBETrainerDotNet
         }
 
         /// <summary>
-        /// Generates a multi-string with a default string and a Chinese Traditional string
+        /// Generates a multi-language string with a default string and a Chinese Traditional string
         /// </summary>
         /// <param name="defaultString">Default string</param>
         /// <param name="chineseTraditional">Chinese triditional string</param>
         /// <returns></returns>
-        public static MString CTML(string defaultString, string chineseTraditional)
+        public static MLString CTML(string defaultString, string chineseTraditional)
         {
-            return new MString(defaultString, new KeyValuePair<int, string>(Language.CODE_CHINESE_TRADITIONAL, chineseTraditional));
+            return new MLString(defaultString, new KeyValuePair<string, string>(Language.CODE_CHINESE_TRADITIONAL, chineseTraditional));
         }
 
         /// <summary>
@@ -229,17 +226,17 @@ namespace GTAVBETrainerDotNet
         /// </summary>
         /// <param name="str">Multi-string</param>
         /// <returns></returns>
-        public static string ML(MString str)
+        public static string ML(MLString str)
         {
             return str[Trainer.LanguageCode];
         }
 
-        public static string FormatML(MString format, params object[] args)
+        public static string FormatML(MLString format, params object[] args)
         {
             return string.Format(ML(format), args);
         }
 
-        public static string FormatML(MString format, MString arg)
+        public static string FormatML(MLString format, MLString arg)
         {
             return string.Format(ML(format), ML(arg));
         }

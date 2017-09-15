@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -37,7 +37,7 @@ namespace GTAVBETrainerDotNet
         /// <summary>
         /// Language code
         /// </summary>
-        public static int LanguageCode = Language.CODE_ENGLISH;
+        public static string LanguageCode = Language.CODE_ENGLISH;
 
         public Trainer()
         {

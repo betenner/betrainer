@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015
+//      Copyright (c) BE Group 2015-2017
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -27,12 +27,12 @@ namespace GTAVBETrainerDotNet.Menu
         private const string TOGGLE_BRACE = "[     ]";
 
         // On
-        private static readonly MString TOGGLE_ON = Utils.CTML(" On", "  開");
+        private static readonly MLString TOGGLE_ON = Utils.CTML(" On", "  開");
         private static readonly Color TOGGLE_ON_COLOR = Color.LightGreen;
         private static readonly Color TOGGLE_ON_COLOR_SELECTED = Color.DarkGreen;
 
         // Off
-        private static readonly MString TOGGLE_OFF = Utils.CTML(" Off", "  關");
+        private static readonly MLString TOGGLE_OFF = Utils.CTML(" Off", "  關");
         private static readonly Color TOGGLE_OFF_COLOR = Color.Red;
         private static readonly Color TOGGLE_OFF_COLOR_SELECTED = Color.DarkRed;
 
@@ -55,7 +55,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Menu title
         /// </summary>
-        public MString Title = null;
+        public MLString Title = null;
 
         /// <summary>
         /// Menu title offset
@@ -372,7 +372,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// Creates an instance of a menu.
         /// </summary>
         /// <param name="title">Title of the menu</param>
-        public Menu(MString title)
+        public Menu(MLString title)
         {
             Title = title;
             _items = new List<MenuItem>();
@@ -384,7 +384,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="title">Title of the menu</param>
         /// <param name="x">X position of the menu</param>
         /// <param name="y">Y position of the menu</param>
-        public Menu(MString title, int x, int y)
+        public Menu(MLString title, int x, int y)
             : this(title, new Point(x, y))
         {
         }
@@ -394,7 +394,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// </summary>
         /// <param name="title">Title of menu</param>
         /// <param name="location">Location of the menu</param>
-        public Menu(MString title, Point location)
+        public Menu(MLString title, Point location)
         {
             _items = new List<MenuItem>();
             Title = title;
@@ -408,7 +408,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="x">X position of the menu</param>
         /// <param name="y">Y position of the menu</param>
         /// <param name="items">Menu items</param>
-        public Menu(MString title, int x, int y, MenuItem[] items)
+        public Menu(MLString title, int x, int y, MenuItem[] items)
             : this(title, new Point(x, y), items)
         {
         }
@@ -419,7 +419,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="title">Title of menu</param>
         /// <param name="location">Location of the menu</param>
         /// <param name="items">Menu items</param>
-        public Menu(MString title, Point location, MenuItem[] items)
+        public Menu(MLString title, Point location, MenuItem[] items)
         {
             _items = new List<MenuItem>(items);
             Title = title;
@@ -435,7 +435,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="width">Width of the menu in pixel</param>
         /// <param name="itemHeight">Item height of the menu in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(MString title, int x, int y, int width, int itemHeight, int itemPerPage)
+        public Menu(MLString title, int x, int y, int width, int itemHeight, int itemPerPage)
             : this(title, new Point(x, y), width, itemHeight, itemPerPage)
         {
         }
@@ -448,7 +448,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="width">Width of the menu in pixel</param>
         /// <param name="itemHeight">Item height of the menu in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(MString title, Point location, int width, int itemHeight, int itemPerPage)
+        public Menu(MLString title, Point location, int width, int itemHeight, int itemPerPage)
         {
             Title = title;
             _width = width;
@@ -469,7 +469,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="screenWidth">Screen width in pixel</param>
         /// <param name="screenHeight">Screen height in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(MString title, int x, int y, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
+        public Menu(MLString title, int x, int y, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
             : this(title, new Point(x, y), width, itemHeight, screenWidth, screenHeight, itemPerPage)
         {
         }
@@ -484,7 +484,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="screenWidth">Screen width in pixel</param>
         /// <param name="screenHeight">Screen height in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
-        public Menu(MString title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
+        public Menu(MLString title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage)
         {
             Title = title;
             _width = width;
@@ -507,7 +507,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <param name="screenHeight">Screen height in pixel</param>
         /// <param name="itemPerPage">Item count per page</param>
         /// <param name="items">Menu items</param>
-        public Menu(MString title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage, MenuItem[] items)
+        public Menu(MLString title, Point location, int width, int itemHeight, int screenWidth, int screenHeight, int itemPerPage, MenuItem[] items)
         {
             Title = title;
             _width = width;
