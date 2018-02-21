@@ -28,7 +28,7 @@ namespace GTAVBETrainerDotNet
         /// <summary>
         /// Trainer version
         /// </summary>
-        public const string TRAINER_VERSION = "v1.02";
+        public const string TRAINER_VERSION = "v1.03";
 
         /// <summary>
         /// Default screen width

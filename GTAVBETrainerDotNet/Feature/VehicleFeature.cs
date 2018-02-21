@@ -43,6 +43,7 @@ namespace GTAVBETrainerDotNet
             public static bool SeatBelt = false;
             public static bool SpawnIntoVehicle = false;
             public static bool Boost = false;
+            public static float InstantBoostSpeed = 85f;    // 300km/h
 
             /// <summary>
             /// Checks whether the player is in a vehicle.
@@ -120,6 +121,7 @@ namespace GTAVBETrainerDotNet
                 }
 
                 // Boost
+                UpdateInstantBoostVehicle();
                 UpdateBoostVehicle();
 
                 // Speed meter
@@ -166,6 +168,21 @@ namespace GTAVBETrainerDotNet
                 if (speed < BOOST_BASE_SPEED) speed = BOOST_BASE_SPEED;
                 Function.Call(Hash.SET_ENTITY_MAX_SPEED, vehicle, MAX_SPEED);
                 speed *= BOOST_MULTIPLIER;
+                Function.Call(Hash.SET_VEHICLE_FORWARD_SPEED, vehicle, speed);
+            }
+
+            /// <summary>
+            /// Update instantly boost vehicle
+            /// </summary>
+            public static void UpdateInstantBoostVehicle()
+            {
+                if (!Boost || !Game.IsKeyPressed(Configuration.InputKey.BoostVehicleInstant) || !CheckInVehicle()) return;
+
+                int vehicle = Game.Player.Character.CurrentVehicle.Handle;
+                float speed = InstantBoostSpeed;
+                if (speed < BOOST_BASE_SPEED) speed = BOOST_BASE_SPEED;
+                if (speed > MAX_SPEED) speed = MAX_SPEED;
+                Function.Call(Hash.SET_ENTITY_MAX_SPEED, vehicle, MAX_SPEED);
                 Function.Call(Hash.SET_VEHICLE_FORWARD_SPEED, vehicle, speed);
             }
 

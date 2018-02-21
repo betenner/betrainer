@@ -68,7 +68,12 @@ namespace GTAVBETrainerDotNet
             /// <summary>
             /// Key to boost vehicle
             /// </summary>
-            public static Keys BoostVehicle = Keys.NumPad9;
+            public static Keys BoostVehicle = Keys.NumPad3;
+
+            /// <summary>
+            /// Key to instantly boost vehicle
+            /// </summary>
+            public static Keys BoostVehicleInstant = Keys.NumPad9;
 
             /// <summary>
             /// Key to stop vehicle
@@ -97,6 +102,7 @@ namespace GTAVBETrainerDotNet
         private const string CONFIG_KEYS_MENU_SELECT = "MenuSelect";
         private const string CONFIG_KEYS_MENU_BACK = "MenuBack";
         private const string CONFIG_KEYS_BOOST_VEHICLE = "BoostVehicle";
+        private const string CONFIG_KEYS_BOOST_VEHICLE_INSTANT = "BoostVehicleInstant";
         private const string CONFIG_KEYS_STOP_VEHICLE = "StopVehicle";
         private const string CONFIG_KEYS_VEHICLE_ROCKET = "VehicleRocket";
 
@@ -118,7 +124,8 @@ namespace GTAVBETrainerDotNet
         private const string CONFIG_VEHICLE_INVINCIBLE = "Invincible";
         private const string CONFIG_VEHICLE_SEATBELT = "SeatBelt";
         private const string CONFIG_VEHICLE_SPAWN_INTO = "SpawnIntoVehicle";
-        private const string CONFIG_VEHICLE_BOOST = "SpeedBoost";
+        private const string CONFIG_VEHICLE_BOOST = "AllowBoost";
+        private const string CONFIG_VEHICLE_INSTANT_BOOST_SPEED = "InstantBoostSpeed";
         private const string CONFIG_VEHICLE_SPEEDMETER_SHOW = "SpeedMeterShow";
         private const string CONFIG_VEHICLE_SPEEDMETER_SHOW_IN_METRIC = "SpeedMeterShowInMetric";
         private const string CONFIG_VEHICLE_SPEEDMETER_SHOW_WITHOUT_VEHICLE = "SpeedMeterShowWithoutVehicle";
@@ -186,6 +193,7 @@ namespace GTAVBETrainerDotNet
                 InputKey.MenuSelect = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_MENU_SELECT));
                 InputKey.MenuBack = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_MENU_BACK));
                 InputKey.BoostVehicle = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_BOOST_VEHICLE));
+                InputKey.BoostVehicleInstant = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_BOOST_VEHICLE_INSTANT));
                 InputKey.StopVehicle = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_STOP_VEHICLE));
                 InputKey.VehicleRocket = Utils.ParseKey(ini.GetValue(CONFIG_KEYS, CONFIG_KEYS_VEHICLE_ROCKET));
 
@@ -208,7 +216,8 @@ namespace GTAVBETrainerDotNet
                 Location.LoadCustomLocations();
 
                 // Vehicle
-                Feature.Vehicle.Boost = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_BOOST)); 
+                Feature.Vehicle.Boost = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_BOOST));
+                Feature.Vehicle.InstantBoostSpeed = Utils.ParseFloat(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_INSTANT_BOOST_SPEED));
                 Feature.Vehicle.Invincible = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_INVINCIBLE)); 
                 Feature.Vehicle.SeatBelt = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SEATBELT)); 
                 Feature.Vehicle.SpawnIntoVehicle = Utils.ParseBoolStr(ini.GetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPAWN_INTO)); 
@@ -278,6 +287,7 @@ namespace GTAVBETrainerDotNet
                 // Keys
                 ini.SetValue(CONFIG_KEYS, CONFIG_KEYS_STOP_VEHICLE, Enum.GetName(typeof(Keys), InputKey.StopVehicle));
                 ini.SetValue(CONFIG_KEYS, CONFIG_KEYS_BOOST_VEHICLE, Enum.GetName(typeof(Keys), InputKey.BoostVehicle));
+                ini.SetValue(CONFIG_KEYS, CONFIG_KEYS_BOOST_VEHICLE_INSTANT, Enum.GetName(typeof(Keys), InputKey.BoostVehicleInstant));
                 ini.SetValue(CONFIG_KEYS, CONFIG_KEYS_MENU_BACK, Enum.GetName(typeof(Keys), InputKey.MenuBack));
                 ini.SetValue(CONFIG_KEYS, CONFIG_KEYS_MENU_DOWN, Enum.GetName(typeof(Keys), InputKey.MenuDown));
                 ini.SetValue(CONFIG_KEYS, CONFIG_KEYS_MENU_LEFT, Enum.GetName(typeof(Keys), InputKey.MenuLeft));
@@ -303,6 +313,7 @@ namespace GTAVBETrainerDotNet
 
                 // Vehicle
                 ini.SetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_BOOST, Feature.Vehicle.Boost.ToString());
+                ini.SetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_INSTANT_BOOST_SPEED, Feature.Vehicle.InstantBoostSpeed.ToString());
                 ini.SetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_INVINCIBLE, Feature.Vehicle.Invincible.ToString());
                 ini.SetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SEATBELT, Feature.Vehicle.SeatBelt.ToString());
                 ini.SetValue(CONFIG_VEHICLE, CONFIG_VEHICLE_SPAWN_INTO, Feature.Vehicle.SpawnIntoVehicle.ToString());
