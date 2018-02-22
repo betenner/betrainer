@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ScriptHookVDotNet2">
-      <HintPath>..\..\..\Tenner\Downloads\ScriptHookVDotNet\ScriptHookVDotNet2.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\Grand Theft Auto V\ScriptHookVDotNet2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -311,11 +311,11 @@ namespace GTAVBETrainerDotNet
                     if (Feature.Player.Wanted.NeverWanted)
                     {
                         Game.Player.WantedLevel = 0;
-                        Function.Call(Hash.SET_MAX_WANTED_LEVEL, 0);
+                        Game.MaxWantedLevel = 0;
                     }
                     else
                     {
-                        Function.Call(Hash.SET_MAX_WANTED_LEVEL, 5);
+                        Game.MaxWantedLevel = 5;
                     }
                 }
 
@@ -325,8 +325,7 @@ namespace GTAVBETrainerDotNet
                 /// <param name="sender">Source menu item</param>
                 public static void SetPoliceIgnored(MenuItem sender)
                 {
-                    Feature.Player.Wanted.PoliceIgnored = sender.On;
-                    Function.Call(Hash.SET_POLICE_IGNORE_PLAYER, Game.Player.Handle, sender.On);
+                    Game.Player.IgnoredByPolice = Feature.Player.Wanted.PoliceIgnored = sender.On;
                     Config.DoAutoSave();
                 }
 
@@ -337,8 +336,7 @@ namespace GTAVBETrainerDotNet
                 public static void SetEveryoneIgonred(MenuItem sender)
                 {
                     Feature.Player.Wanted.EveryoneIgnored = sender.On;
-                    Game.Player.IgnoredByEveryone = sender.On;
-                    Function.Call(Hash.SET_POLICE_IGNORE_PLAYER, Game.Player.Handle, sender.On);
+                    Game.Player.IgnoredByPolice = Game.Player.IgnoredByEveryone = sender.On;
                     Function.Call(Hash.SET_PLAYER_CAN_BE_HASSLED_BY_GANGS, Game.Player.Handle, !sender.On);
                     Function.Call(Hash.SET_IGNORE_LOW_PRIORITY_SHOCKING_EVENTS, Game.Player.Handle, sender.On);
                     Config.DoAutoSave();

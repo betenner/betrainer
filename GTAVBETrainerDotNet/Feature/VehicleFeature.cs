@@ -37,7 +37,9 @@ namespace GTAVBETrainerDotNet
             public const int VEHICLE_MENU_DEPTH = 2;
 
             public static bool Invincible = false;
+            private static bool _invincibleUpdated = true;
             public static bool SeatBelt = false;
+            private static bool _seatBeltUpdated = true;
             public static bool SpawnIntoVehicle = false;
 
             /// <summary>
@@ -62,52 +64,58 @@ namespace GTAVBETrainerDotNet
                     int vehicle = Game.Player.Character.CurrentVehicle.Handle;
 
                     // Invincible
-                    if (Invincible)
+                    if (_invincibleUpdated)
                     {
-                        Function.Call(Hash.SET_ENTITY_INVINCIBLE, vehicle, true);
-                        Function.Call(Hash.SET_ENTITY_PROOFS, vehicle, true, true, true, true, true, true, true, true);
-                        Function.Call(Hash.SET_VEHICLE_TYRES_CAN_BURST, vehicle, false);
-                        Function.Call(Hash.SET_VEHICLE_WHEELS_CAN_BREAK, vehicle, false);
-                        Function.Call(Hash.SET_VEHICLE_CAN_BE_VISIBLY_DAMAGED, vehicle, false);
-                        Function.Call(Hash.SET_ENTITY_ONLY_DAMAGED_BY_PLAYER, vehicle, false);
-                        Function.Call(Hash.SET_ENTITY_CAN_BE_DAMAGED, vehicle, false);
-                        if (Function.Call<bool>(Hash._IS_VEHICLE_DAMAGED, vehicle))
+                        if (Invincible)
                         {
-                            Function.Call(Hash.SET_VEHICLE_FIXED, vehicle);
+                            Function.Call(Hash.SET_ENTITY_INVINCIBLE, vehicle, true);
+                            Function.Call(Hash.SET_ENTITY_PROOFS, vehicle, true, true, true, true, true, true, true, true);
+                            Function.Call(Hash.SET_VEHICLE_TYRES_CAN_BURST, vehicle, false);
+                            Function.Call(Hash.SET_VEHICLE_WHEELS_CAN_BREAK, vehicle, false);
+                            Function.Call(Hash.SET_VEHICLE_CAN_BE_VISIBLY_DAMAGED, vehicle, false);
+                            Function.Call(Hash.SET_ENTITY_ONLY_DAMAGED_BY_PLAYER, vehicle, false);
+                            Function.Call(Hash.SET_ENTITY_CAN_BE_DAMAGED, vehicle, false);
+                            if (Function.Call<bool>(Hash._IS_VEHICLE_DAMAGED, vehicle))
+                            {
+                                Function.Call(Hash.SET_VEHICLE_FIXED, vehicle);
+                            }
+                            Function.Call(Hash.SET_ENTITY_HEALTH, vehicle, FULL_HEALTH);
+                            Function.Call(Hash.SET_VEHICLE_ENGINE_HEALTH, vehicle, FULL_HEALTH);
+                            Function.Call(Hash.SET_VEHICLE_PETROL_TANK_HEALTH, vehicle, FULL_HEALTH);
+                            Function.Call(Hash.SET_VEHICLE_BODY_HEALTH, vehicle, FULL_HEALTH);
+                            Function.Call(Hash.SET_VEHICLE_CAN_BREAK, vehicle, false);
+                            for (int i = 0; i < DOOR_COUNT; i++)
+                            {
+                                Function.Call(Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, false);
+                            }
                         }
-                        Function.Call(Hash.SET_ENTITY_HEALTH, vehicle, FULL_HEALTH);
-                        Function.Call(Hash.SET_VEHICLE_ENGINE_HEALTH, vehicle, FULL_HEALTH);
-                        Function.Call(Hash.SET_VEHICLE_PETROL_TANK_HEALTH, vehicle, FULL_HEALTH);
-                        Function.Call(Hash.SET_VEHICLE_BODY_HEALTH, vehicle, FULL_HEALTH);
-                        Function.Call(Hash.SET_VEHICLE_CAN_BREAK, vehicle, false);
-                        for (int i = 0; i < DOOR_COUNT; i++)
+                        else
                         {
-                            Function.Call(Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, false);
-                        }
-                    }
-                    else
-                    {
-                        Function.Call(Hash.SET_ENTITY_INVINCIBLE, vehicle, false);
-                        Function.Call(Hash.SET_ENTITY_PROOFS, vehicle, false, false, false, false, false, false, false, false);
-                        Function.Call(Hash.SET_VEHICLE_TYRES_CAN_BURST, vehicle, true);
-                        Function.Call(Hash.SET_VEHICLE_WHEELS_CAN_BREAK, vehicle, true);
-                        Function.Call(Hash.SET_VEHICLE_CAN_BE_VISIBLY_DAMAGED, vehicle, true);
-                        for (int i = 0; i < DOOR_COUNT; i++)
-                        {
-                            Function.Call(Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, true);
+                            Function.Call(Hash.SET_ENTITY_INVINCIBLE, vehicle, false);
+                            Function.Call(Hash.SET_ENTITY_PROOFS, vehicle, false, false, false, false, false, false, false, false);
+                            Function.Call(Hash.SET_VEHICLE_TYRES_CAN_BURST, vehicle, true);
+                            Function.Call(Hash.SET_VEHICLE_WHEELS_CAN_BREAK, vehicle, true);
+                            Function.Call(Hash.SET_VEHICLE_CAN_BE_VISIBLY_DAMAGED, vehicle, true);
+                            for (int i = 0; i < DOOR_COUNT; i++)
+                            {
+                                Function.Call(Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, true);
+                            }
                         }
                     }
 
                     // Seat belt
-                    if (SeatBelt)
+                    if (_seatBeltUpdated)
                     {
-                        Function.Call(Hash.SET_PED_CONFIG_FLAG, PED_FLAG_THROUGH_WINDSCREEN, false);
-                        Function.Call(Hash.SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE, Game.Player.Character.Handle, 1);
-                    }
-                    else
-                    {
-                        Function.Call(Hash.SET_PED_CONFIG_FLAG, PED_FLAG_THROUGH_WINDSCREEN, true);
-                        Function.Call(Hash.SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE, Game.Player.Character.Handle, 0);
+                        _seatBeltUpdated = false;
+                        int playerPed = Function.Call<int>(Hash.PLAYER_PED_ID);
+                        if (SeatBelt)
+                        {
+                            Function.Call(Hash.SET_PED_CONFIG_FLAG, playerPed, PED_FLAG_THROUGH_WINDSCREEN, false);
+                        }
+                        else
+                        {
+                            Function.Call(Hash.SET_PED_CONFIG_FLAG, playerPed, PED_FLAG_THROUGH_WINDSCREEN, true);
+                        }
                     }
                 }
                 else
@@ -171,6 +179,7 @@ namespace GTAVBETrainerDotNet
             {
                 Invincible = sender.On;
                 Config.DoAutoSave();
+                _invincibleUpdated = true;
             }
 
             /// <summary>
@@ -181,6 +190,7 @@ namespace GTAVBETrainerDotNet
             {
                 SeatBelt = sender.On;
                 Config.DoAutoSave();
+                _seatBeltUpdated = true;
             }
 
             /// <summary>

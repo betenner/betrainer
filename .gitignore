@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/GTAVBETrainerDotNet/v15
+/GTAVBETrainerDotNet/bin/Debug
+/GTAVBETrainerDotNet/obj/Debug
+*.suo
