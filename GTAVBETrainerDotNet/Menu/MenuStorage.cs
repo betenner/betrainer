@@ -213,6 +213,11 @@ namespace GTAVBETrainerDotNet.Menu
             public static class Vehicles
             {
                 /// <summary>
+                /// Vehicle boost menu
+                /// </summary>
+                public static Menu VehicleBoost = null;
+
+                /// <summary>
                 /// Spawn vehicle menu
                 /// </summary>
                 public static Menu SpawnVehicle = null;
@@ -458,7 +463,18 @@ namespace GTAVBETrainerDotNet.Menu
                 public static MenuItem Invincible = null;
                 public static MenuItem SeatBelt = null;
                 public static MenuItem SpawnIntoVehicle = null;
-                public static MenuItem Boost = null;
+
+                /// <summary>
+                /// Vehicle boost menu items
+                /// </summary>
+                public static class VehicleBoost
+                {
+                    public static MenuItem BoostProgressive = null;
+                    public static MenuItem BoostProgressiveSpeedInc = null;
+                    public static MenuItem BoostInstant = null;
+                    public static MenuItem BoostInstantSpeed = null;
+
+                }
 
                 /// <summary>
                 /// Custom vehicle menu items
@@ -1237,7 +1253,31 @@ namespace GTAVBETrainerDotNet.Menu
             MenuItems.Vehicle.Invincible = AddMenuItem(Menus.Vehicle, MenuText.Vehicle.I09_INVINCIBLE, true, Feature.Vehicle.Invincible, null, Feature.Vehicle.SetInvincible);
             MenuItems.Vehicle.SeatBelt = AddMenuItem(Menus.Vehicle, MenuText.Vehicle.I10_SEAT_BELT, true, Feature.Vehicle.SeatBelt, null, Feature.Vehicle.SetSeatBelt);
             MenuItems.Vehicle.SpawnIntoVehicle = AddMenuItem(Menus.Vehicle, MenuText.Vehicle.I11_SPAWN_INTO, true, Feature.Vehicle.SpawnIntoVehicle, null, Feature.Vehicle.SetSpawnIntoVehicle);
-            MenuItems.Vehicle.Boost = AddMenuItem(Menus.Vehicle, MenuText.Vehicle.I12_BOOST, true, Feature.Vehicle.Boost, null, Feature.Vehicle.SetBoost);
+            InitVehicleBoostMenu();
+            AddMenuItem(Menus.Vehicle, MenuText.Vehicle.I12_VEHICLE_BOOST, false, false, Menus.Vehicles.VehicleBoost);
+        }
+
+        /// <summary>
+        /// Initialize vehicle boost menu
+        /// </summary>
+        private static void InitVehicleBoostMenu()
+        {
+            Menus.Vehicles.VehicleBoost = new Menu(MenuText.Vehicle.VehicleBoost.I00_TITLE);
+            Menus.Vehicles.VehicleBoost.Width = 700;
+            Menus.Vehicles.VehicleBoost.LeftRightAdjustableSignOffset = new System.Drawing.Point(660, 5);
+            Menus.Vehicles.VehicleBoost.ToggleTextOffset = new System.Drawing.Point(650, 5);
+            MenuItems.Vehicle.VehicleBoost.BoostProgressive = AddMenuItem(Menus.Vehicles.VehicleBoost, MenuText.Vehicle.VehicleBoost.I01_BOOST_PROGRESSIVE, true, Feature.Vehicle.VehicleBoost.BoostProgressive, null, Feature.Vehicle.VehicleBoost.SetBoostProgressive);
+            MenuItems.Vehicle.VehicleBoost.BoostProgressiveSpeedInc = AddMenuItem(Menus.Vehicles.VehicleBoost, MenuText.Vehicle.VehicleBoost.I02_BOOST_PROGRESSIVE_SPEED_INC);
+            MenuItems.Vehicle.VehicleBoost.BoostProgressiveSpeedInc.ShowLeftRightAdjustableSign = true;
+            MenuItems.Vehicle.VehicleBoost.BoostProgressiveSpeedInc.LeftPressed += Feature.Vehicle.VehicleBoost.DecBoostProgressiveSpeed;
+            MenuItems.Vehicle.VehicleBoost.BoostProgressiveSpeedInc.RightPressed += Feature.Vehicle.VehicleBoost.IncBoostProgressiveSpeed;
+            MenuItems.Vehicle.VehicleBoost.BoostInstant = AddMenuItem(Menus.Vehicles.VehicleBoost, MenuText.Vehicle.VehicleBoost.I03_BOOST_INSTANT, true, Feature.Vehicle.VehicleBoost.BoostInstant, null, Feature.Vehicle.VehicleBoost.SetBoostInstant);
+            MenuItems.Vehicle.VehicleBoost.BoostInstantSpeed = AddMenuItem(Menus.Vehicles.VehicleBoost, MenuText.Vehicle.VehicleBoost.I04_BOOST_INSTANT_SPEED);
+            MenuItems.Vehicle.VehicleBoost.BoostInstantSpeed.ShowLeftRightAdjustableSign = true;
+            MenuItems.Vehicle.VehicleBoost.BoostInstantSpeed.LeftPressed += Feature.Vehicle.VehicleBoost.DecBoostInstantSpeed;
+            MenuItems.Vehicle.VehicleBoost.BoostInstantSpeed.RightPressed += Feature.Vehicle.VehicleBoost.IncBoostInstantSpeed;
+            Feature.Vehicle.VehicleBoost.UpdateBoostProgressiveSpeed();
+            Feature.Vehicle.VehicleBoost.UpdateBoostInstantSpeed();
         }
 
         /// <summary>

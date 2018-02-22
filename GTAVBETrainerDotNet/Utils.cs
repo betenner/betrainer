@@ -126,6 +126,36 @@ namespace GTAVBETrainerDotNet
         }
 
         /// <summary>
+        /// Converts m/s into km/h
+        /// </summary>
+        /// <param name="mps">m/s</param>
+        /// <returns></returns>
+        public static float Mps2Kph(float mps)
+        {
+            return mps * 18f / 5f;
+        }
+
+        /// <summary>
+        /// Converts km/h into mph
+        /// </summary>
+        /// <param name="kph">km/h</param>
+        /// <returns></returns>
+        public static float Kph2Mph(float kph)
+        {
+            return kph * 0.6213711f;
+        }
+
+        /// <summary>
+        /// Converts m/s into mph
+        /// </summary>
+        /// <param name="mps">m/s</param>
+        /// <returns></returns>
+        public static float Mps2Mph(float mps)
+        {
+            return Kph2Mph(Mps2Kph(mps));
+        }
+
+        /// <summary>
         /// Parses an int value
         /// </summary>
         /// <param name="value">Value</param>

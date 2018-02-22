@@ -298,7 +298,19 @@ namespace GTAVBETrainerDotNet.Menu
             public static readonly MLString I09_INVINCIBLE = Utils.CTML("Invincible", "無敵");
             public static readonly MLString I10_SEAT_BELT = Utils.CTML("Seat Belt", "安全帶");
             public static readonly MLString I11_SPAWN_INTO = Utils.CTML("Spawn into Vehicle", "生成載具時直接駕駛");
-            public static readonly MLString I12_BOOST = Utils.CTML("Speed Boost", "載具加速");
+            public static readonly MLString I12_VEHICLE_BOOST = Utils.CTML("Vehicle Boost", "載具加速");
+
+            /// <summary>
+            /// Vehicle boost menu
+            /// </summary>
+            public static class VehicleBoost
+            {
+                public static readonly MLString I00_TITLE = Utils.CTML("Vehicle Boost", "載具加速");
+                public static readonly MLString I01_BOOST_PROGRESSIVE = Utils.CTML("Progressive Boost", "漸進加速");
+                public static readonly MLString I02_BOOST_PROGRESSIVE_SPEED_INC = Utils.CTML("Progressive Boost Speed Increment: {0:#0}m/s ({1:#0.0}km/h, {2:#0.0}mph)", "漸進加速倍率: {0:#0}m/s ({1:#0.0}km/h, {2:#0.0}mph)");
+                public static readonly MLString I03_BOOST_INSTANT = Utils.CTML("Instant Boost", "瞬間加速");
+                public static readonly MLString I04_BOOST_INSTANT_SPEED = Utils.CTML("Instant Boost Speed: {0:#0}m/s ({1:#0.0}km/h, {2:#0.0}mph)", "瞬間加速速度: {0:#0}m/s ({1:#0.0}km/h, {2:#0.0}mph)");
+            }
 
             /// <summary>
             /// Spawn menu

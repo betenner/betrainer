@@ -30,9 +30,6 @@ namespace GTAVBETrainerDotNet
             public const float FULL_HEALTH = 2000f;
             public const int DOOR_COUNT = 6;
             public const int PED_FLAG_THROUGH_WINDSCREEN = 32;
-            public const float BOOST_BASE_SPEED = 10f;
-            public const float BOOST_MULTIPLIER = 1.02f;
-            public const float MAX_SPEED = 628f;    // 2 mach XD
             public const float SPAWN_X_OFFSET = 0f;
             public const float SPAWN_Y_OFFSET = 5f;
             public const float SPAWN_Z_OFFSET = 0f;
@@ -42,8 +39,6 @@ namespace GTAVBETrainerDotNet
             public static bool Invincible = false;
             public static bool SeatBelt = false;
             public static bool SpawnIntoVehicle = false;
-            public static bool Boost = false;
-            public static float InstantBoostSpeed = 85f;    // 300km/h
 
             /// <summary>
             /// Checks whether the player is in a vehicle.
@@ -121,8 +116,8 @@ namespace GTAVBETrainerDotNet
                 }
 
                 // Boost
-                UpdateInstantBoostVehicle();
-                UpdateBoostVehicle();
+                VehicleBoost.UpdateBoostInstant();
+                VehicleBoost.UpdateBoostProgressive();
 
                 // Speed meter
                 SpeedMeter.UpdateSpeedMeter();
@@ -149,41 +144,13 @@ namespace GTAVBETrainerDotNet
                 SetInvincible(MenuStorage.MenuItems.Vehicle.Invincible);
                 SetSeatBelt(MenuStorage.MenuItems.Vehicle.SeatBelt);
                 SetSpawnIntoVehicle(MenuStorage.MenuItems.Vehicle.SpawnIntoVehicle);
-                SetBoost(MenuStorage.MenuItems.Vehicle.Boost);
 
                 SpeedMeter.SetShow(MenuStorage.MenuItems.Vehicle.SpeedMeter.Show);
                 SpeedMeter.SetShowInMetric(MenuStorage.MenuItems.Vehicle.SpeedMeter.ShowInMetric);
                 SpeedMeter.SetShowWithoutVehicle(MenuStorage.MenuItems.Vehicle.SpeedMeter.ShowWithoutVehicle);
-            }
 
-            /// <summary>
-            /// Update boosts vehicle
-            /// </summary>
-            public static void UpdateBoostVehicle()
-            {
-                if (!Boost || !Game.IsKeyPressed(Configuration.InputKey.BoostVehicle) || !CheckInVehicle()) return;
-
-                int vehicle = Game.Player.Character.CurrentVehicle.Handle;
-                float speed = Function.Call<float>(Hash.GET_ENTITY_SPEED, vehicle);
-                if (speed < BOOST_BASE_SPEED) speed = BOOST_BASE_SPEED;
-                Function.Call(Hash.SET_ENTITY_MAX_SPEED, vehicle, MAX_SPEED);
-                speed *= BOOST_MULTIPLIER;
-                Function.Call(Hash.SET_VEHICLE_FORWARD_SPEED, vehicle, speed);
-            }
-
-            /// <summary>
-            /// Update instantly boost vehicle
-            /// </summary>
-            public static void UpdateInstantBoostVehicle()
-            {
-                if (!Boost || !Game.IsKeyPressed(Configuration.InputKey.BoostVehicleInstant) || !CheckInVehicle()) return;
-
-                int vehicle = Game.Player.Character.CurrentVehicle.Handle;
-                float speed = InstantBoostSpeed;
-                if (speed < BOOST_BASE_SPEED) speed = BOOST_BASE_SPEED;
-                if (speed > MAX_SPEED) speed = MAX_SPEED;
-                Function.Call(Hash.SET_ENTITY_MAX_SPEED, vehicle, MAX_SPEED);
-                Function.Call(Hash.SET_VEHICLE_FORWARD_SPEED, vehicle, speed);
+                VehicleBoost.SetBoostProgressive(MenuStorage.MenuItems.Vehicle.VehicleBoost.BoostProgressive);
+                VehicleBoost.SetBoostInstant(MenuStorage.MenuItems.Vehicle.VehicleBoost.BoostInstant);
             }
 
             /// <summary>
@@ -193,8 +160,7 @@ namespace GTAVBETrainerDotNet
             {
                 if (!CheckInVehicle()) return;
 
-                int vehicle = Game.Player.Character.CurrentVehicle.Handle;
-                Function.Call(Hash.SET_VEHICLE_FORWARD_SPEED, vehicle, 0f);
+                Game.Player.Character.CurrentVehicle.Speed = 0f;
             }
 
             /// <summary>
@@ -224,16 +190,6 @@ namespace GTAVBETrainerDotNet
             public static void SetSpawnIntoVehicle(MenuItem sender)
             {
                 SpawnIntoVehicle = sender.On;
-                Config.DoAutoSave();
-            }
-
-            /// <summary>
-            /// Sets speed boost
-            /// </summary>
-            /// <param name="sender">Source menu item</param>
-            public static void SetBoost(MenuItem sender)
-            {
-                Boost = sender.On;
                 Config.DoAutoSave();
             }
 
@@ -1433,6 +1389,130 @@ namespace GTAVBETrainerDotNet
                         Utils.DrawText(Utils.FormatML((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
                             SPEEDMETER_POS.X, SPEEDMETER_POS.Y, SPEEDMETER_ALIGN, SPEEDMETER_TEXT_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_Y_SCALE, SPEEDMETER_FONT);
                     }
+                }
+            }
+
+            /// <summary>
+            /// Vehicle boost features
+            /// </summary>
+            public static class VehicleBoost
+            {
+                public const float PROGRESSIVE_SPEED_INC = 1f;
+                public const float PROGRESSIVE_SPEED_INC_MIN = 1f;
+                public const float PROGRESSIVE_SPEED_INC_MAX = 100f;
+                public const float PROGRESSIVE_SPEED_INC_DELTA = 1f;
+                public const float INSTANT_SPEED = 83f;
+                public const float INSTANT_SPEED_MIN = 1f;
+                public const float INSTANT_SPEED_DELTA = 1f;
+                public const float MAX_SPEED = 628f;    // 2 mach XD
+
+                public static bool BoostProgressive = false;
+                public static bool BoostInstant = false;
+                public static float BoostProgressiveSpeedInc = PROGRESSIVE_SPEED_INC;
+                public static float BoostInstantSpeed = INSTANT_SPEED;
+
+                /// <summary>
+                /// Sets progressive boost
+                /// </summary>
+                /// <param name="sender">Source menu item</param>
+                public static void SetBoostProgressive(MenuItem sender)
+                {
+                    BoostProgressive = sender.On;
+                    Config.DoAutoSave();
+                }
+
+                /// <summary>
+                /// Sets instant boost
+                /// </summary>
+                /// <param name="sender">Source menu item</param>
+                public static void SetBoostInstant(MenuItem sender)
+                {
+                    BoostInstant = sender.On;
+                    Config.DoAutoSave();
+                }
+
+                /// <summary>
+                /// Update progressive boost
+                /// </summary>
+                public static void UpdateBoostProgressive()
+                {
+                    if (!BoostProgressive || !Game.IsKeyPressed(Configuration.InputKey.BoostVehicleProgressive) || !CheckInVehicle()) return;
+
+                    Game.Player.Character.CurrentVehicle.MaxSpeed = MAX_SPEED;
+                    Game.Player.Character.CurrentVehicle.Speed += BoostProgressiveSpeedInc;
+                }
+
+                /// <summary>
+                /// Update instant boost
+                /// </summary>
+                public static void UpdateBoostInstant()
+                {
+                    if (!BoostInstant || !Game.IsKeyPressed(Configuration.InputKey.BoostVehicleInstant) || !CheckInVehicle()) return;
+
+                    Game.Player.Character.CurrentVehicle.MaxSpeed = MAX_SPEED;
+                    Game.Player.Character.CurrentVehicle.Speed = BoostInstantSpeed;
+                }
+
+                /// <summary>
+                /// Increases progressive boost speed
+                /// </summary>
+                public static void IncBoostProgressiveSpeed(MenuItem sender)
+                {
+                    BoostProgressiveSpeedInc += PROGRESSIVE_SPEED_INC_DELTA;
+                    if (BoostProgressiveSpeedInc > PROGRESSIVE_SPEED_INC_MAX) BoostProgressiveSpeedInc = PROGRESSIVE_SPEED_INC_MAX;
+                    UpdateBoostProgressiveSpeed();
+                    Config.DoAutoSave();
+                }
+
+                /// <summary>
+                /// Decreases progressive boost speed
+                /// </summary>
+                public static void DecBoostProgressiveSpeed(MenuItem sender)
+                {
+                    BoostProgressiveSpeedInc -= PROGRESSIVE_SPEED_INC_DELTA;
+                    if (BoostProgressiveSpeedInc < PROGRESSIVE_SPEED_INC_MIN) BoostProgressiveSpeedInc = PROGRESSIVE_SPEED_INC_MIN;
+                    UpdateBoostProgressiveSpeed();
+                    Config.DoAutoSave();
+                }
+
+                /// <summary>
+                /// Updates progressive boost speed
+                /// </summary>
+                public static void UpdateBoostProgressiveSpeed()
+                {
+                    MenuStorage.MenuItems.Vehicle.VehicleBoost.BoostProgressiveSpeedInc.Text = 
+                        Utils.FormatML(MenuText.Vehicle.VehicleBoost.I02_BOOST_PROGRESSIVE_SPEED_INC, BoostProgressiveSpeedInc, Utils.Mps2Kph(BoostProgressiveSpeedInc), Utils.Mps2Mph(BoostProgressiveSpeedInc));
+                }
+
+                /// <summary>
+                /// Increases progressive boost speed
+                /// </summary>
+                public static void IncBoostInstantSpeed(MenuItem sender)
+                {
+                    BoostInstantSpeed += INSTANT_SPEED_DELTA;
+                    if (BoostInstantSpeed > MAX_SPEED) BoostInstantSpeed = MAX_SPEED;
+                    UpdateBoostInstantSpeed();
+                    Config.DoAutoSave();
+                }
+
+                /// <summary>
+                /// Decreases progressive boost speed
+                /// </summary>
+                public static void DecBoostInstantSpeed(MenuItem sender)
+                {
+                    BoostInstantSpeed -= INSTANT_SPEED_DELTA;
+                    if (BoostInstantSpeed < INSTANT_SPEED_MIN) BoostInstantSpeed = INSTANT_SPEED_MIN;
+                    UpdateBoostInstantSpeed();
+                    Config.DoAutoSave();
+                }
+
+                /// <summary>
+                /// Updates progressive boost speed
+                /// </summary>
+                public static void UpdateBoostInstantSpeed()
+                {
+                    MenuStorage.MenuItems.Vehicle.VehicleBoost.BoostInstantSpeed.Text =
+                        Utils.FormatML(MenuText.Vehicle.VehicleBoost.I04_BOOST_INSTANT_SPEED, BoostInstantSpeed, Utils.Mps2Kph(BoostInstantSpeed), Utils.Mps2Mph(BoostInstantSpeed));
                 }
             }
         }
