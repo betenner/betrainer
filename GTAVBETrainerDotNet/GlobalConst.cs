@@ -20,6 +20,19 @@ namespace GTAVBETrainerDotNet
     /// </summary>
     public static class GlobalConst
     {
+        public static class Hash
+        {
+            public const ulong _SET_NOTIFICATION_TEXT_ENTRY = 0x202709F4C58A0424;
+            public const ulong _ADD_TEXT_COMPONENT_STRING = 0x6C188BE134E074AA;
+            public const ulong _DRAW_NOTIFICATION = 0x2ED7843F8F801023;
+            public const ulong _SET_TEXT_ENTRY = 0xB87A37EEB7FAA67D;
+            public const ulong _DRAW_TEXT = 0xCD015E5BB0D96A57;
+            public const ulong SPECIAL_ABILITY_FILL_METER = 0x3DACA8DDC6FD4980;
+            public const ulong SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER = 0x6DB47AA77FD94E09;
+            public const ulong SET_SWIM_MULTIPLIER_FOR_PLAYER = 0xA91C6F0FF7D16A13;
+            public const ulong _SET_VEHICLE_DOOR_BREAKABLE = 0x2FA133A4A9D37ED8;
+        }
+
         /// <summary>
         /// Trainer name
         /// </summary>
@@ -28,7 +41,7 @@ namespace GTAVBETrainerDotNet
         /// <summary>
         /// Trainer version
         /// </summary>
-        public const string TRAINER_VERSION = "v1.03";
+        public const string TRAINER_VERSION = "v1.05";
 
         /// <summary>
         /// Default screen width

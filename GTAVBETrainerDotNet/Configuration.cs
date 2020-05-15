@@ -33,7 +33,7 @@ namespace GTAVBETrainerDotNet
             /// <summary>
             /// Key to toggle trainer menu
             /// </summary>
-            public static Keys ToggleMenu = Keys.F4;
+            public static Keys ToggleMenu = Keys.F5;
 
             /// <summary>
             /// Key to move menu cursor up

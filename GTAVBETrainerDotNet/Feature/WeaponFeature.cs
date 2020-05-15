@@ -216,8 +216,8 @@ namespace GTAVBETrainerDotNet
                 {
                     if (Trainer.FrameCounter - _vehicleRocketFrames >= VEHICLE_ROCKET_FRAME_INTERVAL)
                     {
-                        GTA.Math.Vector3 v0 = GTA.Math.Vector3.Zero, v1 = GTA.Math.Vector3.Zero;
-                        Game.Player.Character.CurrentVehicle.Model.GetDimensions(out v0, out v1);
+                        var v = Game.Player.Character.CurrentVehicle.Model.Dimensions;
+                        var v1 = v.rearBottomLeft;
 
                         int weaponAsset = Function.Call<int>(Hash.GET_HASH_KEY, VEHICLE_ROCKET_NAME);
                         if (!Function.Call<bool>(Hash.HAS_WEAPON_ASSET_LOADED, weaponAsset))

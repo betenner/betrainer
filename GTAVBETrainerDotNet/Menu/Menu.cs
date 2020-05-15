@@ -98,7 +98,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Menu title font
         /// </summary>
-        public GTA.Font TitleFont = GTA.Font.ChaletLondon;
+        public GTA.UI.Font TitleFont = GTA.UI.Font.ChaletLondon;
 
         // Menu title text x scale
         private float _titleXScale = 0.4f;

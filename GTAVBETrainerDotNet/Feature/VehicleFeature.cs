@@ -86,7 +86,7 @@ namespace GTAVBETrainerDotNet
                             Function.Call(Hash.SET_VEHICLE_CAN_BREAK, vehicle, false);
                             for (int i = 0; i < DOOR_COUNT; i++)
                             {
-                                Function.Call(Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, false);
+                                Function.Call((Hash)GlobalConst.Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, false);
                             }
                         }
                         else
@@ -98,7 +98,7 @@ namespace GTAVBETrainerDotNet
                             Function.Call(Hash.SET_VEHICLE_CAN_BE_VISIBLY_DAMAGED, vehicle, true);
                             for (int i = 0; i < DOOR_COUNT; i++)
                             {
-                                Function.Call(Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, true);
+                                Function.Call((Hash)GlobalConst.Hash._SET_VEHICLE_DOOR_BREAKABLE, vehicle, i, true);
                             }
                         }
                     }
@@ -1342,7 +1342,7 @@ namespace GTAVBETrainerDotNet
                 private const GlobalConst.HAlign SPEEDMETER_ALIGN = GlobalConst.HAlign.Center;
                 private const string SPEEDMETER_FORMAT_MPH = "{0:#0} mph";
                 private const string SPEEDMETER_FORMAT_KPH = "{0:#0} km/h";
-                private const GTA.Font SPEEDMETER_FONT = GTA.Font.ChaletLondon;
+                private const GTA.UI.Font SPEEDMETER_FONT = GTA.UI.Font.ChaletLondon;
                 private const float SPEEDMETER_SPEED_FACTOR_KPH = 3.6f;
                 private const float SPEEDMETER_SPEED_FACTOR_MPH = 3.6f / 1.609344f;
 

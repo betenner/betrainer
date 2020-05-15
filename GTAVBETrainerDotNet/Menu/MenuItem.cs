@@ -190,7 +190,7 @@ namespace GTAVBETrainerDotNet.Menu
         /// <summary>
         /// Font
         /// </summary>
-        public GTA.Font Font = GTA.Font.ChaletLondon;
+        public GTA.UI.Font Font = GTA.UI.Font.ChaletLondon;
 
         /// <summary>
         /// Alignment

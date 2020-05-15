@@ -35,7 +35,7 @@ namespace GTAVBETrainerDotNet
             private static readonly Color SHOWTIME_SHADOW_COLOR = Color.Black;
             private static readonly Point SHOWTIME_SHADOW_OFFSET = new Point(2, 3);
             private const GlobalConst.HAlign SHOWTIME_ALIGN = GlobalConst.HAlign.Center;
-            private const GTA.Font SHOWTIME_FONT = GTA.Font.ChaletLondon;
+            private const GTA.UI.Font SHOWTIME_FONT = GTA.UI.Font.ChaletLondon;
             private const float DEFAULT_SPEED = 1.0f;
             private const float SPEED_075 = 0.75f;
             private const float SPEED_050 = 0.50f;

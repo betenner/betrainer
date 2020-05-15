@@ -35,7 +35,7 @@ namespace GTAVBETrainerDotNet
             private static readonly Point COORDINATE_SHADOW_OFFSET = new Point(2, 3);
             private const GlobalConst.HAlign COORDINATE_ALIGN = GlobalConst.HAlign.Center;
             private const string COORDINATE_FORMAT = "X: {0:0.0000}, Y: {1:0.0000}, Z: {2:0.0000}";
-            private const GTA.Font COORDINATE_FONT = GTA.Font.ChaletLondon;
+            private const GTA.UI.Font COORDINATE_FONT = GTA.UI.Font.ChaletLondon;
 
             /// <summary>
             /// Initializes loction features

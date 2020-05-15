@@ -74,7 +74,7 @@ namespace GTAVBETrainerDotNet
 
                 if (Feature.Player.InfiniteAbility)
                 {
-                    Function.Call(Hash._RECHARGE_SPECIAL_ABILITY, Game.Player.Handle, 1);
+                    Function.Call((Hash)GlobalConst.Hash.SPECIAL_ABILITY_FILL_METER, Game.Player.Handle, 1);
                 }
 
                 if (Feature.Player.SuperJump)
@@ -138,11 +138,11 @@ namespace GTAVBETrainerDotNet
                 Feature.Player.FastRun = sender.On;
                 if (sender.On)
                 {
-                    Function.Call(Hash._SET_MOVE_SPEED_MULTIPLIER, Game.Player.Handle, FAST_RUN_MULTIPLIER);
+                    Function.Call((Hash)GlobalConst.Hash.SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER, Game.Player.Handle, FAST_RUN_MULTIPLIER);
                 }
                 else
                 {
-                    Function.Call(Hash._SET_MOVE_SPEED_MULTIPLIER, Game.Player.Handle, NORMAL_RUN_MULTIPLIER);
+                    Function.Call((Hash)GlobalConst.Hash.SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER, Game.Player.Handle, NORMAL_RUN_MULTIPLIER);
                 }
                 Config.DoAutoSave();
             }
@@ -156,11 +156,11 @@ namespace GTAVBETrainerDotNet
                 Feature.Player.FastSwim = sender.On;
                 if (sender.On)
                 {
-                    Function.Call(Hash._SET_SWIM_SPEED_MULTIPLIER, Game.Player.Handle, FAST_SWIM_MULTIPLIER);
+                    Function.Call((Hash)GlobalConst.Hash.SET_SWIM_MULTIPLIER_FOR_PLAYER, Game.Player.Handle, FAST_SWIM_MULTIPLIER);
                 }
                 else
                 {
-                    Function.Call(Hash._SET_SWIM_SPEED_MULTIPLIER, Game.Player.Handle, NORMAL_SWIM_MULTIPLIER);
+                    Function.Call((Hash)GlobalConst.Hash.SET_SWIM_MULTIPLIER_FOR_PLAYER, Game.Player.Handle, NORMAL_SWIM_MULTIPLIER);
                 }
                 Config.DoAutoSave();
             }

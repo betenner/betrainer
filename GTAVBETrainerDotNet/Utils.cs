@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using GTA;
 using GTA.Native;
+using GTA.UI;
 using System.Windows.Forms;
 
 namespace GTAVBETrainerDotNet
@@ -27,9 +28,9 @@ namespace GTAVBETrainerDotNet
         /// <param name="message">Message to show</param>
         public static void ShowNotificationAboveMap(MLString message)
         {
-            Function.Call(Hash._SET_NOTIFICATION_TEXT_ENTRY, "STRING");
-            Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, message[Trainer.LanguageCode]);
-            Function.Call(Hash._DRAW_NOTIFICATION, 0, 1);
+            Function.Call((Hash)GlobalConst.Hash._SET_NOTIFICATION_TEXT_ENTRY, "STRING");
+            Function.Call((Hash)GlobalConst.Hash._ADD_TEXT_COMPONENT_STRING, message[Trainer.LanguageCode]);
+            Function.Call((Hash)GlobalConst.Hash._DRAW_NOTIFICATION, 0, 1);
         }
 
         /// <summary>
@@ -66,32 +67,38 @@ namespace GTAVBETrainerDotNet
         /// <param name="shadowColor">Color of shadow</param>
         /// <param name="screenHeight">Height of screen in pixel</param>
         /// <param name="screenWidth">Width of screen in pixel</param>
-        public static void DrawText(MLString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, float yScale = 0.35f, GTA.Font font = GTA.Font.ChaletLondon, Point shadowOffset = new Point(), Color shadowColor = new Color(), int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
+        public static void DrawText(MLString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, float yScale = 0.35f, GTA.UI.Font font = GTA.UI.Font.ChaletLondon, Point shadowOffset = new Point(), Color shadowColor = new Color(), int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
         {
-            if (shadowOffset.X != 0 || shadowOffset.Y != 0)
-            {
-                DrawText(text, x + shadowOffset.X, y + shadowOffset.Y, align, shadowColor, xScale, yScale, font, new Point(), Color.Black, screenWidth, screenHeight);
-            }
-            Function.Call(Hash.SET_TEXT_FONT, (int)font);
-            Function.Call(Hash.SET_TEXT_SCALE, xScale, yScale);
-            Function.Call(Hash.SET_TEXT_COLOUR, color.R, color.G, color.B, color.A);
-            switch (align)
-            {
-                case GlobalConst.HAlign.Left:
-                    Function.Call(Hash.SET_TEXT_CENTRE, 0);
-                    break;
+            //if (shadowOffset.X != 0 || shadowOffset.Y != 0)
+            //{
+            //    DrawText(text, x + shadowOffset.X, y + shadowOffset.Y, align, shadowColor, xScale, yScale, font, new Point(), Color.Black, screenWidth, screenHeight);
+            //}
+            //Function.Call(Hash.SET_TEXT_FONT, (int)font);
+            //Function.Call(Hash.SET_TEXT_SCALE, xScale, yScale);
+            //Function.Call(Hash.SET_TEXT_COLOUR, color.R, color.G, color.B, color.A);
+            //switch (align)
+            //{
+            //    case GlobalConst.HAlign.Left:
+            //        Function.Call(Hash.SET_TEXT_CENTRE, 0);
+            //        break;
 
-                case GlobalConst.HAlign.Center:
-                    Function.Call(Hash.SET_TEXT_CENTRE, 1);
-                    break;
+            //    case GlobalConst.HAlign.Center:
+            //        Function.Call(Hash.SET_TEXT_CENTRE, 1);
+            //        break;
 
-                case GlobalConst.HAlign.Right:
-                    Function.Call(Hash.SET_TEXT_RIGHT_JUSTIFY, 1);
-                    break;
-            }
-            Function.Call(Hash._SET_TEXT_ENTRY, "STRING");
-            Function.Call(Hash._ADD_TEXT_COMPONENT_STRING, ML(text));
-            Function.Call(Hash._DRAW_TEXT, (float)x / screenWidth, (float)y / screenHeight);
+            //    case GlobalConst.HAlign.Right:
+            //        Function.Call(Hash.SET_TEXT_RIGHT_JUSTIFY, 1);
+            //        break;
+            //}
+            //Function.Call((Hash)GlobalConst.Hash._SET_TEXT_ENTRY, "STRING");
+            //Function.Call((Hash)GlobalConst.Hash._ADD_TEXT_COMPONENT_STRING, ML(text));
+            //Function.Call((Hash)GlobalConst.Hash._DRAW_TEXT, (float)x / screenWidth, (float)y / screenHeight);
+            PointF pf = new PointF((float)x / GlobalConst.DEFAULT_SCREEN_WIDTH * GTA.UI.Screen.Width, (float)y / GlobalConst.DEFAULT_SCREEN_HEIGHT * GTA.UI.Screen.Height);
+            Alignment al = Alignment.Left;
+            if (align == GlobalConst.HAlign.Center) al = Alignment.Center;
+            else if (al == Alignment.Right) al = Alignment.Right;
+            TextElement te = new TextElement(ML(text), pf, xScale, color, font, al, shadowOffset.X > 0, false);
+            te.Draw();
         }
 
         /// <summary>
