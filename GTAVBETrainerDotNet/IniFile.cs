@@ -1,4 +1,4 @@
-﻿// Copyright (c) BE Group 2015-2017
+﻿// Copyright (c) BE Group 2015-2020
 
 using System;
 using System.Collections.Generic;

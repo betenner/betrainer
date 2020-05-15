@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -22,6 +22,10 @@ namespace GTAVBETrainerDotNet
     /// </summary>
     public static class Utils
     {
+        private static TextElement _te = new TextElement(string.Empty, PointF.Empty, 1f);
+        private static PointF _pf;
+        private static Alignment _al;
+
         /// <summary>
         /// Shows a notification above in-game mini-map
         /// </summary>
@@ -67,7 +71,7 @@ namespace GTAVBETrainerDotNet
         /// <param name="shadowColor">Color of shadow</param>
         /// <param name="screenHeight">Height of screen in pixel</param>
         /// <param name="screenWidth">Width of screen in pixel</param>
-        public static void DrawText(MLString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, float yScale = 0.35f, GTA.UI.Font font = GTA.UI.Font.ChaletLondon, Point shadowOffset = new Point(), Color shadowColor = new Color(), int screenWidth = GlobalConst.DEFAULT_SCREEN_WIDTH, int screenHeight = GlobalConst.DEFAULT_SCREEN_HEIGHT)
+        public static void DrawText(MLString text, int x, int y, GlobalConst.HAlign align, Color color, float xScale = 0.35f, GTA.UI.Font font = GTA.UI.Font.ChaletLondon, Point shadowOffset = new Point(), bool outline = false)
         {
             //if (shadowOffset.X != 0 || shadowOffset.Y != 0)
             //{
@@ -93,12 +97,20 @@ namespace GTAVBETrainerDotNet
             //Function.Call((Hash)GlobalConst.Hash._SET_TEXT_ENTRY, "STRING");
             //Function.Call((Hash)GlobalConst.Hash._ADD_TEXT_COMPONENT_STRING, ML(text));
             //Function.Call((Hash)GlobalConst.Hash._DRAW_TEXT, (float)x / screenWidth, (float)y / screenHeight);
-            PointF pf = new PointF((float)x / GlobalConst.DEFAULT_SCREEN_WIDTH * GTA.UI.Screen.Width, (float)y / GlobalConst.DEFAULT_SCREEN_HEIGHT * GTA.UI.Screen.Height);
-            Alignment al = Alignment.Left;
-            if (align == GlobalConst.HAlign.Center) al = Alignment.Center;
-            else if (al == Alignment.Right) al = Alignment.Right;
-            TextElement te = new TextElement(ML(text), pf, xScale, color, font, al, shadowOffset.X > 0, false);
-            te.Draw();
+            _pf.X = (float)x / GlobalConst.DEFAULT_SCREEN_WIDTH * GTA.UI.Screen.Width;
+            _pf.Y = (float)y / GlobalConst.DEFAULT_SCREEN_HEIGHT * GTA.UI.Screen.Height;
+            _al = Alignment.Left;
+            if (align == GlobalConst.HAlign.Center) _al = Alignment.Center;
+            else if (align == GlobalConst.HAlign.Right) _al = Alignment.Right;
+            _te.Caption = ML(text);
+            _te.Position = _pf;
+            _te.Scale = xScale;
+            _te.Font = font;
+            _te.Alignment = _al;
+            _te.Shadow = shadowOffset.X > 0;
+            _te.Color = color;
+            _te.Outline = outline;
+            _te.Draw();
         }
 
         /// <summary>
@@ -248,14 +260,14 @@ namespace GTAVBETrainerDotNet
         }
 
         /// <summary>
-        /// Generates a multi-language string with a default string and a Chinese Traditional string
+        /// Generates a multi-language string with a default string and a Chinese Simplified string
         /// </summary>
         /// <param name="defaultString">Default string</param>
-        /// <param name="chineseTraditional">Chinese triditional string</param>
+        /// <param name="chineseSimplified">Chinese triditional string</param>
         /// <returns></returns>
-        public static MLString CTML(string defaultString, string chineseTraditional)
+        public static MLString CSML(string defaultString, string chineseSimplified)
         {
-            return new MLString(defaultString, new KeyValuePair<string, string>(Language.CODE_CHINESE_TRADITIONAL, chineseTraditional));
+            return new MLString(defaultString, new KeyValuePair<string, string>(Language.CODE_CHINESE_TRADITIONAL, chineseSimplified));
         }
 
         /// <summary>

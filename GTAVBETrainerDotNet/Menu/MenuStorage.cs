@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -1468,7 +1468,7 @@ namespace GTAVBETrainerDotNet.Menu
         {
             Menus.Language = new Menu(MenuText.Language.I00_TITLE);
             AddMenuItem(Menus.Language, MenuText.Language.I01_ENGLISH, false, false, null, Language.SetToEnglish);
-            AddMenuItem(Menus.Language, MenuText.Language.I02_CHINESE_TRADITIONAL, false, false, null, Language.SetToChineseTraditional);
+            AddMenuItem(Menus.Language, MenuText.Language.I02_CHINESE_SIMPLIFIED, false, false, null, Language.SetToChineseTraditional);
         }
 
         /// <summary>

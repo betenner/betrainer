@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -27,12 +27,12 @@ namespace GTAVBETrainerDotNet.Menu
         private const string TOGGLE_BRACE = "[     ]";
 
         // On
-        private static readonly MLString TOGGLE_ON = Utils.CTML(" On", "  開");
+        private static readonly MLString TOGGLE_ON = Utils.CSML(" On", "  开");
         private static readonly Color TOGGLE_ON_COLOR = Color.LightGreen;
         private static readonly Color TOGGLE_ON_COLOR_SELECTED = Color.DarkGreen;
 
         // Off
-        private static readonly MLString TOGGLE_OFF = Utils.CTML(" Off", "  關");
+        private static readonly MLString TOGGLE_OFF = Utils.CSML(" Off", "  关");
         private static readonly Color TOGGLE_OFF_COLOR = Color.Red;
         private static readonly Color TOGGLE_OFF_COLOR_SELECTED = Color.DarkRed;
 
@@ -771,13 +771,13 @@ namespace GTAVBETrainerDotNet.Menu
             Utils.DrawRect(Location.X, Location.Y, _width, _titleHeight, TitleBackColor, _screenWidth, _screenHeight);
             if (!string.IsNullOrEmpty(Utils.ML(Title)))
             {
-                Utils.DrawText(Title, Location.X + TitleOffset.X, Location.Y + TitleOffset.Y, TitleAlign, TitleTextColor, TitleXScale, TitleYScale, TitleFont, TitleShadowDistance, TitleShadowColor, _screenWidth, _screenHeight);
+                Utils.DrawText(Title, Location.X + TitleOffset.X, Location.Y + TitleOffset.Y, TitleAlign, TitleTextColor, TitleXScale, TitleFont, TitleShadowDistance);
             }
 
             // Page
             if (PageCount > 1)
             {
-                Utils.DrawText(Utils.FormatML(PAGE_FORMAT, _page, PageCount), Location.X + PageTextOffset.X, Location.Y + PageTextOffset.Y, GlobalConst.HAlign.Left, TitleTextColor, TitleXScale, TitleYScale, TitleFont, TitleShadowDistance, TitleShadowColor, _screenWidth, _screenHeight);
+                Utils.DrawText(Utils.FormatML(PAGE_FORMAT, _page, PageCount), Location.X + PageTextOffset.X, Location.Y + PageTextOffset.Y, GlobalConst.HAlign.Left, TitleTextColor, TitleXScale, TitleFont, TitleShadowDistance);
             }
 
             // Menu items
@@ -803,11 +803,11 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.SelectedTextColor, mi.SelectedXScale, mi.Font, mi.ShadowOffset);
                     }
                     else
                     {
-                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(mi.Text, Location.X + mi.TextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + mi.TextOffset.Y, mi.Align, mi.TextColor, mi.XScale, mi.Font, mi.ShadowOffset);
                     }
                 }
 
@@ -816,13 +816,13 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
-                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR_SELECTED : TOGGLE_OFF_COLOR_SELECTED), mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.Font, mi.ShadowOffset);
+                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR_SELECTED : TOGGLE_OFF_COLOR_SELECTED), mi.SelectedXScale, mi.Font, mi.ShadowOffset);
                     }
                     else
                     {
-                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
-                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR : TOGGLE_OFF_COLOR), mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(TOGGLE_BRACE, Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.Font, mi.ShadowOffset);
+                        Utils.DrawText((mi.On ? TOGGLE_ON : TOGGLE_OFF), Location.X + ToggleTextOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + ToggleTextOffset.Y, GlobalConst.HAlign.Left, (mi.On ? TOGGLE_ON_COLOR : TOGGLE_OFF_COLOR), mi.XScale, mi.Font, mi.ShadowOffset);
                     }
                 }
 
@@ -831,11 +831,11 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.Font, mi.ShadowOffset);
                     }
                     else
                     {
-                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(HAS_SUBMENU, Location.X + HasSubmenuSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + HasSubmenuSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.Font, mi.ShadowOffset);
                     }
                 }
 
@@ -844,11 +844,11 @@ namespace GTAVBETrainerDotNet.Menu
                 {
                     if (_selectedIndex == i)
                     {
-                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.SelectedYScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.SelectedTextColor, mi.SelectedXScale, mi.Font, mi.ShadowOffset);
                     }
                     else
                     {
-                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.YScale, mi.Font, mi.ShadowOffset, mi.ShadowColor, _screenWidth, _screenHeight);
+                        Utils.DrawText(LEFT_RIGHT_ADJUSTABLE, Location.X + LeftRightAdjustableSignOffset.X, Location.Y + _titleHeight + _itemSpacing + (_itemHeight + _itemSpacing) * index + LeftRightAdjustableSignOffset.Y, GlobalConst.HAlign.Left, mi.TextColor, mi.XScale, mi.Font, mi.ShadowOffset);
                     }
                 }
 

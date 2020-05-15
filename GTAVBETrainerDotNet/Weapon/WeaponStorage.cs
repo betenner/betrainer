@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -57,19 +57,19 @@ namespace GTAVBETrainerDotNet.Weapon
         public const int MAX_ATTACHMENT_SLOTS = 15;
         public const string WEAPON_UNARMED = "WEAPON_UNARMED";
 
-        public static readonly MLString[] WEAPON_CATEGORY_NAMES = 
-        { 
-            Utils.CTML("Melee", "近戰武器"), 
-            Utils.CTML("Handguns", "手槍"), 
-            Utils.CTML("Submachine Guns", "機關槍"), 
-            Utils.CTML("Assault Rifles", "衝鋒槍"), 
-            Utils.CTML("Shotguns", "散彈槍"), 
-            Utils.CTML("Sniper Rifles", "阻擊槍"), 
-            Utils.CTML("Heavy Weapons", "重型武器"), 
-            Utils.CTML("Thrown Weapons", "投擲武器"), 
+        public static readonly MLString[] WEAPON_CATEGORY_NAMES =
+        {
+            Utils.CSML("Melee", "近战武器"),
+            Utils.CSML("Handguns", "手枪"),
+            Utils.CSML("Submachine Guns", "机关枪"),
+            Utils.CSML("Assault Rifles", "冲锋枪"),
+            Utils.CSML("Shotguns", "散弹枪"),
+            Utils.CSML("Sniper Rifles", "阻击枪"),
+            Utils.CSML("Heavy Weapons", "重型武器"),
+            Utils.CSML("Thrown Weapons", "投掷武器"),
         };
 
-        public static readonly WeaponData[][] WEAPONS = 
+        public static readonly WeaponData[][] WEAPONS =
         {
             // Melee
             new WeaponData[]
@@ -93,11 +93,11 @@ namespace GTAVBETrainerDotNet.Weapon
                     new WeaponAttachmentData("Suppressor", "COMPONENT_AT_PI_SUPP_02"),
                     new WeaponAttachmentData("Flashlight", "COMPONENT_AT_PI_FLSH"),
                     new WeaponAttachmentData("Yusuf Amir Luxury Finish", "COMPONENT_PISTOL_VARMOD_LUXE")),
-                new WeaponData("Combat Pistol", "WEAPON_COMBATPISTOL", true, 
+                new WeaponData("Combat Pistol", "WEAPON_COMBATPISTOL", true,
                     new WeaponAttachmentData("Extended Magazine", "COMPONENT_COMBATPISTOL_CLIP_02"),
                     new WeaponAttachmentData("Suppressor", "COMPONENT_AT_PI_SUPP"),
                     new WeaponAttachmentData("Flashlight", "COMPONENT_AT_PI_FLSH")),
-                new WeaponData("AP Pistol", "WEAPON_APPISTOL", true, 
+                new WeaponData("AP Pistol", "WEAPON_APPISTOL", true,
                     new WeaponAttachmentData("Extended Magazine", "COMPONENT_APPISTOL_CLIP_02"),
                     new WeaponAttachmentData("Suppressor", "COMPONENT_AT_PI_SUPP"),
                     new WeaponAttachmentData("Flashlight", "COMPONENT_AT_PI_FLSH"),
@@ -107,9 +107,9 @@ namespace GTAVBETrainerDotNet.Weapon
                     new WeaponAttachmentData("Suppressor", "COMPONENT_AT_AR_SUPP_02"),
                     new WeaponAttachmentData("Flashlight", "COMPONENT_AT_PI_FLSH"),
                     new WeaponAttachmentData("Platinum Pearl Deluxe Finish", "COMPONENT_PISTOL50_VARMOD_LUXE")),
-                new WeaponData("SNS Pistol", "WEAPON_SNSPISTOL", true, 
+                new WeaponData("SNS Pistol", "WEAPON_SNSPISTOL", true,
                     new WeaponAttachmentData("Extended Magazine", "COMPONENT_SNSPISTOL_CLIP_02")),
-                new WeaponData("Heavy Pistol", "WEAPON_HEAVYPISTOL", true, 
+                new WeaponData("Heavy Pistol", "WEAPON_HEAVYPISTOL", true,
                     new WeaponAttachmentData("Extended Magazine", "COMPONENT_HEAVYPISTOL_CLIP_02"),
                     new WeaponAttachmentData("Suppressor", "COMPONENT_AT_PI_SUPP"),
                     new WeaponAttachmentData("Flashlight", "COMPONENT_AT_PI_FLSH"),
@@ -174,7 +174,7 @@ namespace GTAVBETrainerDotNet.Weapon
                     new WeaponAttachmentData("Grip", "COMPONENT_AT_AR_AFGRIP"),
                     new WeaponAttachmentData("Flashlight", "COMPONENT_AT_AR_FLSH"),
                     new WeaponAttachmentData("Yusuf Amir Luxury Finish", "COMPONENT_CARBINERIFLE_VARMOD_LUXE")),
-                new WeaponData("Advanced Rifle", "WEAPON_ADVANCEDRIFLE", true, 
+                new WeaponData("Advanced Rifle", "WEAPON_ADVANCEDRIFLE", true,
                     new WeaponAttachmentData("Extended Magazine", "COMPONENT_ADVANCEDRIFLE_CLIP_02"),
                     new WeaponAttachmentData("Scope", "COMPONENT_AT_SCOPE_SMALL"),
                     new WeaponAttachmentData("Suppressor", "COMPONENT_AT_AR_SUPP"),

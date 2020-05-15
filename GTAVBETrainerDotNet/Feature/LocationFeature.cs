@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -64,7 +64,7 @@ namespace GTAVBETrainerDotNet
                 {
                     string coord = Utils.FormatML(COORDINATE_FORMAT, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z);
                     Utils.DrawText(coord, COORDINATE_POS.X, COORDINATE_POS.Y, COORDINATE_ALIGN, COORDINATE_TEXT_COLOR,
-                        COORDINATE_X_SCALE, COORDINATE_Y_SCALE, COORDINATE_FONT, COORDINATE_SHADOW_OFFSET, COORDINATE_SHADOW_COLOR);
+                        COORDINATE_X_SCALE, COORDINATE_FONT, COORDINATE_SHADOW_OFFSET, true);
                 }
             }
 

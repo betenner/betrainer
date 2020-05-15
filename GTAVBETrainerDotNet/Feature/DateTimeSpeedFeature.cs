@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -82,8 +82,7 @@ namespace GTAVBETrainerDotNet
                     sbShowTime.AppendFormat(SHOW_TIME_FORMAT, GetGameDateTime(), DateTime.Now);
 
                     Utils.DrawText(sbShowTime.ToString(), SHOWTIME_POS.X, SHOWTIME_POS.Y,
-                        SHOWTIME_ALIGN, SHOWTIME_TEXT_COLOR, SHOWTIME_X_SCALE, SHOWTIME_Y_SCALE, SHOWTIME_FONT, 
-                        SHOWTIME_SHADOW_OFFSET, SHOWTIME_SHADOW_COLOR);
+                        SHOWTIME_ALIGN, SHOWTIME_TEXT_COLOR, SHOWTIME_X_SCALE, SHOWTIME_FONT, SHOWTIME_SHADOW_OFFSET);
                 }
 
                 // Game & aiming speed

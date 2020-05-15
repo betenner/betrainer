@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////
 //   BE Trainer.NET for Grand Theft Auto V
 //             by BE.Tenner
-//      Copyright (c) BE Group 2015-2017
+//      Copyright (c) BE Group 2015-2020
 //               Thanks to
 //    ScriptHookV & ScriptHookVDotNet
 //  Native Trainer & Enhanced Native Trainer
@@ -1393,11 +1393,11 @@ namespace GTAVBETrainerDotNet
                         float speed = Function.Call<float>(Hash.GET_ENTITY_SPEED, handle);
                         speed *= (ShowInMetric ? SPEEDMETER_SPEED_FACTOR_KPH : SPEEDMETER_SPEED_FACTOR_MPH);
 
+                        //Utils.DrawText(Utils.FormatML((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
+                        //    SPEEDMETER_POS.X + SPEEDMETER_SHADOW_OFFSET.X, SPEEDMETER_POS.Y + SPEEDMETER_SHADOW_OFFSET.Y,
+                        //    SPEEDMETER_ALIGN, SPEEDMETER_SHADOW_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_Y_SCALE, SPEEDMETER_FONT);
                         Utils.DrawText(Utils.FormatML((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
-                            SPEEDMETER_POS.X + SPEEDMETER_SHADOW_OFFSET.X, SPEEDMETER_POS.Y + SPEEDMETER_SHADOW_OFFSET.Y,
-                            SPEEDMETER_ALIGN, SPEEDMETER_SHADOW_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_Y_SCALE, SPEEDMETER_FONT);
-                        Utils.DrawText(Utils.FormatML((ShowInMetric ? SPEEDMETER_FORMAT_KPH : SPEEDMETER_FORMAT_MPH), speed),
-                            SPEEDMETER_POS.X, SPEEDMETER_POS.Y, SPEEDMETER_ALIGN, SPEEDMETER_TEXT_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_Y_SCALE, SPEEDMETER_FONT);
+                            SPEEDMETER_POS.X, SPEEDMETER_POS.Y, SPEEDMETER_ALIGN, SPEEDMETER_TEXT_COLOR, SPEEDMETER_X_SCALE, SPEEDMETER_FONT, SPEEDMETER_SHADOW_OFFSET, true);
                     }
                 }
             }
